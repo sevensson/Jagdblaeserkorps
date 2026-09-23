@@ -1840,3 +1840,388 @@ body {
 
   font-size: 0.72rem;
 }
+
+/* =====================================================
+   STIMMGERÄT
+   ===================================================== */
+
+.tuner-card {
+  margin-top: 14px;
+}
+
+
+.tuner-content {
+  padding:
+    25px
+    20px
+    23px;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  background:
+    linear-gradient(
+      180deg,
+      #123f2c,
+      #09291d
+    );
+
+  color: white;
+}
+
+
+/* Instrument */
+
+.tuner-instrument {
+  text-align: center;
+
+  margin-bottom: 25px;
+}
+
+
+.tuner-instrument-title {
+  display: block;
+
+  color: var(--gold-light);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.05rem;
+
+  font-weight: 700;
+}
+
+
+.tuner-instrument-info {
+  display: block;
+
+  margin-top: 4px;
+
+  color:
+    rgba(255,255,255,0.50);
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =====================================================
+   TON
+   ===================================================== */
+
+.tuner-note-area {
+  text-align: center;
+
+  margin-bottom: 27px;
+}
+
+
+.tuner-note-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color:
+    rgba(255,255,255,0.48);
+
+  font-size: 0.64rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+}
+
+
+.tuner-note {
+  min-height: 84px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 5rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+.tuner-cents {
+  min-height: 22px;
+
+  color:
+    rgba(255,255,255,0.62);
+
+  font-size: 0.82rem;
+
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   STIMMANZEIGE
+   ===================================================== */
+
+.tuning-meter {
+  margin-bottom: 20px;
+}
+
+
+.meter-labels {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 8px;
+
+  color:
+    rgba(255,255,255,0.46);
+
+  font-size: 0.63rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+
+.meter-track {
+  position: relative;
+
+  height: 14px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(211,161,59,0.30),
+      rgba(255,255,255,0.15) 45%,
+      rgba(255,255,255,0.15) 55%,
+      rgba(211,161,59,0.30)
+    );
+}
+
+
+.meter-center {
+  position: absolute;
+
+  top: -5px;
+  bottom: -5px;
+
+  left: 50%;
+
+  width: 2px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    var(--gold-light);
+}
+
+
+.meter-needle {
+  position: absolute;
+
+  top: 50%;
+
+  left: 50%;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  background: white;
+
+  border:
+    3px solid
+    var(--gold);
+
+  box-shadow:
+    0 2px 8px
+    rgba(0,0,0,0.35);
+
+  transition:
+    left 0.10s ease;
+}
+
+
+/* =====================================================
+   STATUS
+   ===================================================== */
+
+.tuner-status {
+  min-height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin:
+    0 0
+    18px;
+
+  padding:
+    9px 12px;
+
+  border-radius: 12px;
+
+  background:
+    rgba(255,255,255,0.07);
+
+  color:
+    rgba(255,255,255,0.70);
+
+  text-align: center;
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+}
+
+
+.tuner-status.in-tune {
+  background:
+    rgba(229,193,110,0.16);
+
+  color:
+    var(--gold-light);
+}
+
+
+/* =====================================================
+   FREQUENZ
+   ===================================================== */
+
+.tuner-frequency {
+  text-align: center;
+
+  margin-bottom: 21px;
+}
+
+
+.tuner-frequency strong {
+  display: block;
+
+  color: white;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.25rem;
+}
+
+
+.tuner-frequency span {
+  display: block;
+
+  margin-top: 3px;
+
+  color:
+    rgba(255,255,255,0.42);
+
+  font-size: 0.63rem;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+.tuner-start {
+  width: 100%;
+
+  min-height: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border: 0;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
+  color:
+    var(--green-dark);
+
+  font-size: 0.9rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 16px
+    rgba(0,0,0,0.18);
+}
+
+
+.tuner-start.running {
+  border:
+    1px solid
+    rgba(229,193,110,0.55);
+
+  background:
+    rgba(255,255,255,0.10);
+
+  color: white;
+}
+
+
+.tuner-start:active {
+  transform: scale(0.985);
+}
+
+
+.tuner-hint {
+  margin:
+    13px 0
+    0;
+
+  color:
+    rgba(255,255,255,0.46);
+
+  text-align: center;
+
+  font-size: 0.71rem;
+
+  line-height: 1.45;
+}
