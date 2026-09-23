@@ -1,4 +1,20 @@
-const CACHE = 'blaeserhut-v1';
-const FILES = ['./','index.html','styles.css','app.js','manifest.json'];
-self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))));
-self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
+// Service Worker vorerst ohne Datei-Cache.
+// Während der Entwicklung sollen immer die aktuellen Dateien geladen werden.
+
+self.addEventListener("install", () => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => caches.delete(cacheName))
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", () => {
+  // Kein Caching während der Entwicklung.
+});
