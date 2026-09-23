@@ -110,13 +110,8 @@ practiceAreas.forEach((area) => {
 /* =========================================================
    WIEDERGABEGESCHWINDIGKEIT
 
-   Die gewählte Geschwindigkeit gilt für ALLE
-   Aufnahmen innerhalb eines Stücks:
-
-   - Gesamtaufnahme
-   - FP1
-   - FP2
-   - später auch weitere Stimmen
+   Geschwindigkeit gilt für alle Aufnahmen
+   innerhalb des jeweiligen Stücks.
    ========================================================= */
 
 pieceCards.forEach((pieceCard) => {
@@ -145,21 +140,13 @@ pieceCards.forEach((pieceCard) => {
           );
 
 
-        /*
-           Wiedergabegeschwindigkeit auf alle
-           Aufnahmen dieses Stücks übertragen.
-        */
+        /* Geschwindigkeit setzen */
 
         piecePlayers.forEach((player) => {
 
           player.playbackRate =
             speed;
 
-
-          /*
-             Tonhöhe beim langsameren Abspielen
-             möglichst erhalten.
-          */
 
           if (
             "preservesPitch"
@@ -171,10 +158,6 @@ pieceCards.forEach((pieceCard) => {
 
           }
 
-
-          /*
-             Unterstützung für ältere Safari-Versionen.
-          */
 
           if (
             "webkitPreservesPitch"
@@ -189,9 +172,7 @@ pieceCards.forEach((pieceCard) => {
         });
 
 
-        /*
-           Aktiven Button zurücksetzen.
-        */
+        /* Alte Auswahl entfernen */
 
         speedButtons.forEach(
           (otherButton) => {
@@ -204,18 +185,11 @@ pieceCards.forEach((pieceCard) => {
         );
 
 
-        /*
-           Gewählten Button aktiv markieren.
-        */
+        /* Neue Auswahl markieren */
 
         button
           .classList
           .add("active");
-
-
-        /*
-           Große AKTIV-Anzeige aktualisieren.
-        */
 
       }
     );
@@ -2035,7 +2009,44 @@ if (tunerArea) {
 
 }
 
+/* =========================================================
+   APP IM HINTERGRUND
 
+   Musik, Metronom und Mikrofon stoppen,
+   sobald die App nicht mehr sichtbar ist.
+   ========================================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if (!document.hidden) {
+      return;
+    }
+
+
+    /* Musik pausieren */
+
+    players.forEach((player) => {
+      player.pause();
+    });
+
+
+    /* Metronom stoppen */
+
+    if (metronomeRunning) {
+      stopMetronome();
+    }
+
+
+    /* Stimmgerät stoppen und Mikrofon freigeben */
+
+    if (tunerRunning) {
+      stopTuner();
+    }
+
+  }
+);
 
 /* =========================================================
    SERVICE WORKER
