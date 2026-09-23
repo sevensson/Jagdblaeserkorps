@@ -964,34 +964,6 @@ function autoCorrelate(buffer, sampleRate) {
 
 
 /* =========================================================
-   FREQUENZ -> MIDI NOTE
-   ========================================================= */
-
-/* =========================================================
-   NOTIERTE TONHÖHE FÜR B-INSTRUMENT
-
-   Ein B-Instrument klingt einen Ganzton tiefer
-   als notiert.
-
-   Deshalb addieren wir für die Anzeige
-   zwei Halbtöne.
-   ========================================================= */
-
-  const noteIndex =
-    (
-      writtenMidi % 12 + 12
-    ) % 12;
-
-
-  return {
-    midi: writtenMidi,
-    name: noteNames[noteIndex]
-  };
-
-}
-
-
-/* =========================================================
    NÄCHSTEN NATURTON FINDEN
    ========================================================= */
 
@@ -1245,75 +1217,6 @@ function updateTunerDisplay(
     tunerStatus.textContent =
       targetTone.hornTone +
       ". Ton ist zu hoch";
-
-  }
-
-}
-
-  /* =====================================================
-     NADEL
-
-     -50 Cent = ganz links
-      0 Cent = Mitte
-     +50 Cent = ganz rechts
-     ===================================================== */
-
-  const limitedCents =
-    Math.max(
-      -50,
-      Math.min(
-        50,
-        cents
-      )
-    );
-
-
-  const needlePosition =
-    50 +
-    limitedCents;
-
-
-  tunerNeedle.style.left =
-    needlePosition + "%";
-
-
-  /* =====================================================
-     STATUS
-
-     ±5 Cent gelten zunächst als sauber gestimmt.
-     ===================================================== */
-
-  tunerStatus.classList.remove(
-    "in-tune"
-  );
-
-
-  if (
-    Math.abs(cents) <= 5
-  ) {
-
-    tunerStatus.textContent =
-      "✓ Ton passt";
-
-    tunerStatus.classList.add(
-      "in-tune"
-    );
-
-  }
-
-  else if (
-    cents < -5
-  ) {
-
-    tunerStatus.textContent =
-      "Ton ist zu tief";
-
-  }
-
-  else {
-
-    tunerStatus.textContent =
-      "Ton ist zu hoch";
 
   }
 
