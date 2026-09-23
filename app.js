@@ -1,12 +1,12 @@
 /* =========================================================
-   JAGDBLÄSERCORPS RADEVORMWALD
+   JAGDBLÄSERCORPS HEGERING RADEVORMWALD
    APP.JS
    ========================================================= */
 
 
 /* =========================================================
    AUDIOPLAYER
-   Nur eine Aufnahme gleichzeitig.
+   Immer nur eine Aufnahme gleichzeitig abspielen
    ========================================================= */
 
 const players =
@@ -30,8 +30,55 @@ players.forEach((player) => {
 });
 
 
+
+/* =========================================================
+   STÜCKE
+   Beim Einklappen alle Aufnahmen des Stücks stoppen
+   ========================================================= */
+
+const pieceCards =
+  document.querySelectorAll(".piece-card");
+
+
+pieceCards.forEach((pieceCard) => {
+
+  pieceCard.addEventListener("toggle", () => {
+
+    if (!pieceCard.open) {
+
+      const piecePlayers =
+        pieceCard.querySelectorAll("audio");
+
+
+      piecePlayers.forEach((player) => {
+        player.pause();
+      });
+
+
+      /*
+         Falls der Bereich "Stimmen einzeln üben"
+         geöffnet ist, schließen wir ihn ebenfalls.
+      */
+
+      const practiceAreas =
+        pieceCard.querySelectorAll(".practice-area");
+
+
+      practiceAreas.forEach((area) => {
+        area.open = false;
+      });
+
+    }
+
+  });
+
+});
+
+
+
 /* =========================================================
    STIMMEN-ÜBUNGSBEREICHE
+   Beim Einklappen die Einzelstimmen stoppen
    ========================================================= */
 
 const practiceAreas =
@@ -57,6 +104,143 @@ practiceAreas.forEach((area) => {
   });
 
 });
+
+
+
+/* =========================================================
+   WIEDERGABEGESCHWINDIGKEIT
+
+   Die gewählte Geschwindigkeit gilt für ALLE
+   Aufnahmen innerhalb eines Stücks:
+
+   - Gesamtaufnahme
+   - FP1
+   - FP2
+   - später auch weitere Stimmen
+   ========================================================= */
+
+pieceCards.forEach((pieceCard) => {
+
+  const speedButtons =
+    pieceCard.querySelectorAll(
+      ".speed-button"
+    );
+
+
+  const speedCurrentValue =
+    pieceCard.querySelector(
+      ".speed-current-value"
+    );
+
+
+  const piecePlayers =
+    pieceCard.querySelectorAll(
+      "audio"
+    );
+
+
+  speedButtons.forEach((button) => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        const speed =
+          Number(
+            button.dataset.speed
+          );
+
+
+        const label =
+          button.dataset.label;
+
+
+        /*
+           Wiedergabegeschwindigkeit auf alle
+           Aufnahmen dieses Stücks übertragen.
+        */
+
+        piecePlayers.forEach((player) => {
+
+          player.playbackRate =
+            speed;
+
+
+          /*
+             Tonhöhe beim langsameren Abspielen
+             möglichst erhalten.
+          */
+
+          if (
+            "preservesPitch"
+            in player
+          ) {
+
+            player.preservesPitch =
+              true;
+
+          }
+
+
+          /*
+             Unterstützung für ältere Safari-Versionen.
+          */
+
+          if (
+            "webkitPreservesPitch"
+            in player
+          ) {
+
+            player.webkitPreservesPitch =
+              true;
+
+          }
+
+        });
+
+
+        /*
+           Aktiven Button zurücksetzen.
+        */
+
+        speedButtons.forEach(
+          (otherButton) => {
+
+            otherButton
+              .classList
+              .remove("active");
+
+          }
+        );
+
+
+        /*
+           Gewählten Button aktiv markieren.
+        */
+
+        button
+          .classList
+          .add("active");
+
+
+        /*
+           Große AKTIV-Anzeige aktualisieren.
+        */
+
+        if (speedCurrentValue) {
+
+          speedCurrentValue.textContent =
+            label;
+
+        }
+
+      }
+    );
+
+  });
+
+});
+
 
 
 /* =========================================================
@@ -90,8 +274,9 @@ const beatIndicator =
 const timeButtons =
   document.querySelectorAll(".time-button");
 
+const metronomeArea =
+  document.getElementById("metronome");
 
-/* Grundeinstellungen */
 
 let bpm = 100;
 
@@ -103,14 +288,20 @@ let metronomeRunning = false;
 
 let timerID = null;
 
-let audioContext = null;
+let metronomeAudioContext = null;
+
 
 
 /* =========================================================
-   TAKTPUNKTE ERZEUGEN
+   TAKTPUNKTE ERSTELLEN
    ========================================================= */
 
 function createBeatDots() {
+
+  if (!beatIndicator) {
+    return;
+  }
+
 
   beatIndicator.innerHTML = "";
 
@@ -124,9 +315,15 @@ function createBeatDots() {
     const dot =
       document.createElement("span");
 
-    dot.classList.add("beat-dot");
 
-    beatIndicator.appendChild(dot);
+    dot.classList.add(
+      "beat-dot"
+    );
+
+
+    beatIndicator.appendChild(
+      dot
+    );
 
   }
 
@@ -136,27 +333,34 @@ function createBeatDots() {
 createBeatDots();
 
 
+
 /* =========================================================
-   BPM ÄNDERN
+   BPM EINSTELLEN
    ========================================================= */
 
 function setBpm(value) {
 
-  bpm = Math.max(
-    40,
-    Math.min(200, value)
-  );
+  bpm =
+    Math.max(
+      40,
+      Math.min(
+        200,
+        value
+      )
+    );
 
 
-  bpmDisplay.textContent = bpm;
+  if (bpmDisplay) {
+    bpmDisplay.textContent =
+      bpm;
+  }
 
-  bpmSlider.value = bpm;
 
+  if (bpmSlider) {
+    bpmSlider.value =
+      bpm;
+  }
 
-  /*
-    Wenn das Metronom läuft,
-    wird das neue Tempo direkt übernommen.
-  */
 
   if (metronomeRunning) {
     restartTimer();
@@ -165,42 +369,58 @@ function setBpm(value) {
 }
 
 
-/* Minus */
 
-bpmMinus.addEventListener(
-  "click",
-  () => {
+if (bpmMinus) {
 
-    setBpm(bpm - 1);
+  bpmMinus.addEventListener(
+    "click",
+    () => {
 
-  }
-);
+      setBpm(
+        bpm - 1
+      );
 
+    }
+  );
 
-/* Plus */
-
-bpmPlus.addEventListener(
-  "click",
-  () => {
-
-    setBpm(bpm + 1);
-
-  }
-);
+}
 
 
-/* Slider */
 
-bpmSlider.addEventListener(
-  "input",
-  () => {
+if (bpmPlus) {
 
-    setBpm(
-      Number(bpmSlider.value)
-    );
+  bpmPlus.addEventListener(
+    "click",
+    () => {
 
-  }
-);
+      setBpm(
+        bpm + 1
+      );
+
+    }
+  );
+
+}
+
+
+
+if (bpmSlider) {
+
+  bpmSlider.addEventListener(
+    "input",
+    () => {
+
+      setBpm(
+        Number(
+          bpmSlider.value
+        )
+      );
+
+    }
+  );
+
+}
+
 
 
 /* =========================================================
@@ -219,15 +439,24 @@ timeButtons.forEach((button) => {
         );
 
 
-      timeButtons.forEach((other) => {
-        other.classList.remove("active");
-      });
+      timeButtons.forEach(
+        (otherButton) => {
+
+          otherButton
+            .classList
+            .remove("active");
+
+        }
+      );
 
 
-      button.classList.add("active");
+      button
+        .classList
+        .add("active");
 
 
       currentBeat = 0;
+
 
       createBeatDots();
 
@@ -237,15 +466,16 @@ timeButtons.forEach((button) => {
 });
 
 
+
 /* =========================================================
-   AUDIO CONTEXT
+   AUDIOCONTEXT DES METRONOMS
    ========================================================= */
 
-function getAudioContext() {
+function getMetronomeAudioContext() {
 
-  if (!audioContext) {
+  if (!metronomeAudioContext) {
 
-    audioContext =
+    metronomeAudioContext =
       new (
         window.AudioContext ||
         window.webkitAudioContext
@@ -255,31 +485,34 @@ function getAudioContext() {
 
 
   if (
-    audioContext.state === "suspended"
+    metronomeAudioContext.state ===
+    "suspended"
   ) {
 
-    audioContext.resume();
+    metronomeAudioContext.resume();
 
   }
 
 
-  return audioContext;
+  return metronomeAudioContext;
 
 }
 
 
+
 /* =========================================================
-   KLICKTON ERZEUGEN
+   METRONOM-KLICK
    ========================================================= */
 
 function playClick(isAccent) {
 
   const context =
-    getAudioContext();
+    getMetronomeAudioContext();
 
 
   const oscillator =
     context.createOscillator();
+
 
   const gain =
     context.createGain();
@@ -292,16 +525,14 @@ function playClick(isAccent) {
   );
 
 
-  /*
-    Erster Taktschlag:
-    höher und etwas kräftiger.
-  */
-
   oscillator.frequency.value =
-    isAccent ? 1200 : 800;
+    isAccent
+      ? 1200
+      : 800;
 
 
-  oscillator.type = "sine";
+  oscillator.type =
+    "sine";
 
 
   const now =
@@ -315,7 +546,9 @@ function playClick(isAccent) {
 
 
   gain.gain.exponentialRampToValueAtTime(
-    isAccent ? 0.35 : 0.22,
+    isAccent
+      ? 0.35
+      : 0.22,
     now + 0.002
   );
 
@@ -335,11 +568,17 @@ function playClick(isAccent) {
 }
 
 
+
 /* =========================================================
-   EINEN TAKTSCHLAG ABSPIELEN
+   TAKTSCHLAG
    ========================================================= */
 
 function tick() {
+
+  if (!beatIndicator) {
+    return;
+  }
+
 
   const dots =
     beatIndicator.querySelectorAll(
@@ -348,7 +587,11 @@ function tick() {
 
 
   dots.forEach((dot) => {
-    dot.classList.remove("current");
+
+    dot.classList.remove(
+      "current"
+    );
+
   });
 
 
@@ -365,14 +608,17 @@ function tick() {
     currentBeat === 0;
 
 
-  playClick(firstBeat);
+  playClick(
+    firstBeat
+  );
 
 
   currentBeat++;
 
 
   if (
-    currentBeat >= beatsPerMeasure
+    currentBeat >=
+    beatsPerMeasure
   ) {
 
     currentBeat = 0;
@@ -382,15 +628,12 @@ function tick() {
 }
 
 
+
 /* =========================================================
-   TIMER STARTEN
+   METRONOM TIMER
    ========================================================= */
 
 function startTimer() {
-
-  /*
-    Erster Schlag sofort.
-  */
 
   tick();
 
@@ -408,13 +651,13 @@ function startTimer() {
 }
 
 
-/* =========================================================
-   TIMER BEI BPM ÄNDERUNG NEU STARTEN
-   ========================================================= */
 
 function restartTimer() {
 
-  clearInterval(timerID);
+  clearInterval(
+    timerID
+  );
+
 
   timerID = null;
 
@@ -432,8 +675,9 @@ function restartTimer() {
 }
 
 
+
 /* =========================================================
-   METRONOM STARTEN
+   METRONOM START
    ========================================================= */
 
 function startMetronome() {
@@ -444,11 +688,34 @@ function startMetronome() {
 
 
   /*
-    AudioContext muss durch eine
-    Benutzeraktion gestartet werden.
+     Falls das Stimmgerät läuft,
+     stoppen wir es.
+
+     Sonst würde das Mikrofon die
+     Metronom-Klicks aufnehmen.
   */
 
-  getAudioContext();
+  if (
+    typeof tunerRunning !==
+      "undefined" &&
+    tunerRunning
+  ) {
+
+    stopTuner();
+
+  }
+
+
+  /*
+     Laufende Musik stoppen.
+  */
+
+  players.forEach((player) => {
+    player.pause();
+  });
+
+
+  getMetronomeAudioContext();
 
 
   metronomeRunning = true;
@@ -459,28 +726,44 @@ function startMetronome() {
   startTimer();
 
 
-  metronomeStart
-    .classList
-    .add("running");
+  if (metronomeStart) {
+
+    metronomeStart
+      .classList
+      .add("running");
+
+  }
 
 
-  metronomeSymbol.textContent =
-    "■";
+  if (metronomeSymbol) {
+
+    metronomeSymbol.textContent =
+      "■";
+
+  }
 
 
-  metronomeText.textContent =
-    "Metronom stoppen";
+  if (metronomeText) {
+
+    metronomeText.textContent =
+      "Metronom stoppen";
+
+  }
 
 }
 
 
+
 /* =========================================================
-   METRONOM STOPPEN
+   METRONOM STOP
    ========================================================= */
 
 function stopMetronome() {
 
-  clearInterval(timerID);
+  clearInterval(
+    timerID
+  );
+
 
   timerID = null;
 
@@ -489,96 +772,112 @@ function stopMetronome() {
   currentBeat = 0;
 
 
-  const dots =
-    beatIndicator.querySelectorAll(
-      ".beat-dot"
-    );
+  if (beatIndicator) {
+
+    const dots =
+      beatIndicator.querySelectorAll(
+        ".beat-dot"
+      );
 
 
-  dots.forEach((dot) => {
-    dot.classList.remove("current");
-  });
+    dots.forEach((dot) => {
+
+      dot.classList.remove(
+        "current"
+      );
+
+    });
+
+  }
 
 
-  metronomeStart
-    .classList
-    .remove("running");
+  if (metronomeStart) {
+
+    metronomeStart
+      .classList
+      .remove("running");
+
+  }
 
 
-  metronomeSymbol.textContent =
-    "▶";
+  if (metronomeSymbol) {
+
+    metronomeSymbol.textContent =
+      "▶";
+
+  }
 
 
-  metronomeText.textContent =
-    "Metronom starten";
+  if (metronomeText) {
+
+    metronomeText.textContent =
+      "Metronom starten";
+
+  }
 
 }
 
 
-/* =========================================================
-   START / STOP BUTTON
-   ========================================================= */
-
-metronomeStart.addEventListener(
-  "click",
-  () => {
-
-    if (metronomeRunning) {
-
-      stopMetronome();
-
-    }
-
-    else {
-
-      startMetronome();
-
-    }
-
-  }
-);
-
 
 /* =========================================================
-   METRONOM STOPPEN,
-   WENN DER BEREICH GESCHLOSSEN WIRD
+   METRONOM BUTTON
    ========================================================= */
 
-const metronomeArea =
-  document.getElementById("metronome");
+if (metronomeStart) {
 
+  metronomeStart.addEventListener(
+    "click",
+    () => {
 
-metronomeArea.addEventListener(
-  "toggle",
-  () => {
+      if (metronomeRunning) {
 
-    if (
-      !metronomeArea.open &&
-      metronomeRunning
-    ) {
+        stopMetronome();
 
-      stopMetronome();
+      }
+
+      else {
+
+        startMetronome();
+
+      }
 
     }
+  );
 
-  }
-);
+}
+
+
 
 /* =========================================================
-   STIMMGERÄT FÜR JAGDHORN IN B
+   METRONOM BEIM EINKLAPPEN STOPPEN
    ========================================================= */
 
+if (metronomeArea) {
 
-/*
-   Das Mikrofon misst die tatsächlich klingende Frequenz.
+  metronomeArea.addEventListener(
+    "toggle",
+    () => {
 
-   Für die Anzeige wird anschließend für ein Instrument
-   in B transponiert.
+      if (
+        !metronomeArea.open &&
+        metronomeRunning
+      ) {
 
-   Dadurch sieht der Bläser die notierte Tonhöhe,
-   wie sie auch in den Jagdhornnoten steht.
-*/
+        stopMetronome();
 
+      }
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   STIMMGERÄT
+   FÜRST-PLESS-HORN IN B
+   ========================================================= */
 
 const tunerArea =
   document.getElementById("tuner");
@@ -587,25 +886,39 @@ const tunerStart =
   document.getElementById("tunerStart");
 
 const tunerStartText =
-  document.getElementById("tunerStartText");
+  document.getElementById(
+    "tunerStartText"
+  );
 
 const tunerStartSymbol =
-  document.getElementById("tunerStartSymbol");
+  document.getElementById(
+    "tunerStartSymbol"
+  );
 
 const tunerNote =
-  document.getElementById("tunerNote");
+  document.getElementById(
+    "tunerNote"
+  );
 
 const tunerCents =
-  document.getElementById("tunerCents");
+  document.getElementById(
+    "tunerCents"
+  );
 
 const tunerFrequency =
-  document.getElementById("tunerFrequency");
+  document.getElementById(
+    "tunerFrequency"
+  );
 
 const tunerNeedle =
-  document.getElementById("tunerNeedle");
+  document.getElementById(
+    "tunerNeedle"
+  );
 
 const tunerStatus =
-  document.getElementById("tunerStatus");
+  document.getElementById(
+    "tunerStatus"
+  );
 
 
 let tunerRunning = false;
@@ -621,19 +934,12 @@ let tunerStream = null;
 let tunerAnimationFrame = null;
 
 
-/*
-   Chromatische Notennamen.
-
-   Intern arbeiten wir mit MIDI-Notennummern.
-*/
 
 /* =========================================================
    NATURTÖNE DES FÜRST-PLESS-HORNS IN B
 
-   Die Frequenzen beziehen sich auf die tatsächlich
-   klingenden Töne.
-
-   Die Namen entsprechen der NOTATION für das B-Horn.
+   "name" entspricht der notierten Tonhöhe.
+   "frequency" ist die klingende Sollfrequenz.
    ========================================================= */
 
 const plessNaturalTones = [
@@ -690,25 +996,99 @@ const plessNaturalTones = [
 ];
 
 
+
 /* =========================================================
-   AUTOKORRELATION
-
-   Ermittelt die Grundfrequenz aus dem Mikrofonsignal.
-
-   Für unser erstes Stimmgerät ist diese Methode deutlich
-   sinnvoller als einfach nur den lautesten FFT-Peak
-   auszuwerten, weil ein Jagdhorn starke Obertöne besitzt.
+   NÄCHSTEN NATURTON FINDEN
    ========================================================= */
 
-function autoCorrelate(buffer, sampleRate) {
+function findClosestNaturalTone(
+  frequency
+) {
+
+  let closestTone =
+    plessNaturalTones[0];
+
+
+  let smallestDifference =
+    Infinity;
+
+
+  plessNaturalTones.forEach(
+    (tone) => {
+
+      const difference =
+        Math.abs(
+
+          1200 *
+
+          Math.log2(
+            frequency /
+            tone.frequency
+          )
+
+        );
+
+
+      if (
+        difference <
+        smallestDifference
+      ) {
+
+        smallestDifference =
+          difference;
+
+        closestTone =
+          tone;
+
+      }
+
+    }
+  );
+
+
+  return closestTone;
+
+}
+
+
+
+/* =========================================================
+   CENT-ABWEICHUNG ZUM NATURTON
+   ========================================================= */
+
+function centsFromFrequency(
+  frequency,
+  targetFrequency
+) {
+
+  return (
+
+    1200 *
+
+    Math.log2(
+      frequency /
+      targetFrequency
+    )
+
+  );
+
+}
+
+
+
+/* =========================================================
+   AUTOKORRELATION
+   Grundfrequenz des Mikrofonsignals bestimmen
+   ========================================================= */
+
+function autoCorrelate(
+  buffer,
+  sampleRate
+) {
 
   const size =
     buffer.length;
 
-
-  /*
-     Lautstärke des Eingangssignals bestimmen.
-  */
 
   let rms = 0;
 
@@ -721,6 +1101,7 @@ function autoCorrelate(buffer, sampleRate) {
 
     const value =
       buffer[i];
+
 
     rms +=
       value * value;
@@ -735,19 +1116,15 @@ function autoCorrelate(buffer, sampleRate) {
 
 
   /*
-     Bei zu wenig Signal keine
-     Tonhöhe anzeigen.
+     Signal zu leise.
   */
 
   if (rms < 0.01) {
+
     return -1;
+
   }
 
-
-  /*
-     Leise Bereiche am Anfang und Ende
-     des Puffers entfernen.
-  */
 
   let start = 0;
 
@@ -766,15 +1143,19 @@ function autoCorrelate(buffer, sampleRate) {
   ) {
 
     if (
-      Math.abs(buffer[i]) <
-      threshold
+      Math.abs(
+        buffer[i]
+      ) < threshold
     ) {
 
       start = i;
+
     }
 
     else {
+
       break;
+
     }
 
   }
@@ -788,16 +1169,21 @@ function autoCorrelate(buffer, sampleRate) {
 
     if (
       Math.abs(
-        buffer[size - i]
+        buffer[
+          size - i
+        ]
       ) < threshold
     ) {
 
       end =
         size - i;
+
     }
 
     else {
+
       break;
+
     }
 
   }
@@ -814,15 +1200,20 @@ function autoCorrelate(buffer, sampleRate) {
     trimmed.length;
 
 
+  if (
+    trimmedSize < 2
+  ) {
+
+    return -1;
+
+  }
+
+
   const correlations =
     new Array(
       trimmedSize
     ).fill(0);
 
-
-  /*
-     Autokorrelation berechnen.
-  */
 
   for (
     let lag = 0;
@@ -846,26 +1237,20 @@ function autoCorrelate(buffer, sampleRate) {
   }
 
 
-  /*
-     Ersten fallenden Bereich überspringen.
-  */
-
   let d = 0;
 
 
   while (
+    d + 1 <
+      correlations.length &&
     correlations[d] >
-    correlations[d + 1]
+      correlations[d + 1]
   ) {
 
     d++;
 
   }
 
-
-  /*
-     Höchste Korrelation suchen.
-  */
 
   let maxValue = -1;
 
@@ -903,11 +1288,6 @@ function autoCorrelate(buffer, sampleRate) {
   }
 
 
-  /*
-     Kleine Interpolation für eine
-     genauere Frequenzbestimmung.
-  */
-
   let period =
     maxPosition;
 
@@ -923,10 +1303,12 @@ function autoCorrelate(buffer, sampleRate) {
         maxPosition - 1
       ];
 
+
     const x2 =
       correlations[
         maxPosition
       ];
+
 
     const x3 =
       correlations[
@@ -947,7 +1329,9 @@ function autoCorrelate(buffer, sampleRate) {
       period +=
 
         0.5 *
+
         (x1 - x3) /
+
         denominator;
 
     }
@@ -963,108 +1347,20 @@ function autoCorrelate(buffer, sampleRate) {
 }
 
 
-/* =========================================================
-   NÄCHSTEN NATURTON FINDEN
-   ========================================================= */
-
-function findClosestNaturalTone(
-  frequency
-) {
-
-  let closestTone =
-    plessNaturalTones[0];
-
-  let smallestDifference =
-    Infinity;
-
-
-  plessNaturalTones.forEach(
-    (tone) => {
-
-      /*
-         Abstand logarithmisch vergleichen.
-
-         Dadurch vergleichen wir musikalische
-         Tonhöhen und nicht einfach nur Hz.
-      */
-
-      const difference =
-        Math.abs(
-          1200 *
-          Math.log2(
-            frequency /
-            tone.frequency
-          )
-        );
-
-
-      if (
-        difference <
-        smallestDifference
-      ) {
-
-        smallestDifference =
-          difference;
-
-        closestTone =
-          tone;
-
-      }
-
-    }
-  );
-
-
-  return closestTone;
-
-}
-
 
 /* =========================================================
-   CENT-ABWEICHUNG ZUM NATURTON
-   ========================================================= */
-
-function centsFromFrequency(
-  frequency,
-  targetFrequency
-) {
-
-  return (
-
-    1200 *
-
-    Math.log2(
-      frequency /
-      targetFrequency
-    )
-
-  );
-
-}
-
-/* =========================================================
-   STIMMGERÄT-ANZEIGE AKTUALISIEREN
+   STIMMGERÄT-ANZEIGE
    ========================================================= */
 
 function updateTunerDisplay(
   frequency
 ) {
 
-  /*
-     Passenden Naturton des
-     Fürst-Pless-Horns suchen.
-  */
-
   const targetTone =
     findClosestNaturalTone(
       frequency
     );
 
-
-  /*
-     Abweichung vom tatsächlichen
-     Naturton-Sollwert berechnen.
-  */
 
   const cents =
     centsFromFrequency(
@@ -1073,86 +1369,108 @@ function updateTunerDisplay(
     );
 
 
-  /* =====================================================
-     TONANZEIGE
-     ===================================================== */
+  /*
+     Notierter Ton.
+  */
 
-  tunerNote.textContent =
-    targetTone.name;
+  if (tunerNote) {
 
+    tunerNote.textContent =
+      targetTone.name;
 
-  /* =====================================================
-     FREQUENZANZEIGE
-
-     Gemessene Frequenz +
-     Sollfrequenz
-     ===================================================== */
-
-  tunerFrequency.innerHTML =
-
-    frequency.toFixed(1) +
-    " Hz" +
-
-    "<br>" +
-
-    "<span style='font-size:0.65rem;" +
-    "font-family:sans-serif;" +
-    "font-weight:400;" +
-    "opacity:0.55;'>" +
-
-    "Soll: " +
-    targetTone.frequency.toFixed(1) +
-    " Hz · " +
-    targetTone.hornTone +
-    ". Ton" +
-
-    "</span>";
+  }
 
 
-  /* =====================================================
-     CENT-ANZEIGE
-     ===================================================== */
+  /*
+     Gemessene Frequenz und Naturton-Sollwert.
+  */
+
+  if (tunerFrequency) {
+
+    tunerFrequency.innerHTML =
+
+      frequency.toLocaleString(
+        "de-DE",
+        {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        }
+      ) +
+
+      " Hz" +
+
+      "<br>" +
+
+      "<span>" +
+
+      "Soll: " +
+
+      targetTone.frequency.toLocaleString(
+        "de-DE",
+        {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        }
+      ) +
+
+      " Hz · " +
+
+      targetTone.hornTone +
+
+      ". Ton" +
+
+      "</span>";
+
+  }
+
+
+  /*
+     Cent-Anzeige.
+  */
 
   const roundedCents =
     Math.round(cents);
 
 
-  if (
-    roundedCents > 0
-  ) {
+  if (tunerCents) {
 
-    tunerCents.textContent =
-      "+" +
-      roundedCents +
-      " Cent";
+    if (
+      roundedCents > 0
+    ) {
+
+      tunerCents.textContent =
+        "+" +
+        roundedCents +
+        " Cent";
+
+    }
+
+    else if (
+      roundedCents < 0
+    ) {
+
+      tunerCents.textContent =
+        roundedCents +
+        " Cent";
+
+    }
+
+    else {
+
+      tunerCents.textContent =
+        "0 Cent";
+
+    }
 
   }
 
-  else if (
-    roundedCents < 0
-  ) {
 
-    tunerCents.textContent =
-      roundedCents +
-      " Cent";
-
-  }
-
-  else {
-
-    tunerCents.textContent =
-      "0 Cent";
-
-  }
-
-
-  /* =====================================================
-     NADEL
-
-     -50 Cent = links
-       0 Cent = Mitte
-     +50 Cent = rechts
-     ===================================================== */
+  /*
+     Nadel:
+     -50 Cent links
+       0 Cent Mitte
+     +50 Cent rechts
+  */
 
   const limitedCents =
     Math.max(
@@ -1169,58 +1487,126 @@ function updateTunerDisplay(
     limitedCents;
 
 
-  tunerNeedle.style.left =
-    needlePosition + "%";
+  if (tunerNeedle) {
 
+    tunerNeedle.style.left =
+      needlePosition + "%";
 
-  /* =====================================================
-     STATUS
-     ===================================================== */
-
-  tunerStatus.classList.remove(
-    "in-tune"
-  );
+  }
 
 
   /*
-     ±5 Cent betrachten wir zunächst
-     als sauber getroffen.
+     Status.
+     ±5 Cent gelten zunächst als passend.
   */
 
-  if (
-    Math.abs(cents) <= 5
-  ) {
+  if (tunerStatus) {
 
-    tunerStatus.textContent =
-      "✓ " +
-      targetTone.hornTone +
-      ". Ton passt";
+    tunerStatus
+      .classList
+      .remove(
+        "in-tune"
+      );
 
-    tunerStatus.classList.add(
-      "in-tune"
-    );
 
-  }
+    if (
+      Math.abs(cents) <= 5
+    ) {
 
-  else if (
-    cents < -5
-  ) {
+      tunerStatus.textContent =
+        "✓ " +
+        targetTone.hornTone +
+        ". Ton passt";
 
-    tunerStatus.textContent =
-      targetTone.hornTone +
-      ". Ton ist zu tief";
 
-  }
+      tunerStatus
+        .classList
+        .add(
+          "in-tune"
+        );
 
-  else {
+    }
 
-    tunerStatus.textContent =
-      targetTone.hornTone +
-      ". Ton ist zu hoch";
+    else if (
+      cents < -5
+    ) {
+
+      tunerStatus.textContent =
+        targetTone.hornTone +
+        ". Ton ist zu tief";
+
+    }
+
+    else {
+
+      tunerStatus.textContent =
+        targetTone.hornTone +
+        ". Ton ist zu hoch";
+
+    }
 
   }
 
 }
+
+
+
+/* =========================================================
+   STIMMGERÄT ZURÜCKSETZEN
+   ========================================================= */
+
+function resetTunerDisplay() {
+
+  if (tunerNote) {
+
+    tunerNote.textContent =
+      "–";
+
+  }
+
+
+  if (tunerCents) {
+
+    tunerCents.textContent =
+      tunerRunning
+        ? "Kein stabiler Ton"
+        : "Mikrofon nicht aktiv";
+
+  }
+
+
+  if (tunerFrequency) {
+
+    tunerFrequency.textContent =
+      "– Hz";
+
+  }
+
+
+  if (tunerNeedle) {
+
+    tunerNeedle.style.left =
+      "50%";
+
+  }
+
+
+  if (tunerStatus) {
+
+    tunerStatus.textContent =
+      "Spiele einen gleichmäßigen Ton.";
+
+
+    tunerStatus
+      .classList
+      .remove(
+        "in-tune"
+      );
+
+  }
+
+}
+
 
 
 /* =========================================================
@@ -1230,7 +1616,9 @@ function updateTunerDisplay(
 function analyseTuner() {
 
   if (
-    !tunerRunning
+    !tunerRunning ||
+    !tunerAnalyser ||
+    !tunerAudioContext
   ) {
 
     return;
@@ -1258,11 +1646,7 @@ function analyseTuner() {
 
 
   /*
-     Nur plausible Frequenzen verwenden.
-
-     Der Bereich ist bewusst großzügig,
-     damit wir beim Testen sehen können,
-     was das Mikrofon erkennt.
+     Bereich passend zu unseren Naturtönen.
   */
 
   if (
@@ -1278,24 +1662,7 @@ function analyseTuner() {
 
   else {
 
-    tunerNote.textContent =
-      "–";
-
-    tunerCents.textContent =
-      "Kein stabiler Ton";
-
-    tunerFrequency.textContent =
-      "– Hz";
-
-    tunerNeedle.style.left =
-      "50%";
-
-    tunerStatus.textContent =
-      "Spiele einen gleichmäßigen Ton.";
-
-    tunerStatus.classList.remove(
-      "in-tune"
-    );
+    resetTunerDisplay();
 
   }
 
@@ -1308,29 +1675,72 @@ function analyseTuner() {
 }
 
 
+
 /* =========================================================
    STIMMGERÄT STARTEN
    ========================================================= */
 
 async function startTuner() {
 
+  /*
+     Metronom stoppen, damit dessen Klick
+     nicht vom Mikrofon erkannt wird.
+  */
+
+  if (metronomeRunning) {
+
+    stopMetronome();
+
+  }
+
+
+  /*
+     Laufende Musik ebenfalls stoppen.
+  */
+
+  players.forEach((player) => {
+    player.pause();
+  });
+
+
+  /*
+     Browser muss Mikrofonzugriff unterstützen.
+  */
+
+  if (
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ) {
+
+    if (tunerStatus) {
+
+      tunerStatus.textContent =
+        "Dieser Browser unterstützt keinen Mikrofonzugriff.";
+
+    }
+
+    return;
+
+  }
+
+
   try {
 
-    /*
-       Mikrofon anfordern.
-    */
-
     tunerStream =
+
       await navigator.mediaDevices
         .getUserMedia({
 
           audio: {
 
-            echoCancellation: false,
+            echoCancellation:
+              false,
 
-            noiseSuppression: false,
+            noiseSuppression:
+              false,
 
-            autoGainControl: false
+            autoGainControl:
+              false
 
           }
 
@@ -1338,10 +1748,21 @@ async function startTuner() {
 
 
     tunerAudioContext =
+
       new (
         window.AudioContext ||
         window.webkitAudioContext
       )();
+
+
+    if (
+      tunerAudioContext.state ===
+      "suspended"
+    ) {
+
+      await tunerAudioContext.resume();
+
+    }
 
 
     tunerAnalyser =
@@ -1350,8 +1771,7 @@ async function startTuner() {
 
 
     /*
-       Größerer Puffer hilft insbesondere
-       bei tieferen Tönen.
+       Größerer Puffer für tiefere Hornfrequenzen.
     */
 
     tunerAnalyser.fftSize =
@@ -1370,24 +1790,43 @@ async function startTuner() {
     );
 
 
-    tunerRunning = true;
+    tunerRunning =
+      true;
 
 
-    tunerStart
-      .classList
-      .add("running");
+    if (tunerStart) {
+
+      tunerStart
+        .classList
+        .add(
+          "running"
+        );
+
+    }
 
 
-    tunerStartSymbol.textContent =
-      "■";
+    if (tunerStartSymbol) {
+
+      tunerStartSymbol.textContent =
+        "■";
+
+    }
 
 
-    tunerStartText.textContent =
-      "Mikrofon stoppen";
+    if (tunerStartText) {
+
+      tunerStartText.textContent =
+        "Mikrofon stoppen";
+
+    }
 
 
-    tunerStatus.textContent =
-      "Spiele einen gleichmäßigen Ton.";
+    if (tunerStatus) {
+
+      tunerStatus.textContent =
+        "Spiele einen gleichmäßigen Ton.";
+
+    }
 
 
     analyseTuner();
@@ -1402,16 +1841,49 @@ async function startTuner() {
     );
 
 
-    tunerStatus.textContent =
-      "Mikrofonzugriff nicht möglich.";
+    if (tunerStatus) {
+
+      if (
+        error.name ===
+        "NotAllowedError"
+      ) {
+
+        tunerStatus.textContent =
+          "Mikrofonzugriff wurde nicht erlaubt.";
+
+      }
+
+      else if (
+        error.name ===
+        "NotFoundError"
+      ) {
+
+        tunerStatus.textContent =
+          "Kein Mikrofon gefunden.";
+
+      }
+
+      else {
+
+        tunerStatus.textContent =
+          "Mikrofon konnte nicht gestartet werden.";
+
+      }
+
+    }
 
 
-    tunerCents.textContent =
-      "Bitte Mikrofonfreigabe prüfen.";
+    if (tunerCents) {
+
+      tunerCents.textContent =
+        "Bitte Mikrofonfreigabe prüfen.";
+
+    }
 
   }
 
 }
+
 
 
 /* =========================================================
@@ -1420,7 +1892,8 @@ async function startTuner() {
 
 function stopTuner() {
 
-  tunerRunning = false;
+  tunerRunning =
+    false;
 
 
   if (
@@ -1431,34 +1904,57 @@ function stopTuner() {
       tunerAnimationFrame
     );
 
+
     tunerAnimationFrame =
       null;
 
   }
 
 
-  if (
-    tunerStream
-  ) {
+  if (tunerStream) {
 
     tunerStream
       .getTracks()
-      .forEach(
-        (track) =>
-          track.stop()
-      );
+      .forEach((track) => {
+
+        track.stop();
+
+      });
 
 
-    tunerStream = null;
+    tunerStream =
+      null;
 
   }
 
 
-  if (
-    tunerAudioContext
-  ) {
+  if (tunerSource) {
+
+    try {
+
+      tunerSource.disconnect();
+
+    }
+
+    catch (error) {
+
+      /*
+         Verbindung war bereits getrennt.
+      */
+
+    }
+
+
+    tunerSource =
+      null;
+
+  }
+
+
+  if (tunerAudioContext) {
 
     tunerAudioContext.close();
+
 
     tunerAudioContext =
       null;
@@ -1466,215 +1962,132 @@ function stopTuner() {
   }
 
 
-  tunerAnalyser = null;
-
-  tunerSource = null;
-
-
-  /* Anzeige zurücksetzen */
-
-  tunerNote.textContent =
-    "–";
+  tunerAnalyser =
+    null;
 
 
-  tunerCents.textContent =
-    "Mikrofon nicht aktiv";
+  resetTunerDisplay();
 
 
-  tunerFrequency.textContent =
-    "– Hz";
+  if (tunerStart) {
+
+    tunerStart
+      .classList
+      .remove(
+        "running"
+      );
+
+  }
 
 
-  tunerNeedle.style.left =
-    "50%";
+  if (tunerStartSymbol) {
+
+    tunerStartSymbol.textContent =
+      "●";
+
+  }
 
 
-  tunerStatus.textContent =
-    "Spiele einen gleichmäßigen Ton.";
+  if (tunerStartText) {
 
+    tunerStartText.textContent =
+      "Mikrofon starten";
 
-  tunerStatus.classList.remove(
-    "in-tune"
-  );
-
-
-  tunerStart
-    .classList
-    .remove("running");
-
-
-  tunerStartSymbol.textContent =
-    "●";
-
-
-  tunerStartText.textContent =
-    "Mikrofon starten";
+  }
 
 }
 
 
-/* =========================================================
-   START / STOP
-   ========================================================= */
-
-tunerStart.addEventListener(
-  "click",
-  () => {
-
-    if (
-      tunerRunning
-    ) {
-
-      stopTuner();
-
-    }
-
-    else {
-
-      startTuner();
-
-    }
-
-  }
-);
-
 
 /* =========================================================
-   BEIM SCHLIESSEN STOPPEN
+   STIMMGERÄT START / STOP BUTTON
    ========================================================= */
 
-tunerArea.addEventListener(
-  "toggle",
-  () => {
+if (tunerStart) {
 
-    if (
-      !tunerArea.open &&
-      tunerRunning
-    ) {
+  tunerStart.addEventListener(
+    "click",
+    () => {
 
-      stopTuner();
+      if (tunerRunning) {
 
-    }
-
-  }
-);
-/* =========================================================
-   WIEDERGABEGESCHWINDIGKEIT
-   ========================================================= */
-
-const pieceCards =
-  document.querySelectorAll(
-    ".piece-card"
-  );
-
-
-pieceCards.forEach(
-  (pieceCard) => {
-
-    const speedButtons =
-      pieceCard.querySelectorAll(
-        ".speed-button"
-      );
-
-
-    const piecePlayers =
-      pieceCard.querySelectorAll(
-        "audio"
-      );
-
-
-    speedButtons.forEach(
-      (button) => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const speed =
-              Number(
-                button.dataset.speed
-              );
-
-
-            /* Alle Aufnahmen dieses Stücks */
-
-            piecePlayers.forEach(
-              (player) => {
-
-                player.playbackRate =
-                  speed;
-
-
-                /*
-                   Moderne Browser versuchen dabei,
-                   die Tonhöhe beizubehalten.
-                */
-
-                if (
-                  "preservesPitch"
-                  in player
-                ) {
-
-                  player.preservesPitch =
-                    true;
-
-                }
-
-              }
-            );
-
-
-            /* Aktiven Button markieren */
-
-            speedButtons.forEach(
-              (otherButton) => {
-
-                otherButton
-                  .classList
-                  .remove(
-                    "active"
-                  );
-
-              }
-            );
-
-
-            button
-              .classList
-              .add(
-                "active"
-              );
-
-          }
-        );
+        stopTuner();
 
       }
-    );
 
-  }
-);
+      else {
+
+        startTuner();
+
+      }
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   STIMMGERÄT BEIM EINKLAPPEN STOPPEN
+   ========================================================= */
+
+if (tunerArea) {
+
+  tunerArea.addEventListener(
+    "toggle",
+    () => {
+
+      if (
+        !tunerArea.open &&
+        tunerRunning
+      ) {
+
+        stopTuner();
+
+      }
+
+    }
+  );
+
+}
+
+
+
 /* =========================================================
    SERVICE WORKER
    ========================================================= */
 
-if ("serviceWorker" in navigator) {
+if (
+  "serviceWorker"
+  in navigator
+) {
 
   window.addEventListener(
     "load",
     () => {
 
-      navigator.serviceWorker
-        .register("./sw.js")
+      navigator
+        .serviceWorker
+        .register(
+          "./sw.js"
+        )
+
         .then(() => {
+
           console.log(
             "Service Worker aktiv."
           );
+
         })
+
         .catch((error) => {
+
           console.error(
             "Service Worker Fehler:",
             error
           );
+
         });
 
     }
