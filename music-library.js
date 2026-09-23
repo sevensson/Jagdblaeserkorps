@@ -1,6 +1,15 @@
 /* =========================================================
    JAGDBLÄSERCORPS HEGERING RADEVORMWALD
    MUSIKBIBLIOTHEK
+
+   FP = Fürst-Pless-Horn
+   PF = Parforcehorn
+
+   audio:
+   Dateiname der Gesamtaufnahme
+
+   voices:
+   Einzelstimmen zum Üben
    ========================================================= */
 
 const musicLibrary = [
@@ -13,39 +22,44 @@ const musicLibrary = [
     title: "Das hohe Wecken",
     category: "allgemeine-signale",
     page: 4,
-    audio: null,
-    voices: []
+    audio: "Das hohe Wecken.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Das hohe Wecken-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Das hohe Wecken-FP2.mp3"
+      }
+    ]
   },
 
   {
     title: "Begrüßung",
     category: "allgemeine-signale",
     page: 5,
-
     audio: "Begrüßung.mp3",
-
     voices: [
       {
         instrument: "Fürst-Pless-Horn",
-        code: "FP1",
         voice: "1. Stimme",
         file: "Begrüßung-FP1.mp3"
       },
       {
         instrument: "Fürst-Pless-Horn",
-        code: "FP2",
         voice: "2. Stimme",
         file: "Begrüßung-FP2.mp3"
       },
       {
         instrument: "Fürst-Pless-Horn",
-        code: "FP3",
         voice: "3. Stimme",
         file: "Begrüßung-FP3.mp3"
       },
       {
         instrument: "Fürst-Pless-Horn",
-        code: "FP4",
         voice: "4. Stimme",
         file: "Begrüßung-FP4.mp3"
       }
@@ -64,7 +78,7 @@ const musicLibrary = [
     title: "Blattschlagen",
     category: "allgemeine-signale",
     page: 6,
-    audio: null,
+    audio: "Blattschlagen.mp3",
     voices: []
   },
 
@@ -96,8 +110,29 @@ const musicLibrary = [
     title: "Halali",
     category: "allgemeine-signale",
     page: 9,
-    audio: null,
-    voices: []
+    audio: "Halali.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Halali-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Halali-FP2.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "3. Stimme",
+        file: "Halali-FP3.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "4. Stimme",
+        file: "Halali-FP4.mp3"
+      }
+    ]
   },
 
 
@@ -117,7 +152,7 @@ const musicLibrary = [
     title: "Antwort",
     category: "jagdleitsignale",
     page: 10,
-    audio: null,
+    audio: "Antwort.mp3",
     voices: []
   },
 
@@ -133,7 +168,7 @@ const musicLibrary = [
     title: "Das Ganze",
     category: "jagdleitsignale",
     page: 10,
-    audio: null,
+    audio: "Das Ganze.mp3",
     voices: []
   },
 
@@ -141,7 +176,7 @@ const musicLibrary = [
     title: "Aufbruch zur Jagd",
     category: "jagdleitsignale",
     page: 10,
-    audio: null,
+    audio: "Aufbruch zur Jagd.mp3",
     voices: []
   },
 
@@ -149,9 +184,7 @@ const musicLibrary = [
     title: "Anblasen des Treibens",
     category: "jagdleitsignale",
     page: 10,
-
     audio: "Anblasen des Treibens.mp3",
-
     voices: []
   },
 
@@ -167,7 +200,7 @@ const musicLibrary = [
     title: "Aufmunterung zum Treiben",
     category: "jagdleitsignale",
     page: 11,
-    audio: null,
+    audio: "Aufmunterung zum Treiben.mp3",
     voices: []
   },
 
@@ -183,7 +216,7 @@ const musicLibrary = [
     title: "Halt",
     category: "jagdleitsignale",
     page: 11,
-    audio: null,
+    audio: "Halt.mp3",
     voices: []
   },
 
@@ -207,7 +240,7 @@ const musicLibrary = [
     title: "Aufhören zu schießen (Abblasen des Treibens)",
     category: "jagdleitsignale",
     page: 11,
-    audio: null,
+    audio: "Aufhören zu schießen.mp3",
     voices: []
   },
 
@@ -252,8 +285,19 @@ const musicLibrary = [
     title: "Damhirsch tot",
     category: "totsignale",
     page: 13,
-    audio: null,
-    voices: []
+    audio: "Damhirsch tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Damhirsch tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Damhirsch tot-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -284,8 +328,19 @@ const musicLibrary = [
     title: "Fuchs tot",
     category: "totsignale",
     page: 16,
-    audio: null,
-    voices: []
+    audio: "Fuchs tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Fuchs tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Fuchs tot-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -300,16 +355,38 @@ const musicLibrary = [
     title: "Dachs tot",
     category: "totsignale",
     page: 17,
-    audio: null,
-    voices: []
+    audio: "Dachs tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Dachs tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Dachs tot-FP2.mp3"
+      }
+    ]
   },
 
   {
     title: "Hase tot",
     category: "totsignale",
     page: 17,
-    audio: null,
-    voices: []
+    audio: "Hase tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Hase tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Hase tot-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -324,8 +401,19 @@ const musicLibrary = [
     title: "Flugwild tot",
     category: "totsignale",
     page: 18,
-    audio: null,
-    voices: []
+    audio: "Flugwild tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Flugwild tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Flugwild tot-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -346,15 +434,26 @@ const musicLibrary = [
 
 
   /* =======================================================
-     MÄRSCHE UND MUSIKSTÜCKE
+     MÄRSCHE & STÜCKE
      ======================================================= */
 
   {
     title: "Ehrenfanfare",
     category: "maersche",
     page: 20,
-    audio: null,
-    voices: []
+    audio: "Ehrenfanfare.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Ehrenfanfare-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Ehrenfanfare-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -377,19 +476,15 @@ const musicLibrary = [
     title: "Hubertusmarsch",
     category: "maersche",
     page: 23,
-
     audio: "Hubertusmarsch.mp3",
-
     voices: [
       {
         instrument: "Fürst-Pless-Horn",
-        code: "FP1",
         voice: "1. Stimme",
         file: "Hubertusmarsch-FP1.mp3"
       },
       {
         instrument: "Fürst-Pless-Horn",
-        code: "FP2",
         voice: "2. Stimme",
         file: "Hubertusmarsch-FP2.mp3"
       }
@@ -400,19 +495,15 @@ const musicLibrary = [
     title: "Alpenjägermarsch",
     category: "maersche",
     page: 24,
-
     audio: "Alpenjägermarsch.mp3",
-
     voices: [
       {
         instrument: "Fürst-Pless-Horn",
-        code: "FP1",
         voice: "1. Stimme",
         file: "Alpenjägermarsch-FP1.mp3"
       },
       {
         instrument: "Fürst-Pless-Horn",
-        code: "FP2",
         voice: "2. Stimme",
         file: "Alpenjägermarsch-FP2.mp3"
       }
@@ -439,8 +530,19 @@ const musicLibrary = [
     title: "Auf zum fröhlichen Jagen",
     category: "maersche",
     page: 27,
-    audio: null,
-    voices: []
+    audio: "Auf zum fröhlichen Jagen.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Auf zum fröhlichen Jagen-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Auf zum fröhlichen Jagen-FP2.mp3"
+      }
+    ]
   },
 
 
@@ -476,8 +578,19 @@ const musicLibrary = [
     title: "Auf Wiedersehen",
     category: "weitere-signale",
     page: 29,
-    audio: null,
-    voices: []
+    audio: "Auf Wiedersehen.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Auf Wiedersehen-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Auf Wiedersehen-FP2.mp3"
+      }
+    ]
   },
 
   {
