@@ -395,6 +395,180 @@
 
     </button>
 
+  <!-- ========================================
+     ÜBUNGSWERKZEUGE
+     ======================================== -->
+
+<section class="tools-section">
+
+  <div class="tools-heading">
+    <span class="small-title">Üben</span>
+    <h2>Übungswerkzeuge</h2>
+  </div>
+
+
+  <details class="tool-card" id="metronome">
+
+    <summary>
+
+      <div class="tool-icon">
+        ♩
+      </div>
+
+      <div class="tool-title">
+        <span>Rhythmus &amp; Tempo</span>
+        <strong>Metronom</strong>
+      </div>
+
+      <div class="tool-arrow">
+        ›
+      </div>
+
+    </summary>
+
+
+    <div class="metronome-content">
+
+      <!-- BPM -->
+
+      <div class="metronome-tempo">
+
+        <span class="tempo-note">♩</span>
+
+        <strong id="bpmDisplay">
+          100
+        </strong>
+
+        <span class="tempo-unit">
+          BPM
+        </span>
+
+      </div>
+
+
+      <!-- PLUS / MINUS -->
+
+      <div class="tempo-controls">
+
+        <button
+          id="bpmMinus"
+          class="round-control"
+          type="button"
+          aria-label="Tempo verringern"
+        >
+          −
+        </button>
+
+
+        <input
+          id="bpmSlider"
+          class="bpm-slider"
+          type="range"
+          min="40"
+          max="200"
+          step="1"
+          value="100"
+          aria-label="Tempo"
+        >
+
+
+        <button
+          id="bpmPlus"
+          class="round-control"
+          type="button"
+          aria-label="Tempo erhöhen"
+        >
+          +
+        </button>
+
+      </div>
+
+
+      <!-- TAKTART -->
+
+      <div class="metronome-setting">
+
+        <span class="setting-label">
+          Taktart
+        </span>
+
+        <div class="time-buttons">
+
+          <button
+            class="time-button"
+            data-beats="2"
+            type="button"
+          >
+            2/4
+          </button>
+
+          <button
+            class="time-button"
+            data-beats="3"
+            type="button"
+          >
+            3/4
+          </button>
+
+          <button
+            class="time-button active"
+            data-beats="4"
+            type="button"
+          >
+            4/4
+          </button>
+
+          <button
+            class="time-button"
+            data-beats="6"
+            type="button"
+          >
+            6/8
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- TAKTSCHLÄGE -->
+
+      <div
+        id="beatIndicator"
+        class="beat-indicator"
+        aria-label="Taktschlag"
+      ></div>
+
+
+      <!-- START / STOP -->
+
+      <button
+        id="metronomeStart"
+        class="metronome-start"
+        type="button"
+      >
+
+        <span id="metronomeSymbol">
+          ▶
+        </span>
+
+        <span id="metronomeText">
+          Metronom starten
+        </span>
+
+      </button>
+
+
+      <p class="metronome-hint">
+        Der erste Taktschlag wird stärker betont.
+      </p>
+
+    </div>
+
+  </details>
+
+</section>  
+
   </main>
 
 
