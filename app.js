@@ -127,12 +127,6 @@ pieceCards.forEach((pieceCard) => {
     );
 
 
-  const speedCurrentValue =
-    pieceCard.querySelector(
-      ".speed-current-value"
-    );
-
-
   const piecePlayers =
     pieceCard.querySelectorAll(
       "audio"
@@ -149,10 +143,6 @@ pieceCards.forEach((pieceCard) => {
           Number(
             button.dataset.speed
           );
-
-
-        const label =
-          button.dataset.label;
 
 
         /*
@@ -226,13 +216,6 @@ pieceCards.forEach((pieceCard) => {
         /*
            Große AKTIV-Anzeige aktualisieren.
         */
-
-        if (speedCurrentValue) {
-
-          speedCurrentValue.textContent =
-            label;
-
-        }
 
       }
     );
@@ -2094,3 +2077,49 @@ if (
   );
 
 }
+
+/* =========================================================
+   AUDIO STOPPEN, WENN DIE APP VERLASSEN WIRD
+   ========================================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    /*
+       Sobald die App bzw. Browserseite
+       nicht mehr sichtbar ist:
+    */
+
+    if (document.hidden) {
+
+      /*
+         Alle Musikaufnahmen pausieren.
+      */
+
+      players.forEach((player) => {
+        player.pause();
+      });
+
+
+      /*
+         Metronom stoppen.
+      */
+
+      if (metronomeRunning) {
+        stopMetronome();
+      }
+
+
+      /*
+         Stimmgerät und Mikrofon stoppen.
+      */
+
+      if (tunerRunning) {
+        stopTuner();
+      }
+
+    }
+
+  }
+);
