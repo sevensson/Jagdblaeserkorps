@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
 
@@ -8,10 +9,7 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <meta
-    name="theme-color"
-    content="#183524"
-  >
+  <meta name="theme-color" content="#0d3425">
 
   <meta
     name="description"
@@ -20,85 +18,93 @@
 
   <title>Jagdbläsercorps Radevormwald</title>
 
-  <!-- Vorhandene CSS-Datei -->
   <link rel="stylesheet" href="styles.css">
 </head>
 
 
 <body>
 
-  <!-- =====================================================
-       KOPFBEREICH
-       ===================================================== -->
+  <!-- ==========================================
+       HEADER
+       ========================================== -->
 
-  <header class="app-header">
+  <header class="hero">
 
-    <div class="header-inner">
+    <!-- dekorative Waldsilhouetten -->
+    <div class="forest forest-left"></div>
+    <div class="forest forest-right"></div>
+
+    <div class="hero-inner">
 
       <img
         src="images/logo.png"
         alt="Bläsercorps Hegering Radevormwald"
-        class="logo"
+        class="hero-logo"
       >
 
-      <div class="header-text">
-        <span class="eyebrow">Hegering Radevormwald</span>
+      <h1>Jagdbläsercorps</h1>
 
-        <h1>Jagdbläsercorps</h1>
-
-        <p>
-          Hörbeispiele &amp; Jagdsignale
-        </p>
+      <div class="hero-location">
+        Hegering Radevormwald
       </div>
+
+      <p class="hero-subtitle">
+        Hörbeispiele &amp; Jagdsignale
+      </p>
 
     </div>
 
   </header>
 
 
-  <!-- =====================================================
+  <!-- ==========================================
        HAUPTINHALT
-       ===================================================== -->
+       ========================================== -->
 
-  <main class="app-content">
+  <main class="content">
 
-
-    <!-- Begrüßung -->
+    <!-- INTRO -->
 
     <section class="intro">
 
-      <span class="section-kicker">
+      <span class="kicker">
         Waidmannsheil
       </span>
 
-      <h2>Unsere Hörbeispiele</h2>
+      <h2>
+        Unsere Hörbeispiele
+      </h2>
 
       <p>
-        Hier findest du unsere Märsche, Jagdsignale und
-        weitere Stücke zum Anhören und Üben.
+        Hier findest du unsere Märsche, Jagdsignale
+        und weitere Stücke zum Anhören und Üben.
       </p>
 
     </section>
 
 
-    <!-- ===================================================
-         MÄRSCHE & STÜCKE
-         =================================================== -->
+    <!-- ========================================
+         MÄRSCHE
+         ======================================== -->
 
-    <section class="audio-section">
+    <section class="music-section">
 
-      <div class="section-heading">
+      <div class="section-title">
 
-        <div class="section-icon">
+        <div class="round-icon">
           ♪
         </div>
 
         <div>
-          <span class="section-label">
+
+          <span class="small-title">
             Musik
           </span>
 
-          <h2>Märsche &amp; Stücke</h2>
+          <h2>
+            Märsche &amp; Stücke
+          </h2>
+
         </div>
 
       </div>
@@ -108,17 +114,21 @@
 
       <article class="audio-card">
 
-        <div class="audio-card-top">
+        <div class="audio-heading">
 
-          <div class="audio-number">
+          <div class="track-number">
             01
           </div>
 
-          <div class="audio-info">
+          <div class="track-info">
 
-            <h3>Hubertusmarsch</h3>
+            <h3>
+              Hubertusmarsch
+            </h3>
 
-            <p>Jagdlicher Marsch</p>
+            <p>
+              Jagdlicher Marsch
+            </p>
 
           </div>
 
@@ -126,9 +136,9 @@
 
 
         <audio
+          class="audio-player"
           controls
           preload="metadata"
-          class="audio-player"
         >
 
           <source
@@ -144,33 +154,38 @@
 
 
       <!--
-      =======================================================
-      NEUE STÜCKE
+      ==========================================
+      NEUES STÜCK
 
-      Diesen Block später einfach kopieren:
+      Für weitere Stücke später einfach diesen
+      Block kopieren:
 
       <article class="audio-card">
 
-        <div class="audio-card-top">
+        <div class="audio-heading">
 
-          <div class="audio-number">
+          <div class="track-number">
             02
           </div>
 
-          <div class="audio-info">
+          <div class="track-info">
 
-            <h3>Name des Stückes</h3>
+            <h3>
+              Name des Stückes
+            </h3>
 
-            <p>Beschreibung</p>
+            <p>
+              Jagdlicher Marsch
+            </p>
 
           </div>
 
         </div>
 
         <audio
+          class="audio-player"
           controls
           preload="metadata"
-          class="audio-player"
         >
 
           <source
@@ -182,172 +197,118 @@
 
       </article>
 
-      =======================================================
+      ==========================================
       -->
 
     </section>
 
 
-    <!-- ===================================================
-         JAGDLEITSIGNALE
-         Wird eingeblendet, sobald Dateien vorhanden sind.
-         =================================================== -->
+    <!-- ========================================
+         SPÄTER: JAGDLEITSIGNALE
+         ======================================== -->
 
-    <section
-      class="audio-section future-section"
-      id="jagdleitsignale"
+    <button
+      class="category-card"
+      type="button"
+      disabled
     >
 
-      <div class="section-heading">
+      <div class="category-icon">
+        ♫
+      </div>
 
-        <div class="section-icon">
-          ♫
-        </div>
+      <div class="category-text">
 
-        <div>
+        <span>
+          Jagdliches Brauchtum
+        </span>
 
-          <span class="section-label">
-            Jagdliches Brauchtum
-          </span>
-
-          <h2>Jagdleitsignale</h2>
-
-        </div>
+        <strong>
+          Jagdleitsignale
+        </strong>
 
       </div>
 
+      <div class="category-arrow">
+        ›
+      </div>
 
-      <!--
-      Beispiel:
-
-      <article class="audio-card">
-
-        <div class="audio-card-top">
-
-          <div class="audio-number">
-            01
-          </div>
-
-          <div class="audio-info">
-
-            <h3>Sammeln der Jäger</h3>
-
-            <p>Jagdleitsignal</p>
-
-          </div>
-
-        </div>
-
-        <audio
-          controls
-          preload="metadata"
-          class="audio-player"
-        >
-
-          <source
-            src="audio/sammeln-der-jaeger.mp3"
-            type="audio/mpeg"
-          >
-
-        </audio>
-
-      </article>
-      -->
-
-    </section>
+    </button>
 
 
-    <!-- ===================================================
-         TOTSIGNALE
-         =================================================== -->
+    <!-- ========================================
+         SPÄTER: TOTSIGNALE
+         ======================================== -->
 
-    <section
-      class="audio-section future-section"
-      id="totsignale"
+    <button
+      class="category-card"
+      type="button"
+      disabled
     >
 
-      <div class="section-heading">
+      <div class="category-icon oak">
+        ❧
+      </div>
 
-        <div class="section-icon">
-          ♫
-        </div>
+      <div class="category-text">
 
-        <div>
+        <span>
+          Jagdliches Brauchtum
+        </span>
 
-          <span class="section-label">
-            Jagdliches Brauchtum
-          </span>
-
-          <h2>Totsignale</h2>
-
-        </div>
+        <strong>
+          Totsignale
+        </strong>
 
       </div>
 
+      <div class="category-arrow">
+        ›
+      </div>
 
-      <!--
-      Hier kommen später:
-
-      Sau tot
-      Reh tot
-      Fuchs tot
-      Hase tot
-      Kaninchen tot
-      Flugwild tot
-
-      -->
-
-    </section>
-
+    </button>
 
   </main>
 
 
-  <!-- =====================================================
-       FUSSZEILE
-       ===================================================== -->
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
 
-  <footer class="app-footer">
+  <footer class="footer">
 
-    <img
-      src="images/logo.png"
-      alt=""
-      class="footer-logo"
-    >
-
-    <p class="footer-title">
-      Bläsercorps Hegering Radevormwald
-    </p>
-
-    <p class="footer-subtitle">
-      Jagdliches Brauchtum &amp; Musik
-    </p>
-
-    <div class="footer-decoration">
+    <div class="footer-symbol">
       ◆
     </div>
+
+    <strong>
+      Jagdbläsercorps Radevormwald
+    </strong>
+
+    <p>
+      Jagdliches Brauchtum · Musik · Gemeinschaft
+    </p>
 
   </footer>
 
 
-  <!-- =====================================================
-       JAVASCRIPT
+  <!-- ==========================================
+       AUDIO-FUNKTION
 
-       Sorgt dafür, dass beim Start eines Stückes
-       ein eventuell anderes laufendes Stück stoppt.
-       ===================================================== -->
+       Stoppt ein laufendes Stück, wenn ein
+       anderes gestartet wird.
+       ========================================== -->
 
   <script>
 
-    const audioPlayers =
+    const players =
       document.querySelectorAll("audio");
 
-
-    audioPlayers.forEach((player) => {
+    players.forEach(player => {
 
       player.addEventListener("play", () => {
 
-        audioPlayers.forEach((otherPlayer) => {
+        players.forEach(otherPlayer => {
 
           if (otherPlayer !== player) {
 
@@ -363,6 +324,6 @@
 
   </script>
 
-
 </body>
+
 </html>
