@@ -1,84 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#1f4d2e" />
-  <title>Bläserhut-Quiz</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Jagdbläserkorps</title>
+
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <main class="app-shell">
-    <header class="app-header">
-      <div>
-        <p class="eyebrow">Jagdbläserkorps</p>
-        <h1>Bläserhut-Quiz</h1>
-      </div>
-      <button id="homeBtn" class="icon-btn hidden" aria-label="Zur Startseite">⌂</button>
-    </header>
 
-    <section id="homeView" class="view active">
-      <div class="hero-card">
-        <div class="horn-mark">♪</div>
-        <h2>Jagdsignale sicher erkennen</h2>
-        <p>Trainiere die 15 Signale für das Bläserhutabzeichen oder starte eine zufällige Prüfung.</p>
+  <header>
+    <h1>Jagdbläserkorps</h1>
+    <p>Hörbeispiele</p>
+  </header>
+
+  <main>
+
+    <section class="audio-list">
+
+      <h2>Unsere Stücke</h2>
+
+      <div class="stueck">
+        <h3>Hubertusmarsch</h3>
+
+        <audio controls preload="none">
+          <source src="audio/Hubertusmarsch.mp3" type="audio/mpeg">
+          Dein Browser unterstützt die Audiowiedergabe nicht.
+        </audio>
       </div>
-      <div class="menu-grid">
-        <button class="menu-btn primary" id="practiceBtn">
-          <span>Üben</span>
-          <small>Direkte Rückmeldung nach jeder Antwort</small>
-        </button>
-        <button class="menu-btn" id="examBtn">
-          <span>Prüfung</span>
-          <small>10 zufällige Fragen, Ergebnis am Ende</small>
-        </button>
-        <button class="menu-btn" id="signalsBtn">
-          <span>Alle Signale</span>
-          <small>Liste öffnen und gezielt anhören</small>
-        </button>
-      </div>
+
     </section>
 
-    <section id="quizView" class="view">
-      <div class="status-row">
-        <span id="modeLabel" class="pill">Üben</span>
-        <span id="progressLabel">Frage 1</span>
-      </div>
-
-      <div class="quiz-card">
-        <h2>Welches Signal hörst du?</h2>
-        <p class="muted">Spiele das Signal ab und wähle die richtige Antwort.</p>
-        <button id="playBtn" class="play-btn">▶ Signal abspielen</button>
-        <audio id="audioPlayer" preload="auto"></audio>
-        <div id="audioNotice" class="audio-notice hidden"></div>
-      </div>
-
-      <div id="answers" class="answers"></div>
-      <div id="feedback" class="feedback hidden"></div>
-      <button id="nextBtn" class="next-btn hidden">Nächste Frage</button>
-    </section>
-
-    <section id="resultsView" class="view">
-      <div class="result-card">
-        <p class="eyebrow">Prüfung beendet</p>
-        <h2 id="resultHeadline">Ergebnis</h2>
-        <div id="resultScore" class="score"></div>
-        <p id="resultText"></p>
-        <button id="retryBtn" class="menu-btn primary">Neue Prüfung starten</button>
-        <button id="resultHomeBtn" class="text-btn">Zur Startseite</button>
-      </div>
-    </section>
-
-    <section id="signalsView" class="view">
-      <div class="status-row">
-        <span class="pill">Alle Signale</span>
-        <span>15 Stück</span>
-      </div>
-      <div id="signalList" class="signal-list"></div>
-    </section>
   </main>
 
-  <script src="app.js"></script>
 </body>
 </html>
