@@ -1,15 +1,7 @@
 /* =========================================================
    JAGDBLÄSERCORPS HEGERING RADEVORMWALD
    MUSIKBIBLIOTHEK
-
-   FP = Fürst-Pless-Horn
-   PF = Parforcehorn
-
-   audio: null
-   bedeutet: Für dieses Stück ist aktuell noch keine
-   Gesamtaufnahme hinterlegt.
    ========================================================= */
-
 
 const musicLibrary = [
 
@@ -29,8 +21,35 @@ const musicLibrary = [
     title: "Begrüßung",
     category: "allgemeine-signale",
     page: 5,
-    audio: null,
-    voices: []
+
+    audio: "Begrüßung.mp3",
+
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        code: "FP1",
+        voice: "1. Stimme",
+        file: "Begrüßung-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        code: "FP2",
+        voice: "2. Stimme",
+        file: "Begrüßung-FP2.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        code: "FP3",
+        voice: "3. Stimme",
+        file: "Begrüßung-FP3.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        code: "FP4",
+        voice: "4. Stimme",
+        file: "Begrüßung-FP4.mp3"
+      }
+    ]
   },
 
   {
@@ -130,7 +149,9 @@ const musicLibrary = [
     title: "Anblasen des Treibens",
     category: "jagdleitsignale",
     page: 10,
-    audio: null,
+
+    audio: "Anblasen des Treibens.mp3",
+
     voices: []
   },
 
@@ -325,7 +346,7 @@ const musicLibrary = [
 
 
   /* =======================================================
-     MÄRSCHE
+     MÄRSCHE UND MUSIKSTÜCKE
      ======================================================= */
 
   {
@@ -366,7 +387,6 @@ const musicLibrary = [
         voice: "1. Stimme",
         file: "Hubertusmarsch-FP1.mp3"
       },
-
       {
         instrument: "Fürst-Pless-Horn",
         code: "FP2",
@@ -380,8 +400,23 @@ const musicLibrary = [
     title: "Alpenjägermarsch",
     category: "maersche",
     page: 24,
-    audio: null,
-    voices: []
+
+    audio: "Alpenjägermarsch.mp3",
+
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        code: "FP1",
+        voice: "1. Stimme",
+        file: "Alpenjägermarsch-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        code: "FP2",
+        voice: "2. Stimme",
+        file: "Alpenjägermarsch-FP2.mp3"
+      }
+    ]
   },
 
   {
