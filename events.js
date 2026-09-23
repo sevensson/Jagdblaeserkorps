@@ -14,7 +14,15 @@ const events = [
     clothing: null,
     description: "Gemeinsame Probe des Jagdbläsercorps."
   },
-
+  {
+    title: "Treckertreffen",
+    date: "2026-09-27",
+    time: "16:00",
+    meetingTime: "15:30",
+    location: "Radevormwald - Honsberg",
+    clothing: "Jagdliche Kleidung",
+    description: "Musikalische Aufführung beim Treckertreffen."
+  },
   {
     title: "Hubertusmesse",
     date: "2026-11-08",
