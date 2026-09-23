@@ -1,15 +1,6 @@
 /* =========================================================
    JAGDBLÄSERCORPS HEGERING RADEVORMWALD
    MUSIKBIBLIOTHEK
-
-   FP = Fürst-Pless-Horn
-   PF = Parforcehorn
-
-   audio:
-   Dateiname der Gesamtaufnahme
-
-   voices:
-   Einzelstimmen zum Üben
    ========================================================= */
 
 const musicLibrary = [
@@ -70,8 +61,19 @@ const musicLibrary = [
     title: "Zum Essen",
     category: "allgemeine-signale",
     page: 6,
-    audio: null,
-    voices: []
+    audio: "Zum Essen.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Zum Essen-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Zum Essen-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -86,24 +88,62 @@ const musicLibrary = [
     title: "Jagd vorbei",
     category: "allgemeine-signale",
     page: 6,
-    audio: null,
-    voices: []
+    audio: "Jagd vorbei.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Jagd vorbei-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Jagd vorbei-FP2.mp3"
+      }
+    ]
   },
 
   {
     title: "Zum Trinken",
     category: "allgemeine-signale",
     page: 7,
-    audio: null,
-    voices: []
+    audio: "Zum Trinken.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Zum Trinken-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Zum Trinken-FP2.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "3. Stimme",
+        file: "Zum Trinken-FP3.mp3"
+      }
+    ]
   },
 
   {
     title: "Horrido",
     category: "allgemeine-signale",
     page: 8,
-    audio: null,
-    voices: []
+    audio: "Horrido.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Horrido-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Horrido-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -144,7 +184,7 @@ const musicLibrary = [
     title: "Hegeruf",
     category: "jagdleitsignale",
     page: 10,
-    audio: null,
+    audio: "Hegeruf.mp3",
     voices: []
   },
 
@@ -160,7 +200,7 @@ const musicLibrary = [
     title: "Notruf",
     category: "jagdleitsignale",
     page: 10,
-    audio: null,
+    audio: "Notruf.mp3",
     voices: []
   },
 
@@ -192,7 +232,7 @@ const musicLibrary = [
     title: "Laut treiben",
     category: "jagdleitsignale",
     page: 10,
-    audio: null,
+    audio: "Laut treiben.mp3",
     voices: []
   },
 
@@ -208,7 +248,7 @@ const musicLibrary = [
     title: "Stumm treiben",
     category: "jagdleitsignale",
     page: 11,
-    audio: null,
+    audio: "Stumm treiben.mp3",
     voices: []
   },
 
@@ -224,7 +264,7 @@ const musicLibrary = [
     title: "Treiber in den Kessel",
     category: "jagdleitsignale",
     page: 11,
-    audio: null,
+    audio: "Treiber in den Kessel.mp3",
     voices: []
   },
 
@@ -232,7 +272,7 @@ const musicLibrary = [
     title: "Treiben zurück",
     category: "jagdleitsignale",
     page: 11,
-    audio: null,
+    audio: "Treiben zurück.mp3",
     voices: []
   },
 
@@ -248,7 +288,7 @@ const musicLibrary = [
     title: "Sammeln der Jäger",
     category: "jagdleitsignale",
     page: 11,
-    audio: null,
+    audio: "Sammeln der Jäger.mp3",
     voices: []
   },
 
@@ -256,7 +296,7 @@ const musicLibrary = [
     title: "Hunderuf",
     category: "jagdleitsignale",
     page: 12,
-    audio: null,
+    audio: "Hunderuf.mp3",
     voices: []
   },
 
@@ -264,7 +304,7 @@ const musicLibrary = [
     title: "Wagenruf",
     category: "jagdleitsignale",
     page: 12,
-    audio: null,
+    audio: "Wagenruf.mp3",
     voices: []
   },
 
@@ -277,8 +317,19 @@ const musicLibrary = [
     title: "Hirsch tot",
     category: "totsignale",
     page: 13,
-    audio: null,
-    voices: []
+    audio: "Hirsch tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Hirsch tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Hirsch tot-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -304,24 +355,57 @@ const musicLibrary = [
     title: "Muffel tot",
     category: "totsignale",
     page: 14,
-    audio: null,
-    voices: []
+    audio: "Muffel tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Muffel tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Muffel tot-FP2.mp3"
+      }
+    ]
   },
 
   {
     title: "Sau tot",
     category: "totsignale",
     page: 15,
-    audio: null,
-    voices: []
+    audio: "Sau tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Sau tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Sau tot-FP2.mp3"
+      }
+    ]
   },
 
   {
     title: "Reh tot",
     category: "totsignale",
     page: 15,
-    audio: null,
-    voices: []
+    audio: "Reh tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Reh tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Reh tot-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -347,8 +431,19 @@ const musicLibrary = [
     title: "Waschbär tot",
     category: "totsignale",
     page: 16,
-    audio: null,
-    voices: []
+    audio: "Waschbär tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Waschbär tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Waschbär tot-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -393,8 +488,19 @@ const musicLibrary = [
     title: "Kaninchen tot",
     category: "totsignale",
     page: 18,
-    audio: null,
-    voices: []
+    audio: "Kaninchen tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Kaninchen tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Kaninchen tot-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -420,21 +526,43 @@ const musicLibrary = [
     title: "Raubwild tot",
     category: "totsignale",
     page: 18,
-    audio: null,
-    voices: []
+    audio: "Raubwild tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Raubwild tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Raubwild tot-FP2.mp3"
+      }
+    ]
   },
 
   {
     title: "Nutria tot",
     category: "totsignale",
     page: 19,
-    audio: null,
-    voices: []
+    audio: "Nutria tot.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Nutria tot-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Nutria tot-FP2.mp3"
+      }
+    ]
   },
 
 
   /* =======================================================
-     MÄRSCHE & STÜCKE
+     MÄRSCHE
      ======================================================= */
 
   {
@@ -468,8 +596,24 @@ const musicLibrary = [
     title: "Jägermarsch Nr. 3",
     category: "maersche",
     page: 22,
-    audio: null,
-    voices: []
+    audio: "Jägermarsch_Nr_3.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Jägermarsch_Nr_3-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Jägermarsch_Nr_3-FP2.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "3. Stimme",
+        file: "Jägermarsch_Nr_3-FP3.mp3"
+      }
+    ]
   },
 
   {
@@ -514,16 +658,38 @@ const musicLibrary = [
     title: "Ländler",
     category: "maersche",
     page: 25,
-    audio: null,
-    voices: []
+    audio: "Ländler.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Ländler-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Ländler-FP2.mp3"
+      }
+    ]
   },
 
   {
     title: "Hegewaldfanfare",
     category: "maersche",
     page: 26,
-    audio: null,
-    voices: []
+    audio: "Hegewaldfanfare.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Hegewaldfanfare-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Hegewaldfanfare-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -554,7 +720,7 @@ const musicLibrary = [
     title: "Weckruf",
     category: "weitere-signale",
     page: 28,
-    audio: null,
+    audio: "Weckruf.mp3",
     voices: []
   },
 
@@ -562,16 +728,57 @@ const musicLibrary = [
     title: "Hoch soll er leben",
     category: "weitere-signale",
     page: 28,
-    audio: null,
-    voices: []
+    audio: "Hoch soll er Leben.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Hoch soll er Leben-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Hoch soll er Leben-FP2.mp3"
+      }
+    ]
+  },
+
+  {
+    title: "Hoch soll er leben (vereinfacht)",
+    category: "weitere-signale",
+    page: 28,
+    audio: "Hoch soll er Leben (vereinfacht).mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Hoch soll er Leben (vereinfacht)-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Hoch soll er Leben (vereinfacht)-FP2.mp3"
+      }
+    ]
   },
 
   {
     title: "Zapfenstreich",
     category: "weitere-signale",
     page: 28,
-    audio: null,
-    voices: []
+    audio: "Zapfenstreich.mp3",
+    voices: [
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "1. Stimme",
+        file: "Zapfenstreich-FP1.mp3"
+      },
+      {
+        instrument: "Fürst-Pless-Horn",
+        voice: "2. Stimme",
+        file: "Zapfenstreich-FP2.mp3"
+      }
+    ]
   },
 
   {
@@ -597,7 +804,7 @@ const musicLibrary = [
     title: "Hornruf der Falkner",
     category: "weitere-signale",
     page: 29,
-    audio: null,
+    audio: "Hornruf der Falkner.mp3",
     voices: []
   }
 
