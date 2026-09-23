@@ -1,55 +1,68 @@
-/* =========================================================
+/* =====================================================
    JAGDBLÄSERCORPS RADEVORMWALD
-   Mobile Web-App
-   ========================================================= */
+   Mobile First Web-App
+   ===================================================== */
 
 
-/* ---------------------------------------------------------
-   GRUNDFARBEN
-   --------------------------------------------------------- */
+/* =========================
+   FARBEN
+   ========================= */
 
 :root {
 
-  --green-dark: #10271b;
-  --green: #183524;
-  --green-light: #31583c;
+  --green-dark: #09291d;
+  --green: #103c29;
+  --green-medium: #1c5138;
 
-  --gold: #c99a3b;
-  --gold-light: #e1bd69;
+  --gold-dark: #a97a25;
+  --gold: #d3a13b;
+  --gold-light: #e5c16e;
 
-  --cream: #f4f0e5;
-  --cream-dark: #e8e0ce;
-
-  --text: #20251f;
-  --text-light: #687066;
+  --cream: #f7f3e8;
+  --cream-dark: #eee7d6;
 
   --white: #ffffff;
 
-  --border: rgba(24, 53, 36, 0.12);
+  --text: #10251b;
+  --text-soft: #5e635d;
 
-  --shadow:
-    0 8px 30px rgba(16, 39, 27, 0.10);
+  --line: rgba(16, 60, 41, 0.14);
 
 }
 
 
-/* ---------------------------------------------------------
+/* =========================
    RESET
-   --------------------------------------------------------- */
+   ========================= */
 
 * {
+
   box-sizing: border-box;
+
 }
 
 
 html {
+
   scroll-behavior: smooth;
+
 }
 
 
 body {
 
   margin: 0;
+
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      180deg,
+      #faf7ef 0%,
+      var(--cream) 100%
+    );
+
+  color: var(--text);
 
   font-family:
     -apple-system,
@@ -60,230 +73,296 @@ body {
     Arial,
     sans-serif;
 
-  background:
-    linear-gradient(
-      180deg,
-      #f6f2e8 0%,
-      #eee7d8 100%
-    );
-
-  color: var(--text);
-
-  min-height: 100vh;
-
 }
 
 
-/* ---------------------------------------------------------
-   HEADER
-   --------------------------------------------------------- */
+/* =========================
+   HERO / HEADER
+   ========================= */
 
-.app-header {
+.hero {
 
   position: relative;
 
+  overflow: hidden;
+
+  min-height: 410px;
+
+  display: flex;
+
+  justify-content: center;
+
   background:
+
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(57, 111, 73, 0.65),
+      transparent 45%
+    ),
+
     linear-gradient(
-      145deg,
-      #0d2117,
-      #1b402a
+      180deg,
+      #164d35 0%,
+      #0d3425 55%,
+      #08281c 100%
     );
 
-  color: white;
-
-  padding:
-    calc(24px + env(safe-area-inset-top))
-    20px
-    30px;
-
-  overflow: hidden;
+  border-bottom:
+    4px solid var(--gold);
 
 }
 
 
-/* dezente Lichtfläche */
+/* dezenter Lichtschein */
 
-.app-header::before {
+.hero::before {
 
   content: "";
 
   position: absolute;
 
-  width: 280px;
-  height: 280px;
+  width: 450px;
+  height: 450px;
+
+  top: -280px;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
 
   border-radius: 50%;
 
   background:
-    rgba(201, 154, 59, 0.09);
-
-  right: -120px;
-  top: -150px;
+    rgba(255,255,255,0.06);
 
 }
 
 
-.header-inner {
+/* dunkle Waldlinie */
 
-  position: relative;
+.hero::after {
 
-  max-width: 700px;
+  content: "";
 
-  margin: 0 auto;
+  position: absolute;
 
-  display: flex;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-  align-items: center;
-
-  gap: 18px;
-
-}
-
-
-.logo {
-
-  width: 110px;
   height: 110px;
 
-  object-fit: contain;
+  opacity: 0.35;
 
-  flex-shrink: 0;
+  background:
 
-  filter:
-    drop-shadow(
-      0 5px 10px
-      rgba(0, 0, 0, 0.25)
+    linear-gradient(
+      150deg,
+      transparent 0 8%,
+      #041c13 8% 14%,
+      transparent 14% 18%,
+      #041c13 18% 26%,
+      transparent 26% 32%,
+      #041c13 32% 42%,
+      transparent 42% 47%,
+      #041c13 47% 57%,
+      transparent 57% 63%,
+      #041c13 63% 73%,
+      transparent 73% 79%,
+      #041c13 79% 88%,
+      transparent 88%
     );
 
 }
 
 
-.header-text {
+/* =========================
+   HERO INHALT
+   ========================= */
 
-  min-width: 0;
+.hero-inner {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 720px;
+
+  padding:
+    calc(20px + env(safe-area-inset-top))
+    20px
+    38px;
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
 
 }
 
 
-.eyebrow {
+/* LOGO
+
+   Wichtig:
+   object-fit contain sorgt dafür,
+   dass IMMER das komplette Logo
+   sichtbar bleibt.
+*/
+
+.hero-logo {
 
   display: block;
 
-  color: var(--gold-light);
+  width: 190px;
 
-  font-size: 0.72rem;
+  max-width: 48vw;
 
-  font-weight: 700;
+  height: auto;
 
-  letter-spacing: 0.12em;
+  max-height: 205px;
 
-  text-transform: uppercase;
+  object-fit: contain;
 
-  margin-bottom: 5px;
+  margin:
+    0 auto
+    8px;
+
+  filter:
+    drop-shadow(
+      0 8px 12px
+      rgba(0,0,0,0.30)
+    );
 
 }
 
 
-.header-text h1 {
+/* =========================
+   HERO TEXTE
+   ========================= */
 
-  margin: 0;
+.hero h1 {
+
+  margin:
+    2px 0
+    5px;
+
+  color: #fffdf7;
 
   font-family:
     Georgia,
     "Times New Roman",
     serif;
 
-  font-size: clamp(
-    1.65rem,
-    6vw,
-    2.4rem
-  );
+  font-size:
+    clamp(
+      2.15rem,
+      8vw,
+      3.5rem
+    );
 
-  line-height: 1.05;
+  line-height: 1;
 
   font-weight: 700;
 
-}
-
-
-.header-text p {
-
-  margin:
-    8px 0 0;
-
-  color:
-    rgba(255, 255, 255, 0.72);
-
-  font-size: 0.92rem;
+  text-shadow:
+    0 2px 5px
+    rgba(0,0,0,0.30);
 
 }
 
 
-/* goldene Abschlusslinie */
+.hero-location {
 
-.app-header::after {
+  color: var(--gold-light);
 
-  content: "";
-
-  position: absolute;
-
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  height: 4px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #8f6821,
-      #e3bd65,
-      #8f6821
+  font-size:
+    clamp(
+      0.8rem,
+      3.3vw,
+      1.1rem
     );
 
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.22em;
+
+  margin-top: 8px;
+
 }
 
 
-/* ---------------------------------------------------------
-   HAUPTBEREICH
-   --------------------------------------------------------- */
+.hero-subtitle {
 
-.app-content {
+  margin:
+    16px 0
+    0;
 
-  max-width: 700px;
+  color:
+    rgba(255,255,255,0.88);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.1rem;
+
+}
+
+
+/* =========================
+   HAUPTINHALT
+   ========================= */
+
+.content {
+
+  width: 100%;
+
+  max-width: 720px;
 
   margin: 0 auto;
 
   padding:
-    28px
-    18px
-    50px;
+    38px
+    20px
+    55px;
 
 }
 
 
-/* ---------------------------------------------------------
-   EINLEITUNG
-   --------------------------------------------------------- */
+/* =========================
+   INTRO
+   ========================= */
 
 .intro {
 
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 
 }
 
 
-.section-kicker {
+.kicker {
 
-  color: var(--green-light);
+  display: block;
 
-  font-size: 0.72rem;
+  color: var(--green-medium);
+
+  font-size: 0.78rem;
 
   font-weight: 800;
 
+  letter-spacing: 0.23em;
+
   text-transform: uppercase;
 
-  letter-spacing: 0.13em;
+  margin-bottom: 8px;
 
 }
 
@@ -291,16 +370,24 @@ body {
 .intro h2 {
 
   margin:
-    7px 0 9px;
+    0 0
+    12px;
+
+  color: var(--green-dark);
 
   font-family:
     Georgia,
     "Times New Roman",
     serif;
 
-  color: var(--green-dark);
+  font-size:
+    clamp(
+      2rem,
+      8vw,
+      2.8rem
+    );
 
-  font-size: 1.8rem;
+  line-height: 1.05;
 
 }
 
@@ -309,86 +396,101 @@ body {
 
   margin: 0;
 
-  color: var(--text-light);
+  max-width: 600px;
 
-  line-height: 1.6;
+  color: var(--text-soft);
 
-  font-size: 0.98rem;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-}
+  font-size: 1.05rem;
 
-
-/* ---------------------------------------------------------
-   BEREICHE
-   --------------------------------------------------------- */
-
-.audio-section {
-
-  margin-bottom: 38px;
+  line-height: 1.55;
 
 }
 
 
-.section-heading {
+/* =========================
+   ABSCHNITT TITEL
+   ========================= */
+
+.music-section {
+
+  margin-bottom: 20px;
+
+}
+
+
+.section-title {
 
   display: flex;
 
   align-items: center;
 
-  gap: 12px;
+  gap: 16px;
 
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 
 }
 
 
-.section-icon {
+.round-icon {
 
-  width: 43px;
-  height: 43px;
+  width: 58px;
+  height: 58px;
+
+  flex: 0 0 58px;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 50%;
 
-  background: var(--green);
+  background:
+    linear-gradient(
+      145deg,
+      var(--green-medium),
+      var(--green-dark)
+    );
 
   color: var(--gold-light);
 
   font-family: Georgia, serif;
 
-  font-size: 1.25rem;
+  font-size: 1.8rem;
 
   box-shadow:
-    0 4px 12px
-    rgba(16, 39, 27, 0.18);
+    0 7px 16px
+    rgba(9,41,29,0.20);
 
 }
 
 
-.section-label {
+.small-title {
 
   display: block;
 
-  margin-bottom: 2px;
+  color: var(--gold-dark);
 
-  color: var(--gold);
-
-  font-size: 0.67rem;
+  font-size: 0.75rem;
 
   font-weight: 800;
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
 
   text-transform: uppercase;
+
+  margin-bottom: 3px;
 
 }
 
 
-.section-heading h2 {
+.section-title h2 {
 
   margin: 0;
 
@@ -399,140 +501,123 @@ body {
     "Times New Roman",
     serif;
 
-  font-size: 1.3rem;
+  font-size: 1.65rem;
 
 }
 
 
-/* ---------------------------------------------------------
-   AUDIO-KARTEN
-   --------------------------------------------------------- */
+/* =========================
+   AUDIO KARTE
+   ========================= */
 
 .audio-card {
 
-  position: relative;
+  padding: 20px;
+
+  margin-bottom: 24px;
 
   background:
-    rgba(255, 255, 255, 0.88);
+    rgba(255,255,255,0.82);
 
   border:
     1px solid
-    var(--border);
+    rgba(16,60,41,0.08);
 
-  border-radius: 17px;
+  border-radius: 20px;
 
-  padding: 17px;
-
-  margin-bottom: 13px;
-
-  box-shadow: var(--shadow);
-
-  overflow: hidden;
+  box-shadow:
+    0 12px 30px
+    rgba(26,39,29,0.08);
 
 }
 
 
-/* Goldlinie links */
-
-.audio-card::before {
-
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  bottom: 0;
-  left: 0;
-
-  width: 4px;
-
-  background:
-    linear-gradient(
-      180deg,
-      var(--gold-light),
-      var(--gold)
-    );
-
-}
-
-
-.audio-card-top {
+.audio-heading {
 
   display: flex;
 
   align-items: center;
 
-  gap: 13px;
+  gap: 16px;
 
-  margin-bottom: 13px;
+  margin-bottom: 16px;
 
 }
 
 
-.audio-number {
+.track-number {
 
-  width: 39px;
-  height: 39px;
+  width: 54px;
+  height: 54px;
+
+  flex: 0 0 54px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 
   border-radius: 50%;
 
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
   background:
-    var(--cream);
+    linear-gradient(
+      145deg,
+      #f7f0da,
+      #ebe1c5
+    );
 
-  color:
-    var(--green);
+  color: var(--green-dark);
 
-  font-weight: 800;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 0.76rem;
-
-}
-
-
-.audio-info {
-
-  min-width: 0;
-
-}
-
-
-.audio-info h3 {
-
-  margin: 0;
-
-  color:
-    var(--green-dark);
-
-  font-size: 1.05rem;
+  font-size: 1.35rem;
 
   font-weight: 700;
 
 }
 
 
-.audio-info p {
+.track-info h3 {
 
-  margin:
-    3px 0 0;
+  margin: 0;
 
-  color:
-    var(--text-light);
+  color: var(--green-dark);
 
-  font-size: 0.78rem;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.45rem;
 
 }
 
 
-/* ---------------------------------------------------------
+.track-info p {
+
+  margin:
+    4px 0
+    0;
+
+  color: var(--text-soft);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 0.95rem;
+
+}
+
+
+/* =========================
    AUDIO PLAYER
-   --------------------------------------------------------- */
+   ========================= */
 
 .audio-player {
 
@@ -540,171 +625,358 @@ body {
 
   width: 100%;
 
-  height: 45px;
+  height: 48px;
+
+  border-radius: 25px;
 
 }
 
 
-/* ---------------------------------------------------------
-   LEERE ZUKÜNFTIGE BEREICHE VORERST AUSBLENDEN
+/* =========================
+   KATEGORIE KARTEN
+   ========================= */
 
-   Sobald wir dort Audios hinzufügen,
-   entfernen wir einfach "future-section".
-   --------------------------------------------------------- */
+.category-card {
 
-.future-section {
+  width: 100%;
 
-  display: none;
+  min-height: 104px;
 
-}
+  display: flex;
 
+  align-items: center;
 
-/* ---------------------------------------------------------
-   FOOTER
-   --------------------------------------------------------- */
-
-.app-footer {
-
-  text-align: center;
-
-  background:
-    var(--green-dark);
-
-  color: white;
+  gap: 16px;
 
   padding:
-    35px
-    20px
-    calc(
-      35px +
-      env(safe-area-inset-bottom)
-    );
-
-}
-
-
-.footer-logo {
-
-  width: 65px;
-  height: 65px;
-
-  object-fit: contain;
-
-  margin-bottom: 10px;
-
-  opacity: 0.95;
-
-}
-
-
-.footer-title {
+    18px 4px;
 
   margin: 0;
+
+  border: 0;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  background: transparent;
+
+  text-align: left;
+
+  color: inherit;
+
+  opacity: 1;
+
+}
+
+
+/* deaktivierte Buttons sollen
+   NICHT grau aussehen */
+
+.category-card:disabled {
+
+  color: inherit;
+
+  opacity: 1;
+
+}
+
+
+.category-icon {
+
+  width: 58px;
+  height: 58px;
+
+  flex: 0 0 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--green-medium),
+      var(--green-dark)
+    );
+
+  color: var(--gold-light);
+
+  font-size: 1.45rem;
+
+  box-shadow:
+    0 5px 13px
+    rgba(9,41,29,0.18);
+
+}
+
+
+.category-text {
+
+  flex: 1;
+
+}
+
+
+.category-text span {
+
+  display: block;
+
+  color: var(--gold-dark);
+
+  font-size: 0.69rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.17em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 4px;
+
+}
+
+
+.category-text strong {
+
+  display: block;
+
+  color: var(--green-dark);
 
   font-family:
     Georgia,
     "Times New Roman",
     serif;
 
-  font-weight: 700;
+  font-size: 1.45rem;
 
 }
 
 
-.footer-subtitle {
+.category-arrow {
 
-  margin:
-    5px 0 16px;
+  padding-right: 7px;
 
-  color:
-    rgba(255, 255, 255, 0.55);
+  color: var(--gold-dark);
 
-  font-size: 0.76rem;
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 2.7rem;
+
+  font-weight: 300;
 
 }
 
 
-.footer-decoration {
+/* =========================
+   FOOTER
+   ========================= */
 
-  color:
+.footer {
+
+  padding:
+    32px
+    20px
+    calc(
+      34px +
+      env(safe-area-inset-bottom)
+    );
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0d3827,
+      #07271b
+    );
+
+  color: white;
+
+  border-top:
+    3px solid
     var(--gold);
 
-  font-size: 0.65rem;
+}
+
+
+.footer-symbol {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-bottom: 13px;
+
+  color: var(--gold);
 
 }
 
 
-/* ---------------------------------------------------------
-   TABLET / DESKTOP
-   --------------------------------------------------------- */
+.footer-symbol::before,
+.footer-symbol::after {
+
+  content: "";
+
+  width: 60px;
+  height: 1px;
+
+  background: var(--gold);
+
+}
+
+
+.footer strong {
+
+  display: block;
+
+  color: var(--gold-light);
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.16em;
+
+}
+
+
+.footer p {
+
+  margin:
+    7px 0
+    0;
+
+  color:
+    rgba(255,255,255,0.58);
+
+  font-size: 0.78rem;
+
+}
+
+
+/* =========================
+   KLEINE HANDYS
+   ========================= */
 
 @media
-(min-width: 700px) {
+(max-width: 400px) {
 
-  .app-header {
+  .hero {
 
-    padding-top: 35px;
-    padding-bottom: 35px;
-
-  }
-
-
-  .logo {
-
-    width: 135px;
-    height: 135px;
+    min-height: 375px;
 
   }
 
 
-  .app-content {
+  .hero-logo {
 
-    padding-top: 40px;
+    width: 155px;
+
+    max-height: 170px;
+
+  }
+
+
+  .hero h1 {
+
+    font-size: 2rem;
+
+  }
+
+
+  .hero-location {
+
+    font-size: 0.7rem;
+
+    letter-spacing: 0.16em;
+
+  }
+
+
+  .hero-subtitle {
+
+    font-size: 1rem;
+
+  }
+
+
+  .content {
+
+    padding-left: 16px;
+    padding-right: 16px;
+
+  }
+
+
+  .intro h2 {
+
+    font-size: 2rem;
 
   }
 
 
   .audio-card {
 
-    padding: 20px;
+    padding: 16px;
+
+  }
+
+
+  .track-info h3 {
+
+    font-size: 1.25rem;
 
   }
 
 }
 
 
-/* ---------------------------------------------------------
-   SEHR KLEINE HANDYS
-   --------------------------------------------------------- */
+/* =========================
+   TABLET / DESKTOP
+   ========================= */
 
 @media
-(max-width: 390px) {
+(min-width: 721px) {
 
-  .logo {
+  .hero {
 
-    width: 88px;
-    height: 88px;
-
-  }
-
-
-  .header-inner {
-
-    gap: 13px;
+    min-height: 470px;
 
   }
 
 
-  .header-text h1 {
+  .hero-logo {
 
-    font-size: 1.48rem;
+    width: 220px;
+
+    max-width: 220px;
 
   }
 
 
-  .header-text p {
+  .hero-subtitle {
 
-    font-size: 0.8rem;
+    font-size: 1.3rem;
+
+  }
+
+
+  .content {
+
+    padding-top: 50px;
 
   }
 
