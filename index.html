@@ -424,60 +424,8 @@
 
        Nur ein Audio gleichzeitig.
        ========================================== -->
-
-  <script>
-
-    const players =
-      document.querySelectorAll("audio");
-
-    players.forEach(player => {
-
-      player.addEventListener("play", () => {
-
-        players.forEach(otherPlayer => {
-
-          if (otherPlayer !== player) {
-
-            otherPlayer.pause();
-
-          }
-
-        });
-
-      });
-
-    });
-
-
-    /* Pfeil des Übungsbereichs */
-
-    const practiceAreas =
-      document.querySelectorAll(".practice-area");
-
-    practiceAreas.forEach(area => {
-
-      area.addEventListener("toggle", () => {
-
-        if (!area.open) {
-
-          const voicePlayers =
-            area.querySelectorAll("audio");
-
-          voicePlayers.forEach(player => {
-
-            player.pause();
-
-          });
-
-        }
-
-      });
-
-    });
-
-  </script>
-
-
+<script src="app.js?v=2"></script>
+  
 </body>
 
 </html>
