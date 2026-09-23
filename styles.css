@@ -1379,3 +1379,464 @@ body {
   }
 
 }
+/* =====================================================
+   ÜBUNGSWERKZEUGE
+   ===================================================== */
+
+.tools-section {
+  margin-top: 38px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+
+
+.tools-heading {
+  margin-bottom: 17px;
+}
+
+
+.tools-heading h2 {
+  margin: 4px 0 0;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.65rem;
+}
+
+
+/* =====================================================
+   TOOL KARTE
+   ===================================================== */
+
+.tool-card {
+  overflow: hidden;
+
+  background:
+    rgba(255,255,255,0.82);
+
+  border:
+    1px solid
+    rgba(16,60,41,0.10);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 28px
+    rgba(26,39,29,0.08);
+}
+
+
+.tool-card summary {
+  list-style: none;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 90px;
+
+  gap: 15px;
+
+  padding: 16px 18px;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+.tool-card summary::-webkit-details-marker {
+  display: none;
+}
+
+
+.tool-icon {
+  width: 54px;
+  height: 54px;
+
+  flex: 0 0 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--green-medium),
+      var(--green-dark)
+    );
+
+  color: var(--gold-light);
+
+  font-family: Georgia, serif;
+
+  font-size: 1.6rem;
+}
+
+
+.tool-title {
+  flex: 1;
+}
+
+
+.tool-title span {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--gold-dark);
+
+  font-size: 0.65rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+
+.tool-title strong {
+  display: block;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.4rem;
+}
+
+
+.tool-arrow {
+  color: var(--gold-dark);
+
+  font-family: Georgia, serif;
+
+  font-size: 2.4rem;
+
+  transform: rotate(90deg);
+
+  transition: transform 0.2s ease;
+}
+
+
+.tool-card[open] .tool-arrow {
+  transform: rotate(-90deg);
+}
+
+
+/* =====================================================
+   METRONOM
+   ===================================================== */
+
+.metronome-content {
+  padding:
+    26px
+    20px
+    22px;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  background:
+    linear-gradient(
+      180deg,
+      #123f2c,
+      #09291d
+    );
+
+  color: white;
+}
+
+
+/* BPM ANZEIGE */
+
+.metronome-tempo {
+  display: flex;
+
+  align-items: baseline;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-bottom: 25px;
+}
+
+
+.tempo-note {
+  color: var(--gold-light);
+
+  font-family: Georgia, serif;
+
+  font-size: 1.8rem;
+}
+
+
+.metronome-tempo strong {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 3.5rem;
+
+  line-height: 1;
+
+  font-weight: 700;
+}
+
+
+.tempo-unit {
+  color:
+    rgba(255,255,255,0.60);
+
+  font-size: 0.7rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* BPM STEUERUNG */
+
+.tempo-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+
+.round-control {
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  border:
+    1px solid
+    rgba(229,193,110,0.45);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,0.07);
+
+  color: var(--gold-light);
+
+  font-size: 1.55rem;
+
+  cursor: pointer;
+}
+
+
+.round-control:active {
+  transform: scale(0.94);
+}
+
+
+.bpm-slider {
+  width: 100%;
+
+  accent-color: var(--gold);
+
+  cursor: pointer;
+}
+
+
+/* TAKTART */
+
+.metronome-setting {
+  margin-bottom: 27px;
+}
+
+
+.setting-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color:
+    rgba(255,255,255,0.65);
+
+  font-size: 0.67rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+}
+
+
+.time-buttons {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 7px;
+}
+
+
+.time-button {
+  min-height: 42px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.17);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255,255,255,0.06);
+
+  color:
+    rgba(255,255,255,0.75);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 0.95rem;
+
+  cursor: pointer;
+}
+
+
+.time-button.active {
+  border-color: var(--gold);
+
+  background:
+    rgba(211,161,59,0.17);
+
+  color: var(--gold-light);
+}
+
+
+/* TAKTSCHLÄGE */
+
+.beat-indicator {
+  min-height: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  margin:
+    5px 0
+    21px;
+}
+
+
+.beat-dot {
+  width: 11px;
+  height: 11px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,0.20);
+
+  transition:
+    transform 0.06s ease,
+    background 0.06s ease;
+}
+
+
+.beat-dot.current {
+  background: var(--gold-light);
+
+  transform: scale(1.5);
+}
+
+
+/* START */
+
+.metronome-start {
+  width: 100%;
+
+  min-height: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border: 0;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
+  color: var(--green-dark);
+
+  font-size: 0.9rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 16px
+    rgba(0,0,0,0.18);
+}
+
+
+.metronome-start.running {
+  border:
+    1px solid
+    rgba(229,193,110,0.55);
+
+  background:
+    rgba(255,255,255,0.10);
+
+  color: white;
+}
+
+
+.metronome-start:active {
+  transform: scale(0.985);
+}
+
+
+.metronome-hint {
+  margin:
+    13px 0
+    0;
+
+  text-align: center;
+
+  color:
+    rgba(255,255,255,0.48);
+
+  font-size: 0.72rem;
+}
