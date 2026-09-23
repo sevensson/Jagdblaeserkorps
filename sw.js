@@ -1,4 +1,4 @@
-const CACHE_NAME = "jagdblaeser-v1";
+const CACHE_NAME = "jagdblaeser-v2";
 
 const APP_FILES = [
   "./",
