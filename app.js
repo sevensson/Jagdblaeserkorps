@@ -627,19 +627,66 @@ let tunerAnimationFrame = null;
    Intern arbeiten wir mit MIDI-Notennummern.
 */
 
-const noteNames = [
-  "C",
-  "C♯",
-  "D",
-  "E♭",
-  "E",
-  "F",
-  "F♯",
-  "G",
-  "A♭",
-  "A",
-  "B♭",
-  "B"
+/* =========================================================
+   NATURTÖNE DES FÜRST-PLESS-HORNS IN B
+
+   Die Frequenzen beziehen sich auf die tatsächlich
+   klingenden Töne.
+
+   Die Namen entsprechen der NOTATION für das B-Horn.
+   ========================================================= */
+
+const plessNaturalTones = [
+
+  {
+    partial: 2,
+    hornTone: 1,
+    name: "C",
+    frequency: 233.08
+  },
+
+  {
+    partial: 3,
+    hornTone: 2,
+    name: "G",
+    frequency: 349.62
+  },
+
+  {
+    partial: 4,
+    hornTone: 3,
+    name: "C",
+    frequency: 466.16
+  },
+
+  {
+    partial: 5,
+    hornTone: 4,
+    name: "E",
+    frequency: 582.70
+  },
+
+  {
+    partial: 6,
+    hornTone: 5,
+    name: "G",
+    frequency: 699.24
+  },
+
+  {
+    partial: 7,
+    hornTone: 6,
+    name: "A",
+    frequency: 815.78
+  },
+
+  {
+    partial: 8,
+    hornTone: 7,
+    name: "C",
+    frequency: 932.32
+  }
+
 ];
 
 
@@ -920,25 +967,6 @@ function autoCorrelate(buffer, sampleRate) {
    FREQUENZ -> MIDI NOTE
    ========================================================= */
 
-function frequencyToMidi(
-  frequency
-) {
-
-  return (
-
-    69 +
-
-    12 *
-
-    Math.log2(
-      frequency / 440
-    )
-
-  );
-
-}
-
-
 /* =========================================================
    NOTIERTE TONHÖHE FÜR B-INSTRUMENT
 
@@ -948,16 +976,6 @@ function frequencyToMidi(
    Deshalb addieren wir für die Anzeige
    zwei Halbtöne.
    ========================================================= */
-
-function getWrittenNote(
-  soundingMidi
-) {
-
-  const writtenMidi =
-    Math.round(
-      soundingMidi
-    ) + 2;
-
 
   const noteIndex =
     (
@@ -974,82 +992,162 @@ function getWrittenNote(
 
 
 /* =========================================================
-   CENT-ABWEICHUNG
-
-   Wichtig:
-   Die Transposition verändert die Cent-Abweichung nicht.
-
-   Deshalb vergleichen wir die gemessene klingende
-   Tonhöhe mit der nächstgelegenen klingenden MIDI-Note.
+   NÄCHSTEN NATURTON FINDEN
    ========================================================= */
 
-function getCents(
-  midiValue
+function findClosestNaturalTone(
+  frequency
 ) {
 
-  const nearestMidi =
-    Math.round(
-      midiValue
-    );
+  let closestTone =
+    plessNaturalTones[0];
+
+  let smallestDifference =
+    Infinity;
 
 
-  return (
-    100 *
-    (
-      midiValue -
-      nearestMidi
-    )
+  plessNaturalTones.forEach(
+    (tone) => {
+
+      /*
+         Abstand logarithmisch vergleichen.
+
+         Dadurch vergleichen wir musikalische
+         Tonhöhen und nicht einfach nur Hz.
+      */
+
+      const difference =
+        Math.abs(
+          1200 *
+          Math.log2(
+            frequency /
+            tone.frequency
+          )
+        );
+
+
+      if (
+        difference <
+        smallestDifference
+      ) {
+
+        smallestDifference =
+          difference;
+
+        closestTone =
+          tone;
+
+      }
+
+    }
   );
+
+
+  return closestTone;
 
 }
 
 
 /* =========================================================
-   ANZEIGE AKTUALISIEREN
+   CENT-ABWEICHUNG ZUM NATURTON
+   ========================================================= */
+
+function centsFromFrequency(
+  frequency,
+  targetFrequency
+) {
+
+  return (
+
+    1200 *
+
+    Math.log2(
+      frequency /
+      targetFrequency
+    )
+
+  );
+
+}
+
+/* =========================================================
+   STIMMGERÄT-ANZEIGE AKTUALISIEREN
    ========================================================= */
 
 function updateTunerDisplay(
   frequency
 ) {
 
-  const soundingMidi =
-    frequencyToMidi(
+  /*
+     Passenden Naturton des
+     Fürst-Pless-Horns suchen.
+  */
+
+  const targetTone =
+    findClosestNaturalTone(
       frequency
     );
 
 
-  const writtenNote =
-    getWrittenNote(
-      soundingMidi
-    );
-
+  /*
+     Abweichung vom tatsächlichen
+     Naturton-Sollwert berechnen.
+  */
 
   const cents =
-    getCents(
-      soundingMidi
+    centsFromFrequency(
+      frequency,
+      targetTone.frequency
     );
 
 
-  /* Ton */
+  /* =====================================================
+     TONANZEIGE
+     ===================================================== */
 
   tunerNote.textContent =
-    writtenNote.name;
+    targetTone.name;
 
 
-  /* Frequenz */
+  /* =====================================================
+     FREQUENZANZEIGE
 
-  tunerFrequency.textContent =
+     Gemessene Frequenz +
+     Sollfrequenz
+     ===================================================== */
+
+  tunerFrequency.innerHTML =
+
     frequency.toFixed(1) +
-    " Hz";
+    " Hz" +
+
+    "<br>" +
+
+    "<span style='font-size:0.65rem;" +
+    "font-family:sans-serif;" +
+    "font-weight:400;" +
+    "opacity:0.55;'>" +
+
+    "Soll: " +
+    targetTone.frequency.toFixed(1) +
+    " Hz · " +
+    targetTone.hornTone +
+    ". Ton" +
+
+    "</span>";
 
 
-  /* Cent */
+  /* =====================================================
+     CENT-ANZEIGE
+     ===================================================== */
 
   const roundedCents =
     Math.round(cents);
 
 
-  if (roundedCents > 0) {
+  if (
+    roundedCents > 0
+  ) {
 
     tunerCents.textContent =
       "+" +
@@ -1075,6 +1173,82 @@ function updateTunerDisplay(
 
   }
 
+
+  /* =====================================================
+     NADEL
+
+     -50 Cent = links
+       0 Cent = Mitte
+     +50 Cent = rechts
+     ===================================================== */
+
+  const limitedCents =
+    Math.max(
+      -50,
+      Math.min(
+        50,
+        cents
+      )
+    );
+
+
+  const needlePosition =
+    50 +
+    limitedCents;
+
+
+  tunerNeedle.style.left =
+    needlePosition + "%";
+
+
+  /* =====================================================
+     STATUS
+     ===================================================== */
+
+  tunerStatus.classList.remove(
+    "in-tune"
+  );
+
+
+  /*
+     ±5 Cent betrachten wir zunächst
+     als sauber getroffen.
+  */
+
+  if (
+    Math.abs(cents) <= 5
+  ) {
+
+    tunerStatus.textContent =
+      "✓ " +
+      targetTone.hornTone +
+      ". Ton passt";
+
+    tunerStatus.classList.add(
+      "in-tune"
+    );
+
+  }
+
+  else if (
+    cents < -5
+  ) {
+
+    tunerStatus.textContent =
+      targetTone.hornTone +
+      ". Ton ist zu tief";
+
+  }
+
+  else {
+
+    tunerStatus.textContent =
+      targetTone.hornTone +
+      ". Ton ist zu hoch";
+
+  }
+
+}
 
   /* =====================================================
      NADEL
@@ -1189,8 +1363,8 @@ function analyseTuner() {
   */
 
   if (
-    frequency > 50 &&
-    frequency < 1500
+    frequency > 180 &&
+    frequency < 1050
   ) {
 
     updateTunerDisplay(
