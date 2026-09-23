@@ -1,9 +1,12 @@
 {
-  "name": "Bläserhut-Quiz",
-  "short_name": "Bläserhut",
+  "name": "Jagdbläsercorps Hegering Radevormwald",
+  "short_name": "Jagdbläser",
+  "description": "Die App des Jagdbläsercorps Hegering Radevormwald – Hörbeispiele, Jagdsignale und Übungswerkzeuge.",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#eef3ee",
-  "theme_color": "#1f4d2e",
-  "lang": "de"
+  "theme_color": "#0b2f22",
+  "lang": "de-DE",
+  "orientation": "portrait-primary"
 }
