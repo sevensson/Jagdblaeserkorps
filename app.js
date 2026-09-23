@@ -2732,7 +2732,327 @@ document.addEventListener(
 
   }
 );
+/* =========================================================
+   VERANSTALTUNGEN
+   ========================================================= */
 
+function renderEvents() {
+
+  const eventsList =
+    document.getElementById("eventsList");
+
+  if (!eventsList) {
+    return;
+  }
+
+
+  if (typeof events === "undefined") {
+
+    console.error(
+      "events.js wurde nicht geladen."
+    );
+
+    return;
+  }
+
+
+  /* HEUTIGES DATUM */
+
+  const today = new Date();
+
+  today.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+
+  /* NUR HEUTIGE UND ZUKÜNFTIGE TERMINE */
+
+  const upcomingEvents =
+    events
+      .filter((event) => {
+
+        const eventDate =
+          new Date(
+            event.date + "T00:00:00"
+          );
+
+        return eventDate >= today;
+
+      })
+
+      .sort((a, b) => {
+
+        const dateA =
+          new Date(
+            a.date +
+            "T" +
+            (a.time || "00:00")
+          );
+
+        const dateB =
+          new Date(
+            b.date +
+            "T" +
+            (b.time || "00:00")
+          );
+
+        return dateA - dateB;
+
+      });
+
+
+  /* KEINE TERMINE */
+
+  if (upcomingEvents.length === 0) {
+
+    eventsList.innerHTML = `
+
+      <div class="no-events">
+
+        <div class="no-events-icon">
+          ♫
+        </div>
+
+        <div>
+
+          <strong>
+            Aktuell keine Termine
+          </strong>
+
+          <p>
+            Neue Veranstaltungen werden
+            hier bekanntgegeben.
+          </p>
+
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  /* TERMINE ERZEUGEN */
+
+  eventsList.innerHTML =
+    upcomingEvents
+      .map((event) =>
+        createEventCard(event)
+      )
+      .join("");
+
+}
+
+
+
+/* =========================================================
+   TERMIN-KARTE
+   ========================================================= */
+
+function createEventCard(event) {
+
+  const eventDate =
+    new Date(
+      event.date + "T00:00:00"
+    );
+
+
+  const day =
+    String(
+      eventDate.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const month =
+    eventDate
+      .toLocaleDateString(
+        "de-DE",
+        {
+          month: "short"
+        }
+      )
+      .replace(".", "")
+      .toUpperCase();
+
+
+  const weekday =
+    eventDate
+      .toLocaleDateString(
+        "de-DE",
+        {
+          weekday: "long"
+        }
+      );
+
+
+  let detailsHtml = "";
+
+
+  /* UHRZEIT */
+
+  if (event.time) {
+
+    detailsHtml += `
+
+      <div class="event-detail">
+
+        <span class="event-detail-icon">
+          ◷
+        </span>
+
+        <span>
+          ${escapeHtml(event.time)} Uhr
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* TREFFZEIT */
+
+  if (event.meetingTime) {
+
+    detailsHtml += `
+
+      <div class="event-detail">
+
+        <span class="event-detail-icon">
+          ●
+        </span>
+
+        <span>
+          Treffen:
+          ${escapeHtml(event.meetingTime)} Uhr
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* ORT */
+
+  if (event.location) {
+
+    detailsHtml += `
+
+      <div class="event-detail">
+
+        <span class="event-detail-icon">
+          ◆
+        </span>
+
+        <span>
+          ${escapeHtml(event.location)}
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* KLEIDUNG */
+
+  if (event.clothing) {
+
+    detailsHtml += `
+
+      <div class="event-detail">
+
+        <span class="event-detail-icon">
+          ◇
+        </span>
+
+        <span>
+          ${escapeHtml(event.clothing)}
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* BESCHREIBUNG */
+
+  const descriptionHtml =
+    event.description
+      ? `
+
+        <p class="event-description">
+          ${escapeHtml(event.description)}
+        </p>
+
+      `
+      : "";
+
+
+  return `
+
+    <article class="event-card">
+
+      <div class="event-date">
+
+        <strong>
+          ${day}
+        </strong>
+
+        <span>
+          ${month}
+        </span>
+
+      </div>
+
+
+      <div class="event-information">
+
+        <span class="event-weekday">
+          ${escapeHtml(weekday)}
+        </span>
+
+        <h3>
+          ${escapeHtml(event.title)}
+        </h3>
+
+
+        <div class="event-details">
+          ${detailsHtml}
+        </div>
+
+
+        ${descriptionHtml}
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+
+/* =========================================================
+   VERANSTALTUNGEN STARTEN
+   ========================================================= */
+
+renderEvents();
 
 
 /* =========================================================
