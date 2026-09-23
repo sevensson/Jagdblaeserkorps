@@ -2,6 +2,7 @@
 <html lang="de">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -9,23 +10,35 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <meta name="theme-color" content="#0d3425">
+  <meta
+    name="theme-color"
+    content="#0b2f22"
+  >
 
   <meta
     name="description"
-    content="Jagdbläsercorps Hegering Radevormwald – Hörbeispiele und Jagdsignale"
+    content="Jagdbläsercorps Hegering Radevormwald – Hörbeispiele, Jagdsignale und Übungswerkzeuge"
   >
 
-  <title>Jagdbläsercorps Radevormwald</title>
+  <title>
+    Jagdbläsercorps Radevormwald
+  </title>
 
-  <link rel="stylesheet" href="styles.css?v=4">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0b2f22">
-  
+  <link
+    rel="stylesheet"
+    href="styles.css?v=4"
+  >
+
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
 </head>
 
 
 <body>
+
 
   <!-- ==========================================
        HEADER
@@ -41,7 +54,9 @@
         class="hero-logo"
       >
 
-      <h1>Jagdbläsercorps</h1>
+      <h1>
+        Jagdbläsercorps
+      </h1>
 
       <div class="hero-location">
         Hegering Radevormwald
@@ -56,11 +71,17 @@
   </header>
 
 
+
   <!-- ==========================================
        HAUPTINHALT
        ========================================== -->
 
   <main class="content">
+
+
+    <!-- ========================================
+         EINLEITUNG
+         ======================================== -->
 
     <section class="intro">
 
@@ -78,6 +99,7 @@
       </p>
 
     </section>
+
 
 
     <!-- ========================================
@@ -107,11 +129,15 @@
       </div>
 
 
+
       <!-- ======================================
            HUBERTUSMARSCH
            ====================================== -->
 
-      <article class="audio-card">
+      <article class="audio-card piece-card">
+
+
+        <!-- ÜBERSCHRIFT -->
 
         <div class="audio-heading">
 
@@ -134,7 +160,60 @@
         </div>
 
 
-        <!-- GESAMTAUFNAHME -->
+
+        <!-- ====================================
+             WIEDERGABEGESCHWINDIGKEIT
+             ==================================== -->
+
+        <div class="playback-speed">
+
+          <span class="speed-label">
+            Wiedergabegeschwindigkeit
+          </span>
+
+          <div class="speed-buttons">
+
+            <button
+              class="speed-button"
+              type="button"
+              data-speed="0.7"
+            >
+              70 %
+            </button>
+
+            <button
+              class="speed-button"
+              type="button"
+              data-speed="0.8"
+            >
+              80 %
+            </button>
+
+            <button
+              class="speed-button"
+              type="button"
+              data-speed="0.9"
+            >
+              90 %
+            </button>
+
+            <button
+              class="speed-button active"
+              type="button"
+              data-speed="1"
+            >
+              100 %
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ====================================
+             GESAMTAUFNAHME
+             ==================================== -->
 
         <div class="main-recording">
 
@@ -158,6 +237,7 @@
           </audio>
 
         </div>
+
 
 
         <!-- ====================================
@@ -195,10 +275,13 @@
           </summary>
 
 
+
           <div class="practice-content">
 
 
-            <!-- FÜRST-PLESS-HORN -->
+            <!-- ================================
+                 FÜRST-PLESS-HORN
+                 ================================ -->
 
             <div class="instrument-heading">
 
@@ -211,6 +294,7 @@
               <span class="instrument-line"></span>
 
             </div>
+
 
 
             <!-- FP1 -->
@@ -256,6 +340,7 @@
             </div>
 
 
+
             <!-- FP2 -->
 
             <div class="voice-card">
@@ -299,7 +384,8 @@
             </div>
 
 
-            <!-- ==================================
+
+            <!-- ================================
                  PARFORCEHORN SPÄTER
 
                  Hier können wir später ergänzen:
@@ -307,7 +393,7 @@
                  Hubertusmarsch-PF1.mp3
                  Hubertusmarsch-PF2.mp3
                  Hubertusmarsch-PF3.mp3
-                 ================================== -->
+                 ================================ -->
 
 
             <div class="practice-tip">
@@ -328,9 +414,11 @@
 
         </details>
 
+
       </article>
 
     </section>
+
 
 
     <!-- ========================================
@@ -366,6 +454,7 @@
     </button>
 
 
+
     <!-- ========================================
          TOTSIGNALE – SPÄTER
          ======================================== -->
@@ -398,327 +487,392 @@
 
     </button>
 
-  <!-- ========================================
-     ÜBUNGSWERKZEUGE
-     ======================================== -->
-
-<section class="tools-section">
-
-  <div class="tools-heading">
-    <span class="small-title">Üben</span>
-    <h2>Übungswerkzeuge</h2>
-  </div>
 
 
-  <details class="tool-card" id="metronome">
+    <!-- ========================================
+         ÜBUNGSWERKZEUGE
+         ======================================== -->
 
-    <summary>
-
-      <div class="tool-icon">
-        ♩
-      </div>
-
-      <div class="tool-title">
-        <span>Rhythmus &amp; Tempo</span>
-        <strong>Metronom</strong>
-      </div>
-
-      <div class="tool-arrow">
-        ›
-      </div>
-
-    </summary>
+    <section class="tools-section">
 
 
-    <div class="metronome-content">
+      <div class="tools-heading">
 
-      <!-- BPM -->
-
-      <div class="metronome-tempo">
-
-        <span class="tempo-note">♩</span>
-
-        <strong id="bpmDisplay">
-          100
-        </strong>
-
-        <span class="tempo-unit">
-          BPM
+        <span class="small-title">
+          Üben
         </span>
 
-      </div>
-
-
-      <!-- PLUS / MINUS -->
-
-      <div class="tempo-controls">
-
-        <button
-          id="bpmMinus"
-          class="round-control"
-          type="button"
-          aria-label="Tempo verringern"
-        >
-          −
-        </button>
-
-
-        <input
-          id="bpmSlider"
-          class="bpm-slider"
-          type="range"
-          min="40"
-          max="200"
-          step="1"
-          value="100"
-          aria-label="Tempo"
-        >
-
-
-        <button
-          id="bpmPlus"
-          class="round-control"
-          type="button"
-          aria-label="Tempo erhöhen"
-        >
-          +
-        </button>
+        <h2>
+          Übungswerkzeuge
+        </h2>
 
       </div>
 
 
-      <!-- TAKTART -->
 
-      <div class="metronome-setting">
+      <!-- ======================================
+           METRONOM
+           ====================================== -->
 
-        <span class="setting-label">
-          Taktart
-        </span>
+      <details
+        class="tool-card"
+        id="metronome"
+      >
 
-        <div class="time-buttons">
+        <summary>
+
+          <div class="tool-icon">
+            ♩
+          </div>
+
+          <div class="tool-title">
+
+            <span>
+              Rhythmus &amp; Tempo
+            </span>
+
+            <strong>
+              Metronom
+            </strong>
+
+          </div>
+
+          <div class="tool-arrow">
+            ›
+          </div>
+
+        </summary>
+
+
+
+        <div class="metronome-content">
+
+
+          <!-- BPM -->
+
+          <div class="metronome-tempo">
+
+            <span class="tempo-note">
+              ♩
+            </span>
+
+            <strong id="bpmDisplay">
+              100
+            </strong>
+
+            <span class="tempo-unit">
+              BPM
+            </span>
+
+          </div>
+
+
+
+          <!-- PLUS / MINUS -->
+
+          <div class="tempo-controls">
+
+            <button
+              id="bpmMinus"
+              class="round-control"
+              type="button"
+              aria-label="Tempo verringern"
+            >
+              −
+            </button>
+
+
+            <input
+              id="bpmSlider"
+              class="bpm-slider"
+              type="range"
+              min="40"
+              max="200"
+              step="1"
+              value="100"
+              aria-label="Tempo"
+            >
+
+
+            <button
+              id="bpmPlus"
+              class="round-control"
+              type="button"
+              aria-label="Tempo erhöhen"
+            >
+              +
+            </button>
+
+          </div>
+
+
+
+          <!-- TAKTART -->
+
+          <div class="metronome-setting">
+
+            <span class="setting-label">
+              Taktart
+            </span>
+
+            <div class="time-buttons">
+
+              <button
+                class="time-button"
+                data-beats="2"
+                type="button"
+              >
+                2/4
+              </button>
+
+              <button
+                class="time-button"
+                data-beats="3"
+                type="button"
+              >
+                3/4
+              </button>
+
+              <button
+                class="time-button active"
+                data-beats="4"
+                type="button"
+              >
+                4/4
+              </button>
+
+              <button
+                class="time-button"
+                data-beats="6"
+                type="button"
+              >
+                6/8
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- TAKTSCHLÄGE -->
+
+          <div
+            id="beatIndicator"
+            class="beat-indicator"
+            aria-label="Taktschlag"
+          ></div>
+
+
+
+          <!-- START / STOP -->
 
           <button
-            class="time-button"
-            data-beats="2"
+            id="metronomeStart"
+            class="metronome-start"
             type="button"
           >
-            2/4
+
+            <span id="metronomeSymbol">
+              ▶
+            </span>
+
+            <span id="metronomeText">
+              Metronom starten
+            </span>
+
           </button>
 
-          <button
-            class="time-button"
-            data-beats="3"
-            type="button"
-          >
-            3/4
-          </button>
 
-          <button
-            class="time-button active"
-            data-beats="4"
-            type="button"
-          >
-            4/4
-          </button>
+          <p class="metronome-hint">
+            Der erste Taktschlag wird stärker betont.
+          </p>
 
-          <button
-            class="time-button"
-            data-beats="6"
-            type="button"
-          >
-            6/8
-          </button>
 
         </div>
 
-      </div>
+      </details>
 
 
-      <!-- TAKTSCHLÄGE -->
 
-      <div
-        id="beatIndicator"
-        class="beat-indicator"
-        aria-label="Taktschlag"
-      ></div>
+      <!-- ======================================
+           STIMMGERÄT
+           ====================================== -->
 
-
-      <!-- START / STOP -->
-
-      <button
-        id="metronomeStart"
-        class="metronome-start"
-        type="button"
+      <details
+        class="tool-card tuner-card"
+        id="tuner"
       >
 
-        <span id="metronomeSymbol">
-          ▶
-        </span>
+        <summary>
 
-        <span id="metronomeText">
-          Metronom starten
-        </span>
+          <div class="tool-icon">
+            ♫
+          </div>
 
-      </button>
+          <div class="tool-title">
 
+            <span>
+              Tonhöhe kontrollieren
+            </span>
 
-      <p class="metronome-hint">
-        Der erste Taktschlag wird stärker betont.
-      </p>
+            <strong>
+              Stimmgerät
+            </strong>
 
-    </div>
+          </div>
 
-  </details>
+          <div class="tool-arrow">
+            ›
+          </div>
 
-<!-- ========================================
-     STIMMGERÄT
-     ======================================== -->
-
-<details class="tool-card tuner-card" id="tuner">
-
-  <summary>
-
-    <div class="tool-icon">
-      ♫
-    </div>
-
-    <div class="tool-title">
-      <span>Tonhöhe kontrollieren</span>
-      <strong>Stimmgerät</strong>
-    </div>
-
-    <div class="tool-arrow">
-      ›
-    </div>
-
-  </summary>
+        </summary>
 
 
-  <div class="tuner-content">
 
-    <div class="tuner-instrument">
-
-      <span class="tuner-instrument-title">
-        Fürst-Pless-Horn in B
-      </span>
-
-      <span class="tuner-instrument-info">
-        Naturton-Stimmgerät · Anzeige wie notiert
-      </span>
-
-    </div>
+        <div class="tuner-content">
 
 
-    <!-- TONANZEIGE -->
+          <!-- INSTRUMENT -->
 
-    <div class="tuner-note-area">
+          <div class="tuner-instrument">
 
-      <span class="tuner-note-label">
-        Erkannter Ton
-      </span>
+            <span class="tuner-instrument-title">
+              Fürst-Pless-Horn in B
+            </span>
 
-      <div
-        id="tunerNote"
-        class="tuner-note"
-      >
-        –
-      </div>
+            <span class="tuner-instrument-info">
+              Naturton-Stimmgerät · Anzeige wie notiert
+            </span>
 
-      <div
-        id="tunerCents"
-        class="tuner-cents"
-      >
-        Mikrofon nicht aktiv
-      </div>
-
-    </div>
+          </div>
 
 
-    <!-- STIMMANZEIGE -->
 
-    <div class="tuning-meter">
+          <!-- TONANZEIGE -->
 
-      <div class="meter-labels">
+          <div class="tuner-note-area">
 
-        <span>zu tief</span>
+            <span class="tuner-note-label">
+              Erkannter Ton
+            </span>
 
-        <span>passt</span>
+            <div
+              id="tunerNote"
+              class="tuner-note"
+            >
+              –
+            </div>
 
-        <span>zu hoch</span>
+            <div
+              id="tunerCents"
+              class="tuner-cents"
+            >
+              Mikrofon nicht aktiv
+            </div>
 
-      </div>
-
-
-      <div class="meter-track">
-
-        <div class="meter-center"></div>
-
-        <div
-          id="tunerNeedle"
-          class="meter-needle"
-        ></div>
-
-      </div>
-
-    </div>
+          </div>
 
 
-    <!-- STATUS -->
 
-    <div
-      id="tunerStatus"
-      class="tuner-status"
-    >
-      Spiele einen gleichmäßigen Ton.
-    </div>
+          <!-- STIMMANZEIGE -->
 
+          <div class="tuning-meter">
 
-    <!-- FREQUENZ -->
+            <div class="meter-labels">
 
-    <div class="tuner-frequency">
+              <span>
+                zu tief
+              </span>
 
-      <strong id="tunerFrequency">
-        – Hz
-      </strong>
+              <span>
+                passt
+              </span>
 
-      <span>
-        gemessene Frequenz
-      </span>
+              <span>
+                zu hoch
+              </span>
 
-    </div>
+            </div>
 
 
-    <!-- START / STOP -->
+            <div class="meter-track">
 
-    <button
-      id="tunerStart"
-      class="tuner-start"
-      type="button"
-    >
+              <div class="meter-center"></div>
 
-      <span id="tunerStartSymbol">
-        ●
-      </span>
+              <div
+                id="tunerNeedle"
+                class="meter-needle"
+              ></div>
 
-      <span id="tunerStartText">
-        Mikrofon starten
-      </span>
+            </div>
 
-    </button>
+          </div>
 
 
-    <p class="tuner-hint">
-      Spiele einen einzelnen Ton möglichst gleichmäßig
-      und halte das Smartphone in der Nähe des Horns.
-    </p>
 
-  </div>
+          <!-- STATUS -->
 
-</details>
+          <div
+            id="tunerStatus"
+            class="tuner-status"
+          >
+            Spiele einen gleichmäßigen Ton.
+          </div>
 
-</section>  
+
+
+          <!-- FREQUENZ -->
+
+          <div class="tuner-frequency">
+
+            <strong id="tunerFrequency">
+              – Hz
+            </strong>
+
+            <span>
+              gemessene Frequenz
+            </span>
+
+          </div>
+
+
+
+          <!-- START / STOP -->
+
+          <button
+            id="tunerStart"
+            class="tuner-start"
+            type="button"
+          >
+
+            <span id="tunerStartSymbol">
+              ●
+            </span>
+
+            <span id="tunerStartText">
+              Mikrofon starten
+            </span>
+
+          </button>
+
+
+          <p class="tuner-hint">
+            Spiele einen einzelnen Ton möglichst gleichmäßig
+            und halte das Smartphone in der Nähe des Horns.
+          </p>
+
+
+        </div>
+
+      </details>
+
+
+    </section>
+
 
   </main>
+
 
 
   <!-- ==========================================
@@ -742,13 +896,14 @@
   </footer>
 
 
+
   <!-- ==========================================
        JAVASCRIPT
-
-       Nur ein Audio gleichzeitig.
        ========================================== -->
-<script src="app.js?v=6"></script>
-  
+
+  <script src="app.js?v=7"></script>
+
+
 </body>
 
 </html>
