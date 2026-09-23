@@ -1558,3 +1558,32 @@ tunerArea.addEventListener(
 
   }
 );
+
+/* =========================================================
+   SERVICE WORKER
+   ========================================================= */
+
+if ("serviceWorker" in navigator) {
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then(() => {
+          console.log(
+            "Service Worker aktiv."
+          );
+        })
+        .catch((error) => {
+          console.error(
+            "Service Worker Fehler:",
+            error
+          );
+        });
+
+    }
+  );
+
+}
