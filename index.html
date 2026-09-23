@@ -106,8 +106,10 @@
          MÄRSCHE & STÜCKE
          =================================================== -->
 
-    <section class="music-section">
-
+    <section
+      class="music-section library-section"
+      id="section-maersche"
+    >
 
       <div class="section-title">
 
@@ -129,24 +131,58 @@
 
       </div>
 
+      <!--
+        Hier fügt app.js automatisch alle Einträge
+        mit category: "maersche" ein.
+      -->
 
-      <div id="musicLibrary"></div>
+      <div
+        id="maerscheLibrary"
+        class="library-container"
+      ></div>
+
+    </section>
 
 
 
+    <!-- ===================================================
+         ALLGEMEINE SIGNALE
+         =================================================== -->
 
-      <!-- =================================================
-           HIER KOMMEN SPÄTER WEITERE STÜCKE HIN
+    <section
+      class="music-section library-section"
+      id="section-allgemeine-signale"
+    >
 
-           Jedes weitere Stück bekommt dieselbe Struktur:
+      <div class="section-title">
 
-           <details class="piece-card audio-card">
-             ...
-           </details>
+        <div class="round-icon">
+          ♫
+        </div>
 
-           Dadurch bleibt die Übersicht kompakt.
-           ================================================= -->
+        <div>
 
+          <span class="small-title">
+            Jagdliches Brauchtum
+          </span>
+
+          <h2>
+            Allgemeine Signale
+          </h2>
+
+        </div>
+
+      </div>
+
+      <!--
+        Hier fügt app.js automatisch alle Einträge
+        mit category: "allgemeine-signale" ein.
+      -->
+
+      <div
+        id="allgemeineSignaleLibrary"
+        class="library-container"
+      ></div>
 
     </section>
 
@@ -156,35 +192,42 @@
          JAGDLEITSIGNALE
          =================================================== -->
 
-    <button
-      class="category-card"
-      type="button"
-      disabled
+    <section
+      class="music-section library-section"
+      id="section-jagdleitsignale"
     >
 
-      <div class="category-icon">
-        ♫
+      <div class="section-title">
+
+        <div class="round-icon">
+          ♫
+        </div>
+
+        <div>
+
+          <span class="small-title">
+            Jagdliches Brauchtum
+          </span>
+
+          <h2>
+            Jagdleitsignale
+          </h2>
+
+        </div>
+
       </div>
 
+      <!--
+        Hier fügt app.js automatisch alle Einträge
+        mit category: "jagdleitsignale" ein.
+      -->
 
-      <div class="category-text">
+      <div
+        id="jagdleitsignaleLibrary"
+        class="library-container"
+      ></div>
 
-        <span>
-          Jagdliches Brauchtum
-        </span>
-
-        <strong>
-          Jagdleitsignale
-        </strong>
-
-      </div>
-
-
-      <div class="category-arrow">
-        ›
-      </div>
-
-    </button>
+    </section>
 
 
 
@@ -192,35 +235,85 @@
          TOTSIGNALE
          =================================================== -->
 
-    <button
-      class="category-card"
-      type="button"
-      disabled
+    <section
+      class="music-section library-section"
+      id="section-totsignale"
     >
 
-      <div class="category-icon">
-        ❧
+      <div class="section-title">
+
+        <div class="round-icon">
+          ❧
+        </div>
+
+        <div>
+
+          <span class="small-title">
+            Jagdliches Brauchtum
+          </span>
+
+          <h2>
+            Totsignale
+          </h2>
+
+        </div>
+
       </div>
 
+      <!--
+        Hier fügt app.js automatisch alle Einträge
+        mit category: "totsignale" ein.
+      -->
 
-      <div class="category-text">
+      <div
+        id="totsignaleLibrary"
+        class="library-container"
+      ></div>
 
-        <span>
-          Jagdliches Brauchtum
-        </span>
+    </section>
 
-        <strong>
-          Totsignale
-        </strong>
+
+
+    <!-- ===================================================
+         WEITERE GEBRÄUCHLICHE SIGNALE
+         =================================================== -->
+
+    <section
+      class="music-section library-section"
+      id="section-weitere-signale"
+    >
+
+      <div class="section-title">
+
+        <div class="round-icon">
+          ♫
+        </div>
+
+        <div>
+
+          <span class="small-title">
+            Weitere Signale
+          </span>
+
+          <h2>
+            Gebräuchliche Signale
+          </h2>
+
+        </div>
 
       </div>
 
+      <!--
+        Hier fügt app.js automatisch alle Einträge
+        mit category: "weitere-signale" ein.
+      -->
 
-      <div class="category-arrow">
-        ›
-      </div>
+      <div
+        id="weitereSignaleLibrary"
+        class="library-container"
+      ></div>
 
-    </button>
+    </section>
 
 
 
@@ -664,7 +757,10 @@
        JAVASCRIPT
        ===================================================== -->
 
+  <!-- Zuerst wird die zentrale Musikbibliothek geladen. -->
   <script src="music-library.js?v=1"></script>
+
+  <!-- Danach die eigentliche App-Logik. -->
   <script src="app.js?v=10"></script>
 
 
