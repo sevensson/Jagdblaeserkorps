@@ -5,27 +5,642 @@
 
 
 /* =========================================================
+   MUSIKBIBLIOTHEK
+   ========================================================= */
+
+/*
+   Die eigentlichen Musikdaten stehen in:
+   music-library.js
+
+   Hier legen wir nur fest, welcher category-Wert
+   in welchen Bereich der index.html gehört.
+*/
+
+const libraryTargets = {
+
+  "maersche":
+    "maerscheLibrary",
+
+  "allgemeine-signale":
+    "allgemeineSignaleLibrary",
+
+  "jagdleitsignale":
+    "jagdleitsignaleLibrary",
+
+  "totsignale":
+    "totsignaleLibrary",
+
+  "weitere-signale":
+    "weitereSignaleLibrary"
+
+};
+
+
+/* =========================================================
+   HILFSFUNKTION:
+   HTML-Sonderzeichen absichern
+   ========================================================= */
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   HILFSFUNKTION:
+   INSTRUMENTE GRUPPIEREN
+   ========================================================= */
+
+function groupVoicesByInstrument(voices) {
+
+  const groups = {};
+
+
+  voices.forEach((voice) => {
+
+    const instrument =
+      voice.instrument ||
+      "Weitere Stimme";
+
+
+    if (!groups[instrument]) {
+
+      groups[instrument] = [];
+
+    }
+
+
+    groups[instrument].push(
+      voice
+    );
+
+  });
+
+
+  return groups;
+
+}
+
+
+/* =========================================================
+   EINZELNE STIMME ERZEUGEN
+   ========================================================= */
+
+function createVoiceHtml(
+  voice,
+  index
+) {
+
+  const voiceName =
+    voice.voice ||
+    `${index + 1}. Stimme`;
+
+
+  const instrument =
+    voice.instrument ||
+    "";
+
+
+  return `
+
+    <div class="voice-card">
+
+      <div class="voice-header">
+
+        <div class="voice-number">
+          ${index + 1}
+        </div>
+
+        <div class="voice-title">
+
+          <strong>
+            ${escapeHtml(voiceName)}
+          </strong>
+
+          <span>
+            ${escapeHtml(instrument)}
+          </span>
+
+        </div>
+
+      </div>
+
+      <audio
+        class="audio-player voice-player"
+        controls
+        preload="metadata"
+      >
+
+        <source
+          src="audio/${escapeHtml(voice.file)}"
+          type="audio/mpeg"
+        >
+
+        Dein Browser unterstützt die Audiowiedergabe nicht.
+
+      </audio>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   STIMMENBEREICH ERZEUGEN
+   ========================================================= */
+
+function createPracticeHtml(voices) {
+
+  if (
+    !Array.isArray(voices) ||
+    voices.length === 0
+  ) {
+
+    return "";
+
+  }
+
+
+  const groups =
+    groupVoicesByInstrument(
+      voices
+    );
+
+
+  let groupsHtml = "";
+
+
+  Object.entries(groups)
+    .forEach(
+      ([instrument, instrumentVoices]) => {
+
+        const voicesHtml =
+          instrumentVoices
+            .map(
+              (voice, index) =>
+                createVoiceHtml(
+                  voice,
+                  index
+                )
+            )
+            .join("");
+
+
+        groupsHtml += `
+
+          <div class="instrument-heading">
+
+            <span class="instrument-line"></span>
+
+            <span>
+              ${escapeHtml(instrument)}
+            </span>
+
+            <span class="instrument-line"></span>
+
+          </div>
+
+          ${voicesHtml}
+
+        `;
+
+      }
+    );
+
+
+  return `
+
+    <details class="practice-area">
+
+      <summary>
+
+        <div class="practice-summary-left">
+
+          <div class="practice-symbol">
+            ♫
+          </div>
+
+          <div>
+
+            <span class="practice-small">
+              Übungsmodus
+            </span>
+
+            <strong>
+              Stimmen einzeln üben
+            </strong>
+
+          </div>
+
+        </div>
+
+        <span class="practice-chevron">
+          ›
+        </span>
+
+      </summary>
+
+
+      <div class="practice-content">
+
+        ${groupsHtml}
+
+        <div class="practice-tip">
+
+          <span class="tip-icon">
+            ♪
+          </span>
+
+          <p>
+            Höre deine Stimme zunächst einzeln an und
+            spiele anschließend zur Aufnahme mit.
+          </p>
+
+        </div>
+
+      </div>
+
+    </details>
+
+  `;
+
+}
+
+
+/* =========================================================
+   STÜCK-KARTE ERZEUGEN
+   ========================================================= */
+
+function createPieceCard(
+  piece,
+  number
+) {
+
+  const card =
+    document.createElement(
+      "details"
+    );
+
+
+  card.className =
+    "piece-card audio-card";
+
+
+  const displayNumber =
+    String(number)
+      .padStart(
+        2,
+        "0"
+      );
+
+
+  const practiceHtml =
+    createPracticeHtml(
+      piece.voices || []
+    );
+
+
+  card.innerHTML = `
+
+    <summary class="piece-summary">
+
+      <div class="audio-heading">
+
+        <div class="track-number">
+          ${displayNumber}
+        </div>
+
+        <div class="track-info">
+
+          <h3>
+            ${escapeHtml(piece.title)}
+          </h3>
+
+          <p>
+            Seite ${escapeHtml(piece.page)}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="piece-chevron">
+        ›
+      </div>
+
+    </summary>
+
+
+    <div class="piece-content">
+
+
+      <div class="playback-speed">
+
+        <div class="speed-header">
+
+          <span class="speed-label">
+            Wiedergabetempo
+          </span>
+
+          <span class="speed-description">
+            Tempo zum Üben auswählen
+          </span>
+
+        </div>
+
+
+        <div class="speed-buttons">
+
+          <button
+            class="speed-button"
+            type="button"
+            data-speed="0.7"
+          >
+            <span>70</span>
+            <small>%</small>
+          </button>
+
+          <button
+            class="speed-button"
+            type="button"
+            data-speed="0.8"
+          >
+            <span>80</span>
+            <small>%</small>
+          </button>
+
+          <button
+            class="speed-button"
+            type="button"
+            data-speed="0.9"
+          >
+            <span>90</span>
+            <small>%</small>
+          </button>
+
+          <button
+            class="speed-button active"
+            type="button"
+            data-speed="1"
+          >
+            <span>100</span>
+            <small>%</small>
+          </button>
+
+        </div>
+
+
+        <div class="speed-hint">
+
+          <span class="speed-hint-icon">
+            ♪
+          </span>
+
+          <span>
+            Tonhöhe bleibt beim langsameren
+            Abspielen erhalten.
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="main-recording">
+
+        <span class="audio-label">
+          Gesamtaufnahme
+        </span>
+
+        <audio
+          class="audio-player"
+          controls
+          preload="metadata"
+        >
+
+          <source
+            src="audio/${escapeHtml(piece.audio)}"
+            type="audio/mpeg"
+          >
+
+          Dein Browser unterstützt die Audiowiedergabe nicht.
+
+        </audio>
+
+      </div>
+
+
+      ${practiceHtml}
+
+
+    </div>
+
+  `;
+
+
+  return card;
+
+}
+
+
+/* =========================================================
+   MUSIKBIBLIOTHEK ANZEIGEN
+   ========================================================= */
+
+function renderMusicLibrary() {
+
+  /*
+     Falls music-library.js aus irgendeinem Grund
+     nicht geladen wurde, brechen wir sauber ab.
+  */
+
+  if (
+    typeof musicLibrary ===
+    "undefined"
+  ) {
+
+    console.error(
+      "music-library.js wurde nicht geladen."
+    );
+
+    return;
+
+  }
+
+
+  Object.entries(
+    libraryTargets
+  ).forEach(
+    ([category, targetId]) => {
+
+      const target =
+        document.getElementById(
+          targetId
+        );
+
+
+      if (!target) {
+        return;
+      }
+
+
+      /*
+         Nur Stücke dieser Kategorie anzeigen,
+         für die bereits eine Gesamtaufnahme
+         eingetragen wurde.
+      */
+
+      const pieces =
+        musicLibrary.filter(
+          (piece) =>
+            piece.category === category &&
+            piece.audio
+        );
+
+
+      target.innerHTML = "";
+
+
+      pieces.forEach(
+        (piece, index) => {
+
+          const card =
+            createPieceCard(
+              piece,
+              index + 1
+            );
+
+
+          target.appendChild(
+            card
+          );
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/*
+   Jetzt werden die Karten tatsächlich erzeugt.
+*/
+
+renderMusicLibrary();
+
+
+
+/* =========================================================
    AUDIOPLAYER
-   Immer nur eine Aufnahme gleichzeitig abspielen
+
+   WICHTIG:
+   Die Audioplayer existieren erst NACH
+   renderMusicLibrary().
    ========================================================= */
 
 const players =
-  document.querySelectorAll("audio");
+  document.querySelectorAll(
+    "audio"
+  );
 
 
 players.forEach((player) => {
 
-  player.addEventListener("play", () => {
+  /*
+     Tonhöhe beim Verändern der
+     Wiedergabegeschwindigkeit erhalten.
+  */
 
-    players.forEach((otherPlayer) => {
+  if (
+    "preservesPitch"
+    in player
+  ) {
 
-      if (otherPlayer !== player) {
-        otherPlayer.pause();
+    player.preservesPitch =
+      true;
+
+  }
+
+
+  if (
+    "webkitPreservesPitch"
+    in player
+  ) {
+
+    player.webkitPreservesPitch =
+      true;
+
+  }
+
+
+  /*
+     Immer nur eine Aufnahme gleichzeitig.
+  */
+
+  player.addEventListener(
+    "play",
+    () => {
+
+      players.forEach(
+        (otherPlayer) => {
+
+          if (
+            otherPlayer !==
+            player
+          ) {
+
+            otherPlayer.pause();
+
+          }
+
+        }
+      );
+
+
+      /*
+         Falls das Metronom läuft,
+         wird es gestoppt.
+      */
+
+      if (
+        typeof metronomeRunning !==
+          "undefined" &&
+        metronomeRunning
+      ) {
+
+        stopMetronome();
+
       }
 
-    });
 
-  });
+      /*
+         Falls das Stimmgerät läuft,
+         Mikrofon stoppen.
+      */
+
+      if (
+        typeof tunerRunning !==
+          "undefined" &&
+        tunerRunning
+      ) {
+
+        stopTuner();
+
+      }
+
+    }
+  );
 
 });
 
@@ -33,44 +648,63 @@ players.forEach((player) => {
 
 /* =========================================================
    STÜCKE
-   Beim Einklappen alle Aufnahmen des Stücks stoppen
+
+   Beim Einklappen alle Aufnahmen des
+   jeweiligen Stücks stoppen.
    ========================================================= */
 
 const pieceCards =
-  document.querySelectorAll(".piece-card");
+  document.querySelectorAll(
+    ".piece-card"
+  );
 
 
 pieceCards.forEach((pieceCard) => {
 
-  pieceCard.addEventListener("toggle", () => {
+  pieceCard.addEventListener(
+    "toggle",
+    () => {
 
-    if (!pieceCard.open) {
+      if (!pieceCard.open) {
 
-      const piecePlayers =
-        pieceCard.querySelectorAll("audio");
-
-
-      piecePlayers.forEach((player) => {
-        player.pause();
-      });
-
-
-      /*
-         Falls der Bereich "Stimmen einzeln üben"
-         geöffnet ist, schließen wir ihn ebenfalls.
-      */
-
-      const practiceAreas =
-        pieceCard.querySelectorAll(".practice-area");
+        const piecePlayers =
+          pieceCard.querySelectorAll(
+            "audio"
+          );
 
 
-      practiceAreas.forEach((area) => {
-        area.open = false;
-      });
+        piecePlayers.forEach(
+          (player) => {
+
+            player.pause();
+
+          }
+        );
+
+
+        /*
+           Geöffneten Stimmenbereich
+           ebenfalls schließen.
+        */
+
+        const piecePracticeAreas =
+          pieceCard.querySelectorAll(
+            ".practice-area"
+          );
+
+
+        piecePracticeAreas.forEach(
+          (area) => {
+
+            area.open = false;
+
+          }
+        );
+
+      }
 
     }
-
-  });
+  );
 
 });
 
@@ -78,30 +712,40 @@ pieceCards.forEach((pieceCard) => {
 
 /* =========================================================
    STIMMEN-ÜBUNGSBEREICHE
-   Beim Einklappen die Einzelstimmen stoppen
    ========================================================= */
 
 const practiceAreas =
-  document.querySelectorAll(".practice-area");
+  document.querySelectorAll(
+    ".practice-area"
+  );
 
 
 practiceAreas.forEach((area) => {
 
-  area.addEventListener("toggle", () => {
+  area.addEventListener(
+    "toggle",
+    () => {
 
-    if (!area.open) {
+      if (!area.open) {
 
-      const voicePlayers =
-        area.querySelectorAll("audio");
+        const voicePlayers =
+          area.querySelectorAll(
+            "audio"
+          );
 
 
-      voicePlayers.forEach((player) => {
-        player.pause();
-      });
+        voicePlayers.forEach(
+          (player) => {
+
+            player.pause();
+
+          }
+        );
+
+      }
 
     }
-
-  });
+  );
 
 });
 
@@ -110,8 +754,8 @@ practiceAreas.forEach((area) => {
 /* =========================================================
    WIEDERGABEGESCHWINDIGKEIT
 
-   Geschwindigkeit gilt für alle Aufnahmen
-   innerhalb des jeweiligen Stücks.
+   Gilt immer für Gesamtaufnahme UND
+   Einzelstimmen des jeweiligen Stücks.
    ========================================================= */
 
 pieceCards.forEach((pieceCard) => {
@@ -140,56 +784,56 @@ pieceCards.forEach((pieceCard) => {
           );
 
 
-        /* Geschwindigkeit setzen */
+        piecePlayers.forEach(
+          (player) => {
 
-        piecePlayers.forEach((player) => {
-
-          player.playbackRate =
-            speed;
+            player.playbackRate =
+              speed;
 
 
-          if (
-            "preservesPitch"
-            in player
-          ) {
+            if (
+              "preservesPitch"
+              in player
+            ) {
 
-            player.preservesPitch =
-              true;
+              player.preservesPitch =
+                true;
+
+            }
+
+
+            if (
+              "webkitPreservesPitch"
+              in player
+            ) {
+
+              player.webkitPreservesPitch =
+                true;
+
+            }
 
           }
+        );
 
-
-          if (
-            "webkitPreservesPitch"
-            in player
-          ) {
-
-            player.webkitPreservesPitch =
-              true;
-
-          }
-
-        });
-
-
-        /* Alte Auswahl entfernen */
 
         speedButtons.forEach(
           (otherButton) => {
 
             otherButton
               .classList
-              .remove("active");
+              .remove(
+                "active"
+              );
 
           }
         );
 
 
-        /* Neue Auswahl markieren */
-
         button
           .classList
-          .add("active");
+          .add(
+            "active"
+          );
 
       }
     );
@@ -205,34 +849,54 @@ pieceCards.forEach((pieceCard) => {
    ========================================================= */
 
 const bpmDisplay =
-  document.getElementById("bpmDisplay");
+  document.getElementById(
+    "bpmDisplay"
+  );
 
 const bpmSlider =
-  document.getElementById("bpmSlider");
+  document.getElementById(
+    "bpmSlider"
+  );
 
 const bpmMinus =
-  document.getElementById("bpmMinus");
+  document.getElementById(
+    "bpmMinus"
+  );
 
 const bpmPlus =
-  document.getElementById("bpmPlus");
+  document.getElementById(
+    "bpmPlus"
+  );
 
 const metronomeStart =
-  document.getElementById("metronomeStart");
+  document.getElementById(
+    "metronomeStart"
+  );
 
 const metronomeText =
-  document.getElementById("metronomeText");
+  document.getElementById(
+    "metronomeText"
+  );
 
 const metronomeSymbol =
-  document.getElementById("metronomeSymbol");
+  document.getElementById(
+    "metronomeSymbol"
+  );
 
 const beatIndicator =
-  document.getElementById("beatIndicator");
+  document.getElementById(
+    "beatIndicator"
+  );
 
 const timeButtons =
-  document.querySelectorAll(".time-button");
+  document.querySelectorAll(
+    ".time-button"
+  );
 
 const metronomeArea =
-  document.getElementById("metronome");
+  document.getElementById(
+    "metronome"
+  );
 
 
 let bpm = 100;
@@ -270,7 +934,9 @@ function createBeatDots() {
   ) {
 
     const dot =
-      document.createElement("span");
+      document.createElement(
+        "span"
+      );
 
 
     dot.classList.add(
@@ -308,19 +974,25 @@ function setBpm(value) {
 
 
   if (bpmDisplay) {
+
     bpmDisplay.textContent =
       bpm;
+
   }
 
 
   if (bpmSlider) {
+
     bpmSlider.value =
       bpm;
+
   }
 
 
   if (metronomeRunning) {
+
     restartTimer();
+
   }
 
 }
@@ -401,7 +1073,9 @@ timeButtons.forEach((button) => {
 
           otherButton
             .classList
-            .remove("active");
+            .remove(
+              "active"
+            );
 
         }
       );
@@ -409,7 +1083,9 @@ timeButtons.forEach((button) => {
 
       button
         .classList
-        .add("active");
+        .add(
+          "active"
+        );
 
 
       currentBeat = 0;
@@ -475,7 +1151,9 @@ function playClick(isAccent) {
     context.createGain();
 
 
-  oscillator.connect(gain);
+  oscillator.connect(
+    gain
+  );
 
   gain.connect(
     context.destination
@@ -516,7 +1194,9 @@ function playClick(isAccent) {
   );
 
 
-  oscillator.start(now);
+  oscillator.start(
+    now
+  );
 
   oscillator.stop(
     now + 0.06
@@ -556,7 +1236,9 @@ function tick() {
 
     dots[currentBeat]
       .classList
-      .add("current");
+      .add(
+        "current"
+      );
 
   }
 
@@ -647,9 +1329,6 @@ function startMetronome() {
   /*
      Falls das Stimmgerät läuft,
      stoppen wir es.
-
-     Sonst würde das Mikrofon die
-     Metronom-Klicks aufnehmen.
   */
 
   if (
@@ -668,16 +1347,20 @@ function startMetronome() {
   */
 
   players.forEach((player) => {
+
     player.pause();
+
   });
 
 
   getMetronomeAudioContext();
 
 
-  metronomeRunning = true;
+  metronomeRunning =
+    true;
 
-  currentBeat = 0;
+  currentBeat =
+    0;
 
 
   startTimer();
@@ -687,7 +1370,9 @@ function startMetronome() {
 
     metronomeStart
       .classList
-      .add("running");
+      .add(
+        "running"
+      );
 
   }
 
@@ -724,9 +1409,11 @@ function stopMetronome() {
 
   timerID = null;
 
-  metronomeRunning = false;
+  metronomeRunning =
+    false;
 
-  currentBeat = 0;
+  currentBeat =
+    0;
 
 
   if (beatIndicator) {
@@ -752,7 +1439,9 @@ function stopMetronome() {
 
     metronomeStart
       .classList
-      .remove("running");
+      .remove(
+        "running"
+      );
 
   }
 
@@ -837,10 +1526,14 @@ if (metronomeArea) {
    ========================================================= */
 
 const tunerArea =
-  document.getElementById("tuner");
+  document.getElementById(
+    "tuner"
+  );
 
 const tunerStart =
-  document.getElementById("tunerStart");
+  document.getElementById(
+    "tunerStart"
+  );
 
 const tunerStartText =
   document.getElementById(
@@ -878,17 +1571,23 @@ const tunerStatus =
   );
 
 
-let tunerRunning = false;
+let tunerRunning =
+  false;
 
-let tunerAudioContext = null;
+let tunerAudioContext =
+  null;
 
-let tunerAnalyser = null;
+let tunerAnalyser =
+  null;
 
-let tunerSource = null;
+let tunerSource =
+  null;
 
-let tunerStream = null;
+let tunerStream =
+  null;
 
-let tunerAnimationFrame = null;
+let tunerAnimationFrame =
+  null;
 
 
 
@@ -1072,10 +1771,6 @@ function autoCorrelate(
     );
 
 
-  /*
-     Signal zu leise.
-  */
-
   if (rms < 0.01) {
 
     return -1;
@@ -1083,7 +1778,8 @@ function autoCorrelate(
   }
 
 
-  let start = 0;
+  let start =
+    0;
 
   let end =
     size - 1;
@@ -1105,7 +1801,8 @@ function autoCorrelate(
       ) < threshold
     ) {
 
-      start = i;
+      start =
+        i;
 
     }
 
@@ -1169,7 +1866,9 @@ function autoCorrelate(
   const correlations =
     new Array(
       trimmedSize
-    ).fill(0);
+    ).fill(
+      0
+    );
 
 
   for (
@@ -1194,7 +1893,8 @@ function autoCorrelate(
   }
 
 
-  let d = 0;
+  let d =
+    0;
 
 
   while (
@@ -1209,9 +1909,11 @@ function autoCorrelate(
   }
 
 
-  let maxValue = -1;
+  let maxValue =
+    -1;
 
-  let maxPosition = -1;
+  let maxPosition =
+    -1;
 
 
   for (
@@ -1326,10 +2028,6 @@ function updateTunerDisplay(
     );
 
 
-  /*
-     Notierter Ton.
-  */
-
   if (tunerNote) {
 
     tunerNote.textContent =
@@ -1337,10 +2035,6 @@ function updateTunerDisplay(
 
   }
 
-
-  /*
-     Gemessene Frequenz und Naturton-Sollwert.
-  */
 
   if (tunerFrequency) {
 
@@ -1381,12 +2075,10 @@ function updateTunerDisplay(
   }
 
 
-  /*
-     Cent-Anzeige.
-  */
-
   const roundedCents =
-    Math.round(cents);
+    Math.round(
+      cents
+    );
 
 
   if (tunerCents) {
@@ -1422,13 +2114,6 @@ function updateTunerDisplay(
   }
 
 
-  /*
-     Nadel:
-     -50 Cent links
-       0 Cent Mitte
-     +50 Cent rechts
-  */
-
   const limitedCents =
     Math.max(
       -50,
@@ -1447,15 +2132,11 @@ function updateTunerDisplay(
   if (tunerNeedle) {
 
     tunerNeedle.style.left =
-      needlePosition + "%";
+      needlePosition +
+      "%";
 
   }
 
-
-  /*
-     Status.
-     ±5 Cent gelten zunächst als passend.
-  */
 
   if (tunerStatus) {
 
@@ -1602,10 +2283,6 @@ function analyseTuner() {
     );
 
 
-  /*
-     Bereich passend zu unseren Naturtönen.
-  */
-
   if (
     frequency > 180 &&
     frequency < 1050
@@ -1640,8 +2317,7 @@ function analyseTuner() {
 async function startTuner() {
 
   /*
-     Metronom stoppen, damit dessen Klick
-     nicht vom Mikrofon erkannt wird.
+     Metronom stoppen.
   */
 
   if (metronomeRunning) {
@@ -1652,17 +2328,15 @@ async function startTuner() {
 
 
   /*
-     Laufende Musik ebenfalls stoppen.
+     Laufende Musik stoppen.
   */
 
   players.forEach((player) => {
+
     player.pause();
+
   });
 
-
-  /*
-     Browser muss Mikrofonzugriff unterstützen.
-  */
 
   if (
     !navigator.mediaDevices ||
@@ -1726,10 +2400,6 @@ async function startTuner() {
       tunerAudioContext
         .createAnalyser();
 
-
-    /*
-       Größerer Puffer für tiefere Hornfrequenzen.
-    */
 
     tunerAnalyser.fftSize =
       4096;
@@ -1853,9 +2523,7 @@ function stopTuner() {
     false;
 
 
-  if (
-    tunerAnimationFrame
-  ) {
+  if (tunerAnimationFrame) {
 
     cancelAnimationFrame(
       tunerAnimationFrame
@@ -1872,11 +2540,13 @@ function stopTuner() {
 
     tunerStream
       .getTracks()
-      .forEach((track) => {
+      .forEach(
+        (track) => {
 
-        track.stop();
+          track.stop();
 
-      });
+        }
+      );
 
 
     tunerStream =
@@ -2009,6 +2679,8 @@ if (tunerArea) {
 
 }
 
+
+
 /* =========================================================
    APP IM HINTERGRUND
 
@@ -2025,28 +2697,43 @@ document.addEventListener(
     }
 
 
-    /* Musik pausieren */
+    /*
+       Musik pausieren.
+    */
 
     players.forEach((player) => {
+
       player.pause();
+
     });
 
 
-    /* Metronom stoppen */
+    /*
+       Metronom stoppen.
+    */
 
     if (metronomeRunning) {
+
       stopMetronome();
+
     }
 
 
-    /* Stimmgerät stoppen und Mikrofon freigeben */
+    /*
+       Stimmgerät stoppen und
+       Mikrofon freigeben.
+    */
 
     if (tunerRunning) {
+
       stopTuner();
+
     }
 
   }
 );
+
+
 
 /* =========================================================
    SERVICE WORKER
@@ -2088,49 +2775,3 @@ if (
   );
 
 }
-
-/* =========================================================
-   AUDIO STOPPEN, WENN DIE APP VERLASSEN WIRD
-   ========================================================= */
-
-document.addEventListener(
-  "visibilitychange",
-  () => {
-
-    /*
-       Sobald die App bzw. Browserseite
-       nicht mehr sichtbar ist:
-    */
-
-    if (document.hidden) {
-
-      /*
-         Alle Musikaufnahmen pausieren.
-      */
-
-      players.forEach((player) => {
-        player.pause();
-      });
-
-
-      /*
-         Metronom stoppen.
-      */
-
-      if (metronomeRunning) {
-        stopMetronome();
-      }
-
-
-      /*
-         Stimmgerät und Mikrofon stoppen.
-      */
-
-      if (tunerRunning) {
-        stopTuner();
-      }
-
-    }
-
-  }
-);
