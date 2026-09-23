@@ -2353,3 +2353,98 @@ summary::-webkit-details-marker {
   }
 
 }
+
+/* =========================================================
+   EINKLAPPBARE OBERKATEGORIEN
+   ========================================================= */
+
+.category-section {
+  margin: 0;
+}
+
+.category-section > .section-title {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  padding-right: 38px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category-section > .section-title::after {
+  content: "›";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  color: var(--gold);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+  transform: translateY(-50%) rotate(90deg);
+  transition: transform 0.22s ease;
+}
+
+.category-section:not([open]) > .section-title::after {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.category-section:not([open]) > .section-title {
+  margin-bottom: 0;
+}
+
+.category-section > .section-title:active {
+  opacity: 0.82;
+}
+
+
+/* =========================================================
+   LANGE STÜCKNAMEN AUF SMARTPHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .track-info h3 {
+    font-size: clamp(1.22rem, 5.5vw, 1.55rem);
+    line-height: 1.02;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .piece-summary {
+    gap: 10px;
+  }
+
+  .audio-heading {
+    gap: 11px;
+  }
+
+  .track-number {
+    flex-basis: 54px;
+    width: 54px;
+    height: 54px;
+  }
+
+  .piece-chevron {
+    font-size: 1.9rem;
+  }
+
+  .category-section > .section-title {
+    padding-right: 32px;
+  }
+}
+
+@media (max-width: 370px) {
+
+  .track-info h3 {
+    font-size: 1.16rem;
+  }
+
+  .track-number {
+    flex-basis: 50px;
+    width: 50px;
+    height: 50px;
+  }
+}
