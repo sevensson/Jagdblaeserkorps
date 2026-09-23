@@ -1558,7 +1558,101 @@ tunerArea.addEventListener(
 
   }
 );
+/* =========================================================
+   WIEDERGABEGESCHWINDIGKEIT
+   ========================================================= */
 
+const pieceCards =
+  document.querySelectorAll(
+    ".piece-card"
+  );
+
+
+pieceCards.forEach(
+  (pieceCard) => {
+
+    const speedButtons =
+      pieceCard.querySelectorAll(
+        ".speed-button"
+      );
+
+
+    const piecePlayers =
+      pieceCard.querySelectorAll(
+        "audio"
+      );
+
+
+    speedButtons.forEach(
+      (button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const speed =
+              Number(
+                button.dataset.speed
+              );
+
+
+            /* Alle Aufnahmen dieses Stücks */
+
+            piecePlayers.forEach(
+              (player) => {
+
+                player.playbackRate =
+                  speed;
+
+
+                /*
+                   Moderne Browser versuchen dabei,
+                   die Tonhöhe beizubehalten.
+                */
+
+                if (
+                  "preservesPitch"
+                  in player
+                ) {
+
+                  player.preservesPitch =
+                    true;
+
+                }
+
+              }
+            );
+
+
+            /* Aktiven Button markieren */
+
+            speedButtons.forEach(
+              (otherButton) => {
+
+                otherButton
+                  .classList
+                  .remove(
+                    "active"
+                  );
+
+              }
+            );
+
+
+            button
+              .classList
+              .add(
+                "active"
+              );
+
+          }
+        );
+
+      }
+    );
+
+  }
+);
 /* =========================================================
    SERVICE WORKER
    ========================================================= */
