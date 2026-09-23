@@ -26,7 +26,7 @@
 
   <link
     rel="stylesheet"
-    href="styles.css?v=5"
+    href="styles.css?v=6"
   >
 
   <link
@@ -40,9 +40,9 @@
 <body>
 
 
-  <!-- ==========================================
+  <!-- =====================================================
        HEADER
-       ========================================== -->
+       ===================================================== -->
 
   <header class="hero">
 
@@ -72,16 +72,16 @@
 
 
 
-  <!-- ==========================================
+  <!-- =====================================================
        HAUPTINHALT
-       ========================================== -->
+       ===================================================== -->
 
   <main class="content">
 
 
-    <!-- ========================================
+    <!-- ===================================================
          EINLEITUNG
-         ======================================== -->
+         =================================================== -->
 
     <section class="intro">
 
@@ -102,11 +102,12 @@
 
 
 
-    <!-- ========================================
+    <!-- ===================================================
          MÄRSCHE & STÜCKE
-         ======================================== -->
+         =================================================== -->
 
     <section class="music-section">
+
 
       <div class="section-title">
 
@@ -130,300 +131,451 @@
 
 
 
-      <!-- ======================================
+      <!-- =================================================
            HUBERTUSMARSCH
-           ====================================== -->
 
-      <article class="audio-card piece-card">
+           Das komplette Stück ist jetzt aufklappbar.
+           ================================================= -->
 
-
-        <!-- ÜBERSCHRIFT -->
-
-        <div class="audio-heading">
-
-          <div class="track-number">
-            01
-          </div>
-
-          <div class="track-info">
-
-            <h3>
-              Hubertusmarsch
-            </h3>
-
-            <p>
-              Jagdlicher Marsch
-            </p>
-
-          </div>
-
-        </div>
+      <details class="piece-card audio-card">
 
 
+        <!-- ===============================================
+             STÜCK-KOPF
+             In der Übersicht ist nur dieser Teil sichtbar.
+             =============================================== -->
 
-        <!-- ====================================
-             WIEDERGABEGESCHWINDIGKEIT
-             ==================================== -->
+        <summary class="piece-summary">
 
-        <div class="playback-speed">
+          <div class="audio-heading">
 
-          <span class="speed-label">
-            Wiedergabegeschwindigkeit
-          </span>
+            <div class="track-number">
+              01
+            </div>
 
-          <div class="speed-buttons">
+            <div class="track-info">
 
-            <button
-              class="speed-button"
-              type="button"
-              data-speed="0.7"
-            >
-              70 %
-            </button>
+              <h3>
+                Hubertusmarsch
+              </h3>
 
-            <button
-              class="speed-button"
-              type="button"
-              data-speed="0.8"
-            >
-              80 %
-            </button>
+              <p>
+                Jagdlicher Marsch
+              </p>
 
-            <button
-              class="speed-button"
-              type="button"
-              data-speed="0.9"
-            >
-              90 %
-            </button>
-
-            <button
-              class="speed-button active"
-              type="button"
-              data-speed="1"
-            >
-              100 %
-            </button>
+            </div>
 
           </div>
 
-        </div>
+
+          <div class="piece-chevron">
+            ›
+          </div>
+
+        </summary>
 
 
 
-        <!-- ====================================
-             GESAMTAUFNAHME
-             ==================================== -->
+        <!-- ===============================================
+             STÜCK-INHALT
+             Erst nach dem Aufklappen sichtbar.
+             =============================================== -->
 
-        <div class="main-recording">
-
-          <span class="audio-label">
-            Gesamtaufnahme
-          </span>
-
-          <audio
-            class="audio-player"
-            controls
-            preload="metadata"
-          >
-
-            <source
-              src="audio/Hubertusmarsch.mp3"
-              type="audio/mpeg"
-            >
-
-            Dein Browser unterstützt die Audiowiedergabe nicht.
-
-          </audio>
-
-        </div>
+        <div class="piece-content">
 
 
+          <!-- =============================================
+               WIEDERGABETEMPO
+               ============================================= -->
 
-        <!-- ====================================
-             AUFKLAPPBARER ÜBUNGSBEREICH
-             ==================================== -->
+          <div class="playback-speed">
 
-        <details class="practice-area">
 
-          <summary>
-
-            <div class="practice-summary-left">
-
-              <div class="practice-symbol">
-                ♫
-              </div>
+            <div class="speed-header">
 
               <div>
 
-                <span class="practice-small">
-                  Übungsmodus
+                <span class="speed-label">
+                  Wiedergabetempo
                 </span>
 
-                <strong>
-                  Stimmen einzeln üben
+                <span class="speed-description">
+                  Tempo zum Üben auswählen
+                </span>
+
+              </div>
+
+
+              <div class="speed-current">
+
+                <span>
+                  Aktiv
+                </span>
+
+                <strong class="speed-current-value">
+                  100 %
                 </strong>
 
               </div>
 
             </div>
 
-            <span class="practice-chevron">
-              ›
-            </span>
-
-          </summary>
 
 
+            <div class="speed-buttons">
 
-          <div class="practice-content">
+
+              <button
+                class="speed-button"
+                type="button"
+                data-speed="0.7"
+                data-label="70 %"
+              >
+
+                <span>
+                  70
+                </span>
+
+                <small>
+                  %
+                </small>
+
+              </button>
 
 
-            <!-- ================================
-                 FÜRST-PLESS-HORN
-                 ================================ -->
+              <button
+                class="speed-button"
+                type="button"
+                data-speed="0.8"
+                data-label="80 %"
+              >
 
-            <div class="instrument-heading">
+                <span>
+                  80
+                </span>
 
-              <span class="instrument-line"></span>
+                <small>
+                  %
+                </small>
+
+              </button>
+
+
+              <button
+                class="speed-button"
+                type="button"
+                data-speed="0.9"
+                data-label="90 %"
+              >
+
+                <span>
+                  90
+                </span>
+
+                <small>
+                  %
+                </small>
+
+              </button>
+
+
+              <button
+                class="speed-button active"
+                type="button"
+                data-speed="1"
+                data-label="100 %"
+              >
+
+                <span>
+                  100
+                </span>
+
+                <small>
+                  %
+                </small>
+
+              </button>
+
+
+            </div>
+
+
+
+            <div class="speed-hint">
 
               <span>
-                Fürst-Pless-Horn
-              </span>
-
-              <span class="instrument-line"></span>
-
-            </div>
-
-
-
-            <!-- FP1 -->
-
-            <div class="voice-card">
-
-              <div class="voice-header">
-
-                <div class="voice-number">
-                  1
-                </div>
-
-                <div class="voice-title">
-
-                  <strong>
-                    1. Stimme
-                  </strong>
-
-                  <span>
-                    Fürst-Pless-Horn
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <audio
-                class="audio-player voice-player"
-                controls
-                preload="metadata"
-              >
-
-                <source
-                  src="audio/Hubertusmarsch-FP1.mp3"
-                  type="audio/mpeg"
-                >
-
-                Dein Browser unterstützt die Audiowiedergabe nicht.
-
-              </audio>
-
-            </div>
-
-
-
-            <!-- FP2 -->
-
-            <div class="voice-card">
-
-              <div class="voice-header">
-
-                <div class="voice-number">
-                  2
-                </div>
-
-                <div class="voice-title">
-
-                  <strong>
-                    2. Stimme
-                  </strong>
-
-                  <span>
-                    Fürst-Pless-Horn
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <audio
-                class="audio-player voice-player"
-                controls
-                preload="metadata"
-              >
-
-                <source
-                  src="audio/Hubertusmarsch-FP2.mp3"
-                  type="audio/mpeg"
-                >
-
-                Dein Browser unterstützt die Audiowiedergabe nicht.
-
-              </audio>
-
-            </div>
-
-
-
-            <!-- ================================
-                 PARFORCEHORN SPÄTER
-
-                 Hier können wir später ergänzen:
-
-                 Hubertusmarsch-PF1.mp3
-                 Hubertusmarsch-PF2.mp3
-                 Hubertusmarsch-PF3.mp3
-                 ================================ -->
-
-
-            <div class="practice-tip">
-
-              <span class="tip-icon">
                 ♪
               </span>
 
-              <p>
-                Höre deine Stimme zunächst einzeln an
-                und spiele anschließend zur Aufnahme mit.
-              </p>
+              <span>
+                Tonhöhe bleibt beim langsameren
+                Abspielen erhalten.
+              </span>
 
             </div>
 
 
           </div>
 
-        </details>
 
 
-      </article>
+          <!-- =============================================
+               GESAMTAUFNAHME
+               ============================================= -->
+
+          <div class="main-recording">
+
+            <span class="audio-label">
+              Gesamtaufnahme
+            </span>
+
+
+            <audio
+              class="audio-player"
+              controls
+              preload="metadata"
+            >
+
+              <source
+                src="audio/Hubertusmarsch.mp3"
+                type="audio/mpeg"
+              >
+
+              Dein Browser unterstützt die Audiowiedergabe nicht.
+
+            </audio>
+
+          </div>
+
+
+
+          <!-- =============================================
+               STIMMEN EINZELN ÜBEN
+               ============================================= -->
+
+          <details class="practice-area">
+
+
+            <summary>
+
+
+              <div class="practice-summary-left">
+
+                <div class="practice-symbol">
+                  ♫
+                </div>
+
+
+                <div>
+
+                  <span class="practice-small">
+                    Übungsmodus
+                  </span>
+
+                  <strong>
+                    Stimmen einzeln üben
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <span class="practice-chevron">
+                ›
+              </span>
+
+
+            </summary>
+
+
+
+            <!-- ===========================================
+                 EINZELSTIMMEN
+                 =========================================== -->
+
+            <div class="practice-content">
+
+
+              <!-- =========================================
+                   FÜRST-PLESS-HORN
+                   ========================================= -->
+
+              <div class="instrument-heading">
+
+                <span class="instrument-line"></span>
+
+                <span>
+                  Fürst-Pless-Horn
+                </span>
+
+                <span class="instrument-line"></span>
+
+              </div>
+
+
+
+              <!-- =========================================
+                   FP 1
+                   ========================================= -->
+
+              <div class="voice-card">
+
+
+                <div class="voice-header">
+
+                  <div class="voice-number">
+                    1
+                  </div>
+
+
+                  <div class="voice-title">
+
+                    <strong>
+                      1. Stimme
+                    </strong>
+
+                    <span>
+                      Fürst-Pless-Horn
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+
+                <audio
+                  class="audio-player voice-player"
+                  controls
+                  preload="metadata"
+                >
+
+                  <source
+                    src="audio/Hubertusmarsch-FP1.mp3"
+                    type="audio/mpeg"
+                  >
+
+                  Dein Browser unterstützt die Audiowiedergabe nicht.
+
+                </audio>
+
+
+              </div>
+
+
+
+              <!-- =========================================
+                   FP 2
+                   ========================================= -->
+
+              <div class="voice-card">
+
+
+                <div class="voice-header">
+
+                  <div class="voice-number">
+                    2
+                  </div>
+
+
+                  <div class="voice-title">
+
+                    <strong>
+                      2. Stimme
+                    </strong>
+
+                    <span>
+                      Fürst-Pless-Horn
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+
+                <audio
+                  class="audio-player voice-player"
+                  controls
+                  preload="metadata"
+                >
+
+                  <source
+                    src="audio/Hubertusmarsch-FP2.mp3"
+                    type="audio/mpeg"
+                  >
+
+                  Dein Browser unterstützt die Audiowiedergabe nicht.
+
+                </audio>
+
+
+              </div>
+
+
+
+              <!-- =========================================
+                   PARFORCEHORN
+
+                   Später können wir hier ergänzen:
+
+                   Hubertusmarsch-PF1.mp3
+                   Hubertusmarsch-PF2.mp3
+                   Hubertusmarsch-PF3.mp3
+                   ========================================= -->
+
+
+
+              <!-- =========================================
+                   ÜBUNGSHINWEIS
+                   ========================================= -->
+
+              <div class="practice-tip">
+
+                <span class="tip-icon">
+                  ♪
+                </span>
+
+                <p>
+                  Höre deine Stimme zunächst einzeln an
+                  und spiele anschließend zur Aufnahme mit.
+                </p>
+
+              </div>
+
+
+            </div>
+
+          </details>
+
+
+        </div>
+
+      </details>
+
+
+
+      <!-- =================================================
+           HIER KOMMEN SPÄTER WEITERE STÜCKE HIN
+
+           Jedes weitere Stück bekommt dieselbe Struktur:
+
+           <details class="piece-card audio-card">
+             ...
+           </details>
+
+           Dadurch bleibt die Übersicht kompakt.
+           ================================================= -->
+
 
     </section>
 
 
 
-    <!-- ========================================
-         JAGDLEITSIGNALE – SPÄTER
-         ======================================== -->
+    <!-- ===================================================
+         JAGDLEITSIGNALE
+         =================================================== -->
 
     <button
       class="category-card"
@@ -434,6 +586,7 @@
       <div class="category-icon">
         ♫
       </div>
+
 
       <div class="category-text">
 
@@ -447,6 +600,7 @@
 
       </div>
 
+
       <div class="category-arrow">
         ›
       </div>
@@ -455,9 +609,9 @@
 
 
 
-    <!-- ========================================
-         TOTSIGNALE – SPÄTER
-         ======================================== -->
+    <!-- ===================================================
+         TOTSIGNALE
+         =================================================== -->
 
     <button
       class="category-card"
@@ -468,6 +622,7 @@
       <div class="category-icon">
         ❧
       </div>
+
 
       <div class="category-text">
 
@@ -481,6 +636,7 @@
 
       </div>
 
+
       <div class="category-arrow">
         ›
       </div>
@@ -489,9 +645,9 @@
 
 
 
-    <!-- ========================================
+    <!-- ===================================================
          ÜBUNGSWERKZEUGE
-         ======================================== -->
+         =================================================== -->
 
     <section class="tools-section">
 
@@ -510,20 +666,23 @@
 
 
 
-      <!-- ======================================
+      <!-- =================================================
            METRONOM
-           ====================================== -->
+           ================================================= -->
 
       <details
         class="tool-card"
         id="metronome"
       >
 
+
         <summary>
+
 
           <div class="tool-icon">
             ♩
           </div>
+
 
           <div class="tool-title">
 
@@ -537,9 +696,11 @@
 
           </div>
 
+
           <div class="tool-arrow">
             ›
           </div>
+
 
         </summary>
 
@@ -568,9 +729,10 @@
 
 
 
-          <!-- PLUS / MINUS -->
+          <!-- TEMPO -->
 
           <div class="tempo-controls">
+
 
             <button
               id="bpmMinus"
@@ -603,6 +765,7 @@
               +
             </button>
 
+
           </div>
 
 
@@ -611,11 +774,14 @@
 
           <div class="metronome-setting">
 
+
             <span class="setting-label">
               Taktart
             </span>
 
+
             <div class="time-buttons">
+
 
               <button
                 class="time-button"
@@ -625,6 +791,7 @@
                 2/4
               </button>
 
+
               <button
                 class="time-button"
                 data-beats="3"
@@ -632,6 +799,7 @@
               >
                 3/4
               </button>
+
 
               <button
                 class="time-button active"
@@ -641,6 +809,7 @@
                 4/4
               </button>
 
+
               <button
                 class="time-button"
                 data-beats="6"
@@ -649,7 +818,9 @@
                 6/8
               </button>
 
+
             </div>
+
 
           </div>
 
@@ -665,7 +836,7 @@
 
 
 
-          <!-- START / STOP -->
+          <!-- START -->
 
           <button
             id="metronomeStart"
@@ -691,24 +862,28 @@
 
         </div>
 
+
       </details>
 
 
 
-      <!-- ======================================
+      <!-- =================================================
            STIMMGERÄT
-           ====================================== -->
+           ================================================= -->
 
       <details
         class="tool-card tuner-card"
         id="tuner"
       >
 
+
         <summary>
+
 
           <div class="tool-icon">
             ♫
           </div>
+
 
           <div class="tool-title">
 
@@ -722,9 +897,11 @@
 
           </div>
 
+
           <div class="tool-arrow">
             ›
           </div>
+
 
         </summary>
 
@@ -779,6 +956,7 @@
 
           <div class="tuning-meter">
 
+
             <div class="meter-labels">
 
               <span>
@@ -806,6 +984,7 @@
               ></div>
 
             </div>
+
 
           </div>
 
@@ -865,6 +1044,7 @@
 
         </div>
 
+
       </details>
 
 
@@ -875,31 +1055,35 @@
 
 
 
-  <!-- ==========================================
+  <!-- =====================================================
        FOOTER
-       ========================================== -->
+       ===================================================== -->
 
   <footer class="footer">
+
 
     <div class="footer-symbol">
       ◆
     </div>
 
+
     <strong>
       Jagdbläsercorps Radevormwald
     </strong>
+
 
     <p>
       Jagdliches Brauchtum · Musik · Gemeinschaft
     </p>
 
+
   </footer>
 
 
 
-  <!-- ==========================================
+  <!-- =====================================================
        JAVASCRIPT
-       ========================================== -->
+       ===================================================== -->
 
   <script src="app.js?v=8"></script>
 
