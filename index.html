@@ -26,7 +26,7 @@
 
   <link
     rel="stylesheet"
-    href="styles.css?v=7"
+    href="styles.css?v=8"
   >
 
   <link
@@ -111,7 +111,9 @@
       id="section-maersche"
     >
 
-      <div class="section-title">
+      <details class="category-section" open>
+
+      <summary class="section-title">
 
         <div class="round-icon">
           ♪
@@ -129,7 +131,7 @@
 
         </div>
 
-      </div>
+      </summary>
 
       <!--
         Hier fügt app.js automatisch alle Einträge
@@ -140,6 +142,8 @@
         id="maerscheLibrary"
         class="library-container"
       ></div>
+
+      </details>
 
     </section>
 
@@ -154,7 +158,9 @@
       id="section-allgemeine-signale"
     >
 
-      <div class="section-title">
+      <details class="category-section" open>
+
+      <summary class="section-title">
 
         <div class="round-icon">
           ♫
@@ -172,7 +178,7 @@
 
         </div>
 
-      </div>
+      </summary>
 
       <!--
         Hier fügt app.js automatisch alle Einträge
@@ -183,6 +189,8 @@
         id="allgemeineSignaleLibrary"
         class="library-container"
       ></div>
+
+      </details>
 
     </section>
 
@@ -197,7 +205,9 @@
       id="section-jagdleitsignale"
     >
 
-      <div class="section-title">
+      <details class="category-section" open>
+
+      <summary class="section-title">
 
         <div class="round-icon">
           ♫
@@ -215,7 +225,7 @@
 
         </div>
 
-      </div>
+      </summary>
 
       <!--
         Hier fügt app.js automatisch alle Einträge
@@ -226,6 +236,8 @@
         id="jagdleitsignaleLibrary"
         class="library-container"
       ></div>
+
+      </details>
 
     </section>
 
@@ -240,7 +252,9 @@
       id="section-totsignale"
     >
 
-      <div class="section-title">
+      <details class="category-section" open>
+
+      <summary class="section-title">
 
         <div class="round-icon">
           ❧
@@ -258,7 +272,7 @@
 
         </div>
 
-      </div>
+      </summary>
 
       <!--
         Hier fügt app.js automatisch alle Einträge
@@ -269,6 +283,8 @@
         id="totsignaleLibrary"
         class="library-container"
       ></div>
+
+      </details>
 
     </section>
 
@@ -283,7 +299,9 @@
       id="section-weitere-signale"
     >
 
-      <div class="section-title">
+      <details class="category-section" open>
+
+      <summary class="section-title">
 
         <div class="round-icon">
           ♫
@@ -301,7 +319,7 @@
 
         </div>
 
-      </div>
+      </summary>
 
       <!--
         Hier fügt app.js automatisch alle Einträge
@@ -312,6 +330,8 @@
         id="weitereSignaleLibrary"
         class="library-container"
       ></div>
+
+      </details>
 
     </section>
 
@@ -762,6 +782,29 @@
 
   <!-- Danach die eigentliche App-Logik. -->
   <script src="app.js?v=11"></script>
+
+  <!-- Beim Einklappen einer Oberkategorie werden laufende Audios darin gestoppt. -->
+  <script>
+    document.addEventListener("toggle", function (event) {
+      const category = event.target;
+
+      if (
+        category instanceof HTMLDetailsElement &&
+        category.classList.contains("category-section") &&
+        !category.open
+      ) {
+        category.querySelectorAll("audio").forEach(function (audio) {
+          audio.pause();
+        });
+
+        category.querySelectorAll(".piece-card[open], .practice-area[open]")
+          .forEach(function (details) {
+            details.open = false;
+          });
+      }
+    }, true);
+  </script>
+
 
 
 </body>
