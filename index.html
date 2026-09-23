@@ -30,10 +30,6 @@
 
   <header class="hero">
 
-    <!-- dekorative Waldsilhouetten -->
-    <div class="forest forest-left"></div>
-    <div class="forest forest-right"></div>
-
     <div class="hero-inner">
 
       <img
@@ -63,8 +59,6 @@
 
   <main class="content">
 
-    <!-- INTRO -->
-
     <section class="intro">
 
       <span class="kicker">
@@ -84,7 +78,7 @@
 
 
     <!-- ========================================
-         MÄRSCHE
+         MÄRSCHE & STÜCKE
          ======================================== -->
 
     <section class="music-section">
@@ -110,7 +104,9 @@
       </div>
 
 
-      <!-- HUBERTUSMARSCH -->
+      <!-- ======================================
+           HUBERTUSMARSCH
+           ====================================== -->
 
       <article class="audio-card">
 
@@ -135,76 +131,207 @@
         </div>
 
 
-        <audio
-          class="audio-player"
-          controls
-          preload="metadata"
-        >
+        <!-- GESAMTAUFNAHME -->
 
-          <source
-            src="audio/Hubertusmarsch.mp3"
-            type="audio/mpeg"
+        <div class="main-recording">
+
+          <span class="audio-label">
+            Gesamtaufnahme
+          </span>
+
+          <audio
+            class="audio-player"
+            controls
+            preload="metadata"
           >
 
-          Dein Browser unterstützt die Audiowiedergabe nicht.
+            <source
+              src="audio/Hubertusmarsch.mp3"
+              type="audio/mpeg"
+            >
 
-        </audio>
+            Dein Browser unterstützt die Audiowiedergabe nicht.
 
-      </article>
-
-
-      <!--
-      ==========================================
-      NEUES STÜCK
-
-      Für weitere Stücke später einfach diesen
-      Block kopieren:
-
-      <article class="audio-card">
-
-        <div class="audio-heading">
-
-          <div class="track-number">
-            02
-          </div>
-
-          <div class="track-info">
-
-            <h3>
-              Name des Stückes
-            </h3>
-
-            <p>
-              Jagdlicher Marsch
-            </p>
-
-          </div>
+          </audio>
 
         </div>
 
-        <audio
-          class="audio-player"
-          controls
-          preload="metadata"
-        >
 
-          <source
-            src="audio/dateiname.mp3"
-            type="audio/mpeg"
-          >
+        <!-- ====================================
+             AUFKLAPPBARER ÜBUNGSBEREICH
+             ==================================== -->
 
-        </audio>
+        <details class="practice-area">
+
+          <summary>
+
+            <div class="practice-summary-left">
+
+              <div class="practice-symbol">
+                ♫
+              </div>
+
+              <div>
+
+                <span class="practice-small">
+                  Übungsmodus
+                </span>
+
+                <strong>
+                  Stimmen einzeln üben
+                </strong>
+
+              </div>
+
+            </div>
+
+            <span class="practice-chevron">
+              ›
+            </span>
+
+          </summary>
+
+
+          <div class="practice-content">
+
+
+            <!-- FÜRST-PLESS-HORN -->
+
+            <div class="instrument-heading">
+
+              <span class="instrument-line"></span>
+
+              <span>
+                Fürst-Pless-Horn
+              </span>
+
+              <span class="instrument-line"></span>
+
+            </div>
+
+
+            <!-- FP1 -->
+
+            <div class="voice-card">
+
+              <div class="voice-header">
+
+                <div class="voice-number">
+                  1
+                </div>
+
+                <div class="voice-title">
+
+                  <strong>
+                    1. Stimme
+                  </strong>
+
+                  <span>
+                    Fürst-Pless-Horn
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <audio
+                class="audio-player voice-player"
+                controls
+                preload="metadata"
+              >
+
+                <source
+                  src="audio/Hubertusmarsch-FP1.mp3"
+                  type="audio/mpeg"
+                >
+
+                Dein Browser unterstützt die Audiowiedergabe nicht.
+
+              </audio>
+
+            </div>
+
+
+            <!-- FP2 -->
+
+            <div class="voice-card">
+
+              <div class="voice-header">
+
+                <div class="voice-number">
+                  2
+                </div>
+
+                <div class="voice-title">
+
+                  <strong>
+                    2. Stimme
+                  </strong>
+
+                  <span>
+                    Fürst-Pless-Horn
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <audio
+                class="audio-player voice-player"
+                controls
+                preload="metadata"
+              >
+
+                <source
+                  src="audio/Hubertusmarsch-FP2.mp3"
+                  type="audio/mpeg"
+                >
+
+                Dein Browser unterstützt die Audiowiedergabe nicht.
+
+              </audio>
+
+            </div>
+
+
+            <!-- ==================================
+                 PARFORCEHORN SPÄTER
+
+                 Hier können wir später ergänzen:
+
+                 Hubertusmarsch-PF1.mp3
+                 Hubertusmarsch-PF2.mp3
+                 Hubertusmarsch-PF3.mp3
+                 ================================== -->
+
+
+            <div class="practice-tip">
+
+              <span class="tip-icon">
+                ♪
+              </span>
+
+              <p>
+                Höre deine Stimme zunächst einzeln an
+                und spiele anschließend zur Aufnahme mit.
+              </p>
+
+            </div>
+
+
+          </div>
+
+        </details>
 
       </article>
-
-      ==========================================
-      -->
 
     </section>
 
 
     <!-- ========================================
-         SPÄTER: JAGDLEITSIGNALE
+         JAGDLEITSIGNALE – SPÄTER
          ======================================== -->
 
     <button
@@ -237,7 +364,7 @@
 
 
     <!-- ========================================
-         SPÄTER: TOTSIGNALE
+         TOTSIGNALE – SPÄTER
          ======================================== -->
 
     <button
@@ -246,7 +373,7 @@
       disabled
     >
 
-      <div class="category-icon oak">
+      <div class="category-icon">
         ❧
       </div>
 
@@ -293,10 +420,9 @@
 
 
   <!-- ==========================================
-       AUDIO-FUNKTION
+       JAVASCRIPT
 
-       Stoppt ein laufendes Stück, wenn ein
-       anderes gestartet wird.
+       Nur ein Audio gleichzeitig.
        ========================================== -->
 
   <script>
@@ -322,7 +448,35 @@
 
     });
 
+
+    /* Pfeil des Übungsbereichs */
+
+    const practiceAreas =
+      document.querySelectorAll(".practice-area");
+
+    practiceAreas.forEach(area => {
+
+      area.addEventListener("toggle", () => {
+
+        if (!area.open) {
+
+          const voicePlayers =
+            area.querySelectorAll("audio");
+
+          voicePlayers.forEach(player => {
+
+            player.pause();
+
+          });
+
+        }
+
+      });
+
+    });
+
   </script>
+
 
 </body>
 
