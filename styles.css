@@ -1,39 +1,38 @@
-/* =====================================================
-   JAGDBLÄSERCORPS RADEVORMWALD
-   Mobile First Web-App
-   ===================================================== */
+/* =========================================================
+   JAGDBLÄSERCORPS HEGERING RADEVORMWALD
+   STYLES.CSS
+   ========================================================= */
 
 
-/* =========================
-   FARBEN
-   ========================= */
+/* =========================================================
+   GRUNDEINSTELLUNGEN
+   ========================================================= */
 
 :root {
+  --green-dark: #0b2f22;
+  --green: #124631;
+  --green-light: #1d5a40;
 
-  --green-dark: #09291d;
-  --green: #103c29;
-  --green-medium: #1c5138;
-
-  --gold-dark: #a97a25;
-  --gold: #d3a13b;
+  --gold: #b4882f;
   --gold-light: #e5c16e;
 
-  --cream: #f7f3e8;
-  --cream-dark: #eee7d6;
+  --cream: #f5f1e6;
+  --cream-light: #fbf9f3;
+
+  --text: #123528;
+  --text-soft: #6e7068;
 
   --white: #ffffff;
 
-  --text: #10251b;
-  --text-soft: #5e635d;
+  --line: rgba(11, 47, 34, 0.12);
 
-  --line: rgba(16, 60, 41, 0.14);
+  --shadow:
+    0 10px 28px
+    rgba(22, 42, 32, 0.08);
 
+  --radius: 22px;
 }
 
-
-/* =========================
-   RESET
-   ========================= */
 
 * {
   box-sizing: border-box;
@@ -46,187 +45,132 @@ html {
 
 
 body {
-
   margin: 0;
-
-  min-height: 100vh;
 
   background:
     linear-gradient(
       180deg,
-      #faf7ef 0%,
-      var(--cream) 100%
+      #f8f5ec 0%,
+      #f4f0e4 100%
     );
 
   color: var(--text);
 
   font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Helvetica,
     Arial,
+    Helvetica,
     sans-serif;
 
+  -webkit-font-smoothing: antialiased;
 }
 
 
-/* =========================
-   HERO
-   ========================= */
+button,
+input,
+audio {
+  font: inherit;
+}
+
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+summary {
+  list-style: none;
+}
+
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+
+
+/* =========================================================
+   HEADER / HERO
+   ========================================================= */
 
 .hero {
-
   position: relative;
 
   overflow: hidden;
 
-  min-height: 410px;
+  min-height: 420px;
 
-  display: flex;
-
-  justify-content: center;
-
-  background:
-
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(57, 111, 73, 0.65),
-      transparent 45%
-    ),
-
-    linear-gradient(
-      180deg,
-      #164d35 0%,
-      #0d3425 55%,
-      #08281c 100%
-    );
+  padding:
+    calc(28px + env(safe-area-inset-top))
+    20px
+    42px;
 
   border-bottom:
-    4px solid var(--gold);
+    5px solid var(--gold);
 
+  background:
+    linear-gradient(
+      180deg,
+      #0e3b2b 0%,
+      #062219 100%
+    );
+
+  color: white;
 }
 
 
 .hero::before {
-
   content: "";
 
   position: absolute;
+  inset: 0;
 
-  width: 450px;
-  height: 450px;
-
-  top: -280px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  border-radius: 50%;
+  opacity: 0.22;
 
   background:
-    rgba(255,255,255,0.06);
-
-}
-
-
-.hero::after {
-
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: 110px;
-
-  opacity: 0.35;
-
-  background:
-
     linear-gradient(
       150deg,
-      transparent 0 8%,
-      #041c13 8% 14%,
-      transparent 14% 18%,
-      #041c13 18% 26%,
-      transparent 26% 32%,
-      #041c13 32% 42%,
-      transparent 42% 47%,
-      #041c13 47% 57%,
-      transparent 57% 63%,
-      #041c13 63% 73%,
-      transparent 73% 79%,
-      #041c13 79% 88%,
-      transparent 88%
+      transparent 0%,
+      transparent 35%,
+      rgba(255,255,255,0.06) 35%,
+      rgba(255,255,255,0.06) 43%,
+      transparent 43%,
+      transparent 100%
     );
 
+  pointer-events: none;
 }
 
 
 .hero-inner {
-
   position: relative;
+  z-index: 1;
 
-  z-index: 2;
+  max-width: 700px;
 
-  width: 100%;
-
-  max-width: 720px;
-
-  padding:
-    calc(20px + env(safe-area-inset-top))
-    20px
-    38px;
+  margin: 0 auto;
 
   text-align: center;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
 }
 
 
 .hero-logo {
-
   display: block;
 
-  width: 190px;
-
-  max-width: 48vw;
-
+  width: min(260px, 70vw);
   height: auto;
-
-  max-height: 205px;
-
-  object-fit: contain;
 
   margin:
     0 auto
-    8px;
-
-  filter:
-    drop-shadow(
-      0 8px 12px
-      rgba(0,0,0,0.30)
-    );
-
+    18px;
 }
 
 
 .hero h1 {
-
   margin:
-    2px 0
-    5px;
+    0 0
+    8px;
 
-  color: #fffdf7;
+  color: white;
 
   font-family:
     Georgia,
@@ -235,52 +179,37 @@ body {
 
   font-size:
     clamp(
-      2.15rem,
-      8vw,
-      3.5rem
+      2.2rem,
+      9vw,
+      3.8rem
     );
 
   line-height: 1;
 
-  font-weight: 700;
-
-  text-shadow:
-    0 2px 5px
-    rgba(0,0,0,0.30);
-
+  letter-spacing: -0.025em;
 }
 
 
 .hero-location {
-
   color: var(--gold-light);
 
-  font-size:
-    clamp(
-      0.8rem,
-      3.3vw,
-      1.1rem
-    );
+  font-size: 0.78rem;
 
-  font-weight: 700;
-
-  text-transform: uppercase;
+  font-weight: 800;
 
   letter-spacing: 0.22em;
 
-  margin-top: 8px;
-
+  text-transform: uppercase;
 }
 
 
 .hero-subtitle {
-
   margin:
-    16px 0
+    22px 0
     0;
 
   color:
-    rgba(255,255,255,0.88);
+    rgba(255,255,255,0.68);
 
   font-family:
     Georgia,
@@ -288,65 +217,59 @@ body {
     serif;
 
   font-size: 1.1rem;
-
 }
 
 
-/* =========================
-   CONTENT
-   ========================= */
+
+/* =========================================================
+   HAUPTINHALT
+   ========================================================= */
 
 .content {
-
-  width: 100%;
-
-  max-width: 720px;
+  width:
+    min(
+      100%,
+      760px
+    );
 
   margin: 0 auto;
 
   padding:
-    38px
-    20px
+    38px 20px
     55px;
-
 }
 
 
-/* =========================
-   INTRO
-   ========================= */
+
+/* =========================================================
+   EINLEITUNG
+   ========================================================= */
 
 .intro {
-
   margin-bottom: 40px;
-
 }
 
 
-.kicker {
-
+.kicker,
+.small-title {
   display: block;
 
-  color: var(--green-medium);
+  color: var(--green);
 
-  font-size: 0.78rem;
+  font-size: 0.72rem;
 
-  font-weight: 800;
+  font-weight: 900;
 
-  letter-spacing: 0.23em;
+  letter-spacing: 0.20em;
 
   text-transform: uppercase;
-
-  margin-bottom: 8px;
-
 }
 
 
 .intro h2 {
-
   margin:
-    0 0
-    12px;
+    8px 0
+    13px;
 
   color: var(--green-dark);
 
@@ -359,19 +282,15 @@ body {
     clamp(
       2rem,
       8vw,
-      2.8rem
+      3rem
     );
 
   line-height: 1.05;
-
 }
 
 
 .intro p {
-
   margin: 0;
-
-  max-width: 600px;
 
   color: var(--text-soft);
 
@@ -380,26 +299,23 @@ body {
     "Times New Roman",
     serif;
 
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 
-  line-height: 1.55;
-
+  line-height: 1.5;
 }
 
 
-/* =========================
-   SECTION
-   ========================= */
+
+/* =========================================================
+   ABSCHNITTSÜBERSCHRIFT
+   ========================================================= */
 
 .music-section {
-
-  margin-bottom: 20px;
-
+  margin-bottom: 34px;
 }
 
 
 .section-title {
-
   display: flex;
 
   align-items: center;
@@ -407,21 +323,20 @@ body {
   gap: 16px;
 
   margin-bottom: 20px;
-
 }
 
 
 .round-icon {
+  flex:
+    0 0
+    58px;
 
   width: 58px;
   height: 58px;
 
-  flex: 0 0 58px;
-
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   border-radius: 50%;
@@ -429,324 +344,35 @@ body {
   background:
     linear-gradient(
       145deg,
-      var(--green-medium),
+      var(--green-light),
       var(--green-dark)
     );
 
   color: var(--gold-light);
 
-  font-family: Georgia, serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 
   box-shadow:
     0 7px 16px
-    rgba(9,41,29,0.20);
-
+    rgba(11,47,34,0.15);
 }
 
 
-.small-title {
-
-  display: block;
-
-  color: var(--gold-dark);
-
-  font-size: 0.75rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.2em;
-
-  text-transform: uppercase;
-
-  margin-bottom: 3px;
-
+.section-title .small-title {
+  color: var(--gold);
 }
 
 
 .section-title h2 {
-
-  margin: 0;
-
-  color: var(--green-dark);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 1.65rem;
-
-}
-
-
-/* =========================
-   AUDIO CARD
-   ========================= */
-
-.audio-card {
-
-  padding: 20px;
-
-  margin-bottom: 24px;
-
-  background:
-    rgba(255,255,255,0.82);
-
-  border:
-    1px solid
-    rgba(16,60,41,0.08);
-
-  border-radius: 20px;
-
-  box-shadow:
-    0 12px 30px
-    rgba(26,39,29,0.08);
-
-}
-
-
-.audio-heading {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 16px;
-
-  margin-bottom: 16px;
-
-}
-
-
-.track-number {
-
-  width: 54px;
-  height: 54px;
-
-  flex: 0 0 54px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background:
-    linear-gradient(
-      145deg,
-      #f7f0da,
-      #ebe1c5
-    );
-
-  color: var(--green-dark);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 1.35rem;
-
-  font-weight: 700;
-
-}
-
-
-.track-info h3 {
-
-  margin: 0;
-
-  color: var(--green-dark);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 1.45rem;
-
-}
-
-
-.track-info p {
-
   margin:
     4px 0
     0;
 
-  color: var(--text-soft);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 0.95rem;
-
-}
-
-
-/* =========================
-   GESAMTAUFNAHME
-   ========================= */
-
-.main-recording {
-
-  margin-top: 4px;
-
-}
-
-
-.audio-label {
-
-  display: block;
-
-  margin:
-    0 0
-    8px
-    4px;
-
-  color: var(--gold-dark);
-
-  font-size: 0.68rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.13em;
-
-  text-transform: uppercase;
-
-}
-
-
-/* =========================
-   AUDIO PLAYER
-   ========================= */
-
-.audio-player {
-
-  display: block;
-
-  width: 100%;
-
-  height: 48px;
-
-  border-radius: 25px;
-
-}
-
-
-/* =====================================================
-   ÜBUNGSMODUS
-   ===================================================== */
-
-.practice-area {
-
-  margin-top: 18px;
-
-  border-top:
-    1px solid
-    var(--line);
-
-}
-
-
-.practice-area summary {
-
-  list-style: none;
-
-  cursor: pointer;
-
-  min-height: 72px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 12px;
-
-  padding:
-    14px 2px
-    4px;
-
-  user-select: none;
-
-}
-
-
-.practice-area summary::-webkit-details-marker {
-
-  display: none;
-
-}
-
-
-.practice-summary-left {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-}
-
-
-.practice-symbol {
-
-  width: 40px;
-  height: 40px;
-
-  flex: 0 0 40px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background:
-    var(--green-dark);
-
-  color:
-    var(--gold-light);
-
-  font-size: 1.1rem;
-
-}
-
-
-.practice-small {
-
-  display: block;
-
-  margin-bottom: 2px;
-
-  color: var(--gold-dark);
-
-  font-size: 0.62rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.13em;
-
-  text-transform: uppercase;
-
-}
-
-
-.practice-summary-left strong {
-
-  display: block;
-
   color: var(--green-dark);
 
   font-family:
@@ -754,694 +380,56 @@ body {
     "Times New Roman",
     serif;
 
-  font-size: 1.05rem;
-
-}
-
-
-.practice-chevron {
-
-  color: var(--gold-dark);
-
-  font-family: Georgia, serif;
-
-  font-size: 2rem;
-
-  line-height: 1;
-
-  transform:
-    rotate(90deg);
-
-  transition:
-    transform 0.25s ease;
-
-}
-
-
-.practice-area[open]
-.practice-chevron {
-
-  transform:
-    rotate(-90deg);
-
-}
-
-
-/* =========================
-   INHALT ÜBUNGSMODUS
-   ========================= */
-
-.practice-content {
-
-  padding:
-    10px 0
-    3px;
-
-  animation:
-    practiceOpen
-    0.25s ease;
-
-}
-
-
-@keyframes practiceOpen {
-
-  from {
-
-    opacity: 0;
-
-    transform:
-      translateY(-5px);
-
-  }
-
-  to {
-
-    opacity: 1;
-
-    transform:
-      translateY(0);
-
-  }
-
-}
-
-
-/* =========================
-   INSTRUMENT
-   ========================= */
-
-.instrument-heading {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  margin:
-    5px 0
-    15px;
-
-  color:
-    var(--green-medium);
-
-  font-size: 0.7rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.12em;
-
-  text-transform: uppercase;
-
-  white-space: nowrap;
-
-}
-
-
-.instrument-line {
-
-  width: 100%;
-  height: 1px;
-
-  background:
-    rgba(16,60,41,0.14);
-
-}
-
-
-/* =========================
-   EINZELSTIMMEN
-   ========================= */
-
-.voice-card {
-
-  padding: 15px;
-
-  margin-bottom: 12px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #f7f4ea,
-      #f0eadc
+  font-size:
+    clamp(
+      1.75rem,
+      7vw,
+      2.5rem
     );
 
-  border:
-    1px solid
-    rgba(16,60,41,0.08);
-
-  border-radius: 16px;
-
+  line-height: 1.05;
 }
 
 
-.voice-header {
 
-  display: flex;
+/* =========================================================
+   STÜCK-KARTE
 
-  align-items: center;
+   Das gesamte Stück ist ein <details>.
+   Geschlossen sieht man nur Titel und Nummer.
+   ========================================================= */
 
-  gap: 12px;
-
-  margin-bottom: 11px;
-
-}
-
-
-.voice-number {
-
-  width: 37px;
-  height: 37px;
-
-  flex: 0 0 37px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background:
-    var(--green-dark);
-
-  color:
-    var(--gold-light);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-weight: 700;
-
-}
-
-
-.voice-title strong {
-
-  display: block;
-
-  color: var(--green-dark);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 1rem;
-
-}
-
-
-.voice-title span {
-
-  display: block;
-
-  margin-top: 2px;
-
-  color: var(--text-soft);
-
-  font-size: 0.72rem;
-
-}
-
-
-.voice-player {
-
-  height: 44px;
-
-}
-
-
-/* =========================
-   ÜBUNGSTIPP
-   ========================= */
-
-.practice-tip {
-
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 10px;
-
-  margin-top: 16px;
-
-  padding: 12px 14px;
-
-  background:
-    rgba(211,161,59,0.09);
-
-  border-left:
-    3px solid
-    var(--gold);
-
-  border-radius:
-    4px 12px 12px 4px;
-
-}
-
-
-.tip-icon {
-
-  color:
-    var(--gold-dark);
-
-  font-size: 1rem;
-
-}
-
-
-.practice-tip p {
-
-  margin: 0;
-
-  color: var(--text-soft);
-
-  font-size: 0.78rem;
-
-  line-height: 1.45;
-
-}
-
-
-/* =========================
-   KATEGORIE KARTEN
-   ========================= */
-
-.category-card {
-
-  width: 100%;
-
-  min-height: 104px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 16px;
-
-  padding:
-    18px 4px;
-
-  margin: 0;
-
-  border: 0;
-
-  border-top:
-    1px solid
-    var(--line);
-
-  background: transparent;
-
-  text-align: left;
-
-  color: inherit;
-
-  opacity: 1;
-
-}
-
-
-.category-card:disabled {
-
-  color: inherit;
-
-  opacity: 1;
-
-}
-
-
-.category-icon {
-
-  width: 58px;
-  height: 58px;
-
-  flex: 0 0 58px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background:
-    linear-gradient(
-      145deg,
-      var(--green-medium),
-      var(--green-dark)
-    );
-
-  color: var(--gold-light);
-
-  font-size: 1.45rem;
-
-  box-shadow:
-    0 5px 13px
-    rgba(9,41,29,0.18);
-
-}
-
-
-.category-text {
-
-  flex: 1;
-
-}
-
-
-.category-text span {
-
-  display: block;
-
-  color: var(--gold-dark);
-
-  font-size: 0.69rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.17em;
-
-  text-transform: uppercase;
-
-  margin-bottom: 4px;
-
-}
-
-
-.category-text strong {
-
-  display: block;
-
-  color: var(--green-dark);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 1.45rem;
-
-}
-
-
-.category-arrow {
-
-  padding-right: 7px;
-
-  color: var(--gold-dark);
-
-  font-family:
-    Georgia,
-    serif;
-
-  font-size: 2.7rem;
-
-}
-
-
-/* =========================
-   FOOTER
-   ========================= */
-
-.footer {
-
-  padding:
-    32px
-    20px
-    calc(
-      34px +
-      env(safe-area-inset-bottom)
-    );
-
-  text-align: center;
-
-  background:
-    linear-gradient(
-      180deg,
-      #0d3827,
-      #07271b
-    );
-
-  color: white;
-
-  border-top:
-    3px solid
-    var(--gold);
-
-}
-
-
-.footer-symbol {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 15px;
-
-  margin-bottom: 13px;
-
-  color: var(--gold);
-
-}
-
-
-.footer-symbol::before,
-.footer-symbol::after {
-
-  content: "";
-
-  width: 60px;
-  height: 1px;
-
-  background: var(--gold);
-
-}
-
-
-.footer strong {
-
-  display: block;
-
-  color: var(--gold-light);
-
-  font-size: 0.8rem;
-
-  font-weight: 700;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.16em;
-
-}
-
-
-.footer p {
-
-  margin:
-    7px 0
-    0;
-
-  color:
-    rgba(255,255,255,0.58);
-
-  font-size: 0.78rem;
-
-}
-
-
-/* =========================
-   KLEINE HANDYS
-   ========================= */
-
-@media
-(max-width: 400px) {
-
-  .hero {
-
-    min-height: 375px;
-
-  }
-
-
-  .hero-logo {
-
-    width: 155px;
-
-    max-height: 170px;
-
-  }
-
-
-  .hero h1 {
-
-    font-size: 2rem;
-
-  }
-
-
-  .hero-location {
-
-    font-size: 0.7rem;
-
-    letter-spacing: 0.16em;
-
-  }
-
-
-  .hero-subtitle {
-
-    font-size: 1rem;
-
-  }
-
-
-  .content {
-
-    padding-left: 16px;
-    padding-right: 16px;
-
-  }
-
-
-  .intro h2 {
-
-    font-size: 2rem;
-
-  }
-
-
-  .audio-card {
-
-    padding: 16px;
-
-  }
-
-
-  .track-info h3 {
-
-    font-size: 1.25rem;
-
-  }
-
-
-  .practice-summary-left strong {
-
-    font-size: 0.95rem;
-
-  }
-
-}
-
-
-/* =========================
-   TABLET / DESKTOP
-   ========================= */
-
-@media
-(min-width: 721px) {
-
-  .hero {
-
-    min-height: 470px;
-
-  }
-
-
-  .hero-logo {
-
-    width: 220px;
-
-    max-width: 220px;
-
-  }
-
-
-  .hero-subtitle {
-
-    font-size: 1.3rem;
-
-  }
-
-
-  .content {
-
-    padding-top: 50px;
-
-  }
-
-}
-/* =====================================================
-   ÜBUNGSWERKZEUGE
-   ===================================================== */
-
-.tools-section {
-  margin-top: 38px;
-  padding-top: 30px;
-  border-top: 1px solid var(--line);
-}
-
-
-.tools-heading {
-  margin-bottom: 17px;
-}
-
-
-.tools-heading h2 {
-  margin: 4px 0 0;
-
-  color: var(--green-dark);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 1.65rem;
-}
-
-
-/* =====================================================
-   TOOL KARTE
-   ===================================================== */
-
-.tool-card {
+.audio-card,
+.piece-card {
   overflow: hidden;
 
-  background:
-    rgba(255,255,255,0.82);
+  margin-bottom: 16px;
 
   border:
     1px solid
-    rgba(16,60,41,0.10);
+    rgba(11,47,34,0.08);
 
-  border-radius: 20px;
+  border-radius: var(--radius);
 
-  box-shadow:
-    0 10px 28px
-    rgba(26,39,29,0.08);
+  background:
+    rgba(255,255,255,0.88);
+
+  box-shadow: var(--shadow);
 }
 
 
-.tool-card summary {
-  list-style: none;
+.piece-summary {
+  min-height: 108px;
 
   display: flex;
-  align-items: center;
 
-  min-height: 90px;
+  align-items: center;
+  justify-content: space-between;
 
   gap: 15px;
 
-  padding: 16px 18px;
+  padding:
+    20px 20px;
 
   cursor: pointer;
 
@@ -1451,18 +439,33 @@ body {
 }
 
 
-.tool-card summary::-webkit-details-marker {
-  display: none;
+.piece-summary:active {
+  background:
+    rgba(11,47,34,0.025);
 }
 
 
-.tool-icon {
-  width: 54px;
-  height: 54px;
-
-  flex: 0 0 54px;
+.audio-heading {
+  min-width: 0;
 
   display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
+
+.track-number {
+  flex:
+    0 0
+    64px;
+
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -1471,19 +474,945 @@ body {
   background:
     linear-gradient(
       145deg,
-      var(--green-medium),
+      #f8f1d8,
+      #eee2b9
+    );
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.5rem;
+
+  font-weight: 700;
+}
+
+
+.track-info {
+  min-width: 0;
+}
+
+
+.track-info h3 {
+  margin: 0;
+
+  overflow-wrap: anywhere;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      1.55rem,
+      6.5vw,
+      2.05rem
+    );
+
+  line-height: 1.05;
+}
+
+
+.track-info p {
+  margin:
+    5px 0
+    0;
+
+  color: var(--text-soft);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 0.98rem;
+}
+
+
+.piece-chevron {
+  flex:
+    0 0 auto;
+
+  color: var(--gold);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 2.2rem;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  transform: rotate(0deg);
+
+  transition:
+    transform 0.22s ease;
+}
+
+
+.piece-card[open]
+.piece-chevron {
+  transform:
+    rotate(90deg);
+}
+
+
+.piece-card[open]
+.piece-summary {
+  border-bottom:
+    1px solid var(--line);
+}
+
+
+.piece-content {
+  padding:
+    0 20px
+    22px;
+}
+
+
+
+/* =========================================================
+   WIEDERGABETEMPO
+   ========================================================= */
+
+.playback-speed {
+  margin:
+    20px 0
+    20px;
+
+  padding: 16px;
+
+  border:
+    1px solid
+    rgba(180,136,47,0.20);
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(250,247,237,0.98),
+      rgba(244,238,218,0.84)
+    );
+}
+
+
+.speed-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 15px;
+}
+
+
+.speed-label {
+  display: block;
+
+  color: var(--green-dark);
+
+  font-size: 0.67rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+
+.speed-description {
+  display: block;
+
+  margin-top: 4px;
+
+  color:
+    rgba(11,47,34,0.52);
+
+  font-size: 0.7rem;
+
+  line-height: 1.3;
+}
+
+
+
+/* Aktuell ausgewähltes Tempo */
+
+.speed-current {
+  flex-shrink: 0;
+
+  min-width: 70px;
+
+  padding:
+    7px 10px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--green-light),
+      var(--green-dark)
+    );
+
+  text-align: center;
+
+  box-shadow:
+    0 4px 10px
+    rgba(11,47,34,0.15);
+}
+
+
+.speed-current span {
+  display: block;
+
+  margin-bottom: 1px;
+
+  color: var(--gold-light);
+
+  font-size: 0.5rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+
+.speed-current strong {
+  display: block;
+
+  color: white;
+
+  font-size: 0.92rem;
+
+  font-weight: 800;
+}
+
+
+
+/* Tempo-Buttons */
+
+.speed-buttons {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 7px;
+}
+
+
+.speed-button {
+  position: relative;
+
+  min-width: 0;
+  min-height: 48px;
+
+  display: flex;
+
+  align-items: baseline;
+  justify-content: center;
+
+  gap: 2px;
+
+  padding:
+    8px 3px;
+
+  border:
+    1px solid
+    rgba(11,47,34,0.13);
+
+  border-radius: 11px;
+
+  background:
+    rgba(255,255,255,0.78);
+
+  color:
+    rgba(11,47,34,0.72);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.12s ease,
+    background 0.12s ease,
+    border-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+
+.speed-button span {
+  font-size: 0.95rem;
+
+  font-weight: 900;
+}
+
+
+.speed-button small {
+  font-size: 0.62rem;
+
+  font-weight: 800;
+}
+
+
+.speed-button.active {
+  border-color: var(--gold);
+
+  background:
+    linear-gradient(
+      145deg,
+      #185039,
+      var(--green-dark)
+    );
+
+  color: white;
+
+  box-shadow:
+    0 4px 10px
+    rgba(11,47,34,0.18);
+}
+
+
+.speed-button.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 24%;
+  right: 24%;
+  bottom: -1px;
+
+  height: 3px;
+
+  border-radius:
+    3px 3px
+    0 0;
+
+  background: var(--gold);
+}
+
+
+.speed-button:active {
+  transform:
+    scale(0.96);
+}
+
+
+.speed-hint {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 11px;
+
+  color:
+    rgba(11,47,34,0.48);
+
+  font-size: 0.64rem;
+
+  line-height: 1.4;
+}
+
+
+.speed-hint > span:first-child {
+  color: var(--gold);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 0.95rem;
+}
+
+
+
+/* =========================================================
+   GESAMTAUFNAHME
+   ========================================================= */
+
+.main-recording {
+  margin-bottom: 18px;
+}
+
+
+.audio-label {
+  display: block;
+
+  margin:
+    0 0
+    9px
+    4px;
+
+  color: var(--gold);
+
+  font-size: 0.66rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+
+.audio-player {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-height: 48px;
+}
+
+
+
+/* =========================================================
+   STIMMEN EINZELN ÜBEN
+   ========================================================= */
+
+.practice-area {
+  overflow: hidden;
+
+  margin-top: 20px;
+
+  border-top:
+    1px solid var(--line);
+}
+
+
+.practice-area > summary {
+  min-height: 86px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding:
+    18px 2px
+    14px;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+.practice-summary-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+
+.practice-symbol {
+  flex:
+    0 0
+    48px;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--green-light),
       var(--green-dark)
     );
 
   color: var(--gold-light);
 
-  font-family: Georgia, serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 1.6rem;
+  font-size: 1.15rem;
+}
+
+
+.practice-small {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: var(--gold);
+
+  font-size: 0.62rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+
+.practice-summary-left strong {
+  display: block;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.15rem;
+
+  line-height: 1.15;
+}
+
+
+.practice-chevron {
+  color: var(--gold);
+
+  font-size: 1.8rem;
+
+  line-height: 1;
+
+  transition:
+    transform 0.2s ease;
+}
+
+
+.practice-area[open]
+.practice-chevron {
+  transform:
+    rotate(90deg);
+}
+
+
+.practice-content {
+  padding:
+    4px 0
+    4px;
+}
+
+
+
+/* =========================================================
+   INSTRUMENT / EINZELSTIMMEN
+   ========================================================= */
+
+.instrument-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin:
+    10px 0
+    16px;
+
+  color: var(--gold);
+
+  font-size: 0.64rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+}
+
+
+.instrument-line {
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    rgba(180,136,47,0.25);
+}
+
+
+.voice-card {
+  margin-bottom: 12px;
+
+  padding: 15px;
+
+  border:
+    1px solid
+    rgba(11,47,34,0.08);
+
+  border-radius: 15px;
+
+  background:
+    rgba(245,241,230,0.65);
+}
+
+
+.voice-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+
+.voice-number {
+  flex:
+    0 0
+    39px;
+
+  width: 39px;
+  height: 39px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--green-dark);
+
+  color: var(--gold-light);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight: 700;
+}
+
+
+.voice-title strong {
+  display: block;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1rem;
+}
+
+
+.voice-title span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--text-soft);
+
+  font-size: 0.68rem;
+}
+
+
+.practice-tip {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 16px;
+
+  padding:
+    12px 13px;
+
+  border-radius: 12px;
+
+  background:
+    rgba(180,136,47,0.09);
+}
+
+
+.tip-icon {
+  flex-shrink: 0;
+
+  color: var(--gold);
+
+  font-size: 1rem;
+}
+
+
+.practice-tip p {
+  margin: 0;
+
+  color:
+    rgba(11,47,34,0.62);
+
+  font-size: 0.7rem;
+
+  line-height: 1.45;
+}
+
+
+
+/* =========================================================
+   KATEGORIEN
+   JAGDLEITSIGNALE / TOTSIGNALE
+   ========================================================= */
+
+.category-card {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding:
+    20px 6px;
+
+  border: 0;
+
+  border-top:
+    1px solid var(--line);
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  opacity: 1;
+}
+
+
+.category-card:last-of-type {
+  border-bottom:
+    1px solid var(--line);
+}
+
+
+.category-icon {
+  flex:
+    0 0
+    58px;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--green-light),
+      var(--green-dark)
+    );
+
+  color: var(--gold-light);
+
+  font-size: 1.25rem;
+
+  box-shadow:
+    0 6px 14px
+    rgba(11,47,34,0.14);
+}
+
+
+.category-text {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+.category-text span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--gold);
+
+  font-size: 0.62rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+
+.category-text strong {
+  display: block;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.5rem;
+
+  line-height: 1.05;
+}
+
+
+.category-arrow {
+  color: var(--gold);
+
+  font-size: 2rem;
+
+  font-weight: 700;
+}
+
+
+
+/* =========================================================
+   ÜBUNGSWERKZEUGE
+   ========================================================= */
+
+.tools-section {
+  margin-top: 42px;
+}
+
+
+.tools-heading {
+  margin-bottom: 16px;
+}
+
+
+.tools-heading .small-title {
+  color: var(--gold);
+}
+
+
+.tools-heading h2 {
+  margin:
+    4px 0
+    0;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 2rem;
+
+  line-height: 1.05;
+}
+
+
+.tool-card {
+  overflow: hidden;
+
+  margin-bottom: 14px;
+
+  border:
+    1px solid
+    rgba(11,47,34,0.09);
+
+  border-radius: 18px;
+
+  background:
+    rgba(255,255,255,0.88);
+
+  box-shadow:
+    0 7px 20px
+    rgba(22,42,32,0.06);
+}
+
+
+.tool-card > summary {
+  min-height: 82px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding:
+    15px 17px;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+.tool-icon {
+  flex:
+    0 0
+    48px;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--green-light),
+      var(--green-dark)
+    );
+
+  color: var(--gold-light);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.2rem;
 }
 
 
 .tool-title {
+  min-width: 0;
+
   flex: 1;
 }
 
@@ -1491,15 +1420,15 @@ body {
 .tool-title span {
   display: block;
 
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 
-  color: var(--gold-dark);
+  color: var(--gold);
 
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 
-  font-weight: 800;
+  font-weight: 900;
 
-  letter-spacing: 0.13em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 }
@@ -1515,41 +1444,41 @@ body {
     "Times New Roman",
     serif;
 
-  font-size: 1.4rem;
+  font-size: 1.25rem;
 }
 
 
 .tool-arrow {
-  color: var(--gold-dark);
+  color: var(--gold);
 
-  font-family: Georgia, serif;
+  font-size: 1.9rem;
 
-  font-size: 2.4rem;
+  line-height: 1;
 
-  transform: rotate(90deg);
-
-  transition: transform 0.2s ease;
+  transition:
+    transform 0.2s ease;
 }
 
 
-.tool-card[open] .tool-arrow {
-  transform: rotate(-90deg);
+.tool-card[open]
+.tool-arrow {
+  transform:
+    rotate(90deg);
 }
 
 
-/* =====================================================
+
+/* =========================================================
    METRONOM
-   ===================================================== */
+   ========================================================= */
 
 .metronome-content {
   padding:
-    26px
-    20px
-    22px;
+    25px 20px
+    23px;
 
   border-top:
-    1px solid
-    var(--line);
+    1px solid var(--line);
 
   background:
     linear-gradient(
@@ -1562,65 +1491,60 @@ body {
 }
 
 
-/* BPM ANZEIGE */
-
 .metronome-tempo {
   display: flex;
 
   align-items: baseline;
   justify-content: center;
 
-  gap: 8px;
+  gap: 7px;
 
-  margin-bottom: 25px;
+  margin-bottom: 21px;
 }
 
 
 .tempo-note {
   color: var(--gold-light);
 
-  font-family: Georgia, serif;
-
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 
 .metronome-tempo strong {
+  color: white;
+
   font-family:
     Georgia,
     "Times New Roman",
     serif;
 
-  font-size: 3.5rem;
+  font-size: 3.2rem;
 
   line-height: 1;
-
-  font-weight: 700;
 }
 
 
 .tempo-unit {
   color:
-    rgba(255,255,255,0.60);
+    rgba(255,255,255,0.48);
 
   font-size: 0.7rem;
 
   font-weight: 800;
-
-  letter-spacing: 0.08em;
 }
 
 
-/* BPM STEUERUNG */
-
 .tempo-controls {
-  display: flex;
+  display: grid;
+
+  grid-template-columns:
+    46px 1fr 46px;
 
   align-items: center;
 
-  gap: 14px;
+  gap: 13px;
 
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 
@@ -1628,59 +1552,57 @@ body {
   width: 46px;
   height: 46px;
 
-  flex: 0 0 46px;
-
   border:
     1px solid
-    rgba(229,193,110,0.45);
+    rgba(229,193,110,0.35);
 
   border-radius: 50%;
 
   background:
-    rgba(255,255,255,0.07);
+    rgba(255,255,255,0.08);
 
   color: var(--gold-light);
 
-  font-size: 1.55rem;
+  font-size: 1.5rem;
+
+  font-weight: 400;
 
   cursor: pointer;
 }
 
 
 .round-control:active {
-  transform: scale(0.94);
+  transform:
+    scale(0.95);
 }
 
 
 .bpm-slider {
   width: 100%;
 
-  accent-color: var(--gold);
-
-  cursor: pointer;
+  accent-color:
+    var(--gold-light);
 }
 
 
-/* TAKTART */
-
 .metronome-setting {
-  margin-bottom: 27px;
+  margin-bottom: 20px;
 }
 
 
 .setting-label {
   display: block;
 
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 
   color:
-    rgba(255,255,255,0.65);
+    rgba(255,255,255,0.48);
 
-  font-size: 0.67rem;
+  font-size: 0.62rem;
 
-  font-weight: 800;
+  font-weight: 900;
 
-  letter-spacing: 0.15em;
+  letter-spacing: 0.11em;
 
   text-transform: uppercase;
 }
@@ -1690,33 +1612,30 @@ body {
   display: grid;
 
   grid-template-columns:
-    repeat(4, 1fr);
+    repeat(4,1fr);
 
   gap: 7px;
 }
 
 
 .time-button {
-  min-height: 42px;
+  min-height: 40px;
 
   border:
     1px solid
-    rgba(255,255,255,0.17);
+    rgba(255,255,255,0.15);
 
   border-radius: 10px;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255,255,255,0.07);
 
   color:
-    rgba(255,255,255,0.75);
+    rgba(255,255,255,0.72);
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-size: 0.75rem;
 
-  font-size: 0.95rem;
+  font-weight: 800;
 
   cursor: pointer;
 }
@@ -1726,53 +1645,51 @@ body {
   border-color: var(--gold);
 
   background:
-    rgba(211,161,59,0.17);
+    rgba(229,193,110,0.15);
 
   color: var(--gold-light);
 }
 
 
-/* TAKTSCHLÄGE */
-
 .beat-indicator {
-  min-height: 30px;
+  min-height: 26px;
 
   display: flex;
 
   align-items: center;
   justify-content: center;
 
-  gap: 15px;
+  gap: 10px;
 
   margin:
     5px 0
-    21px;
+    20px;
 }
 
 
 .beat-dot {
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
 
   border-radius: 50%;
 
   background:
-    rgba(255,255,255,0.20);
+    rgba(255,255,255,0.22);
 
   transition:
-    transform 0.06s ease,
-    background 0.06s ease;
+    transform 0.08s ease,
+    background 0.08s ease;
 }
 
 
 .beat-dot.current {
-  background: var(--gold-light);
+  transform:
+    scale(1.45);
 
-  transform: scale(1.5);
+  background:
+    var(--gold-light);
 }
 
-
-/* START */
 
 .metronome-start {
   width: 100%;
@@ -1799,15 +1716,11 @@ body {
 
   color: var(--green-dark);
 
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 
-  font-weight: 800;
+  font-weight: 900;
 
   cursor: pointer;
-
-  box-shadow:
-    0 6px 16px
-    rgba(0,0,0,0.18);
 }
 
 
@@ -1824,7 +1737,8 @@ body {
 
 
 .metronome-start:active {
-  transform: scale(0.985);
+  transform:
+    scale(0.985);
 }
 
 
@@ -1833,17 +1747,19 @@ body {
     13px 0
     0;
 
+  color:
+    rgba(255,255,255,0.45);
+
   text-align: center;
 
-  color:
-    rgba(255,255,255,0.48);
-
-  font-size: 0.72rem;
+  font-size: 0.68rem;
 }
 
-/* =====================================================
+
+
+/* =========================================================
    STIMMGERÄT
-   ===================================================== */
+   ========================================================= */
 
 .tuner-card {
   margin-top: 14px;
@@ -1852,13 +1768,11 @@ body {
 
 .tuner-content {
   padding:
-    25px
-    20px
+    25px 20px
     23px;
 
   border-top:
-    1px solid
-    var(--line);
+    1px solid var(--line);
 
   background:
     linear-gradient(
@@ -1871,12 +1785,10 @@ body {
 }
 
 
-/* Instrument */
-
 .tuner-instrument {
-  text-align: center;
-
   margin-bottom: 25px;
+
+  text-align: center;
 }
 
 
@@ -1910,14 +1822,13 @@ body {
 }
 
 
-/* =====================================================
-   TON
-   ===================================================== */
+
+/* Tonanzeige */
 
 .tuner-note-area {
-  text-align: center;
-
   margin-bottom: 27px;
+
+  text-align: center;
 }
 
 
@@ -1931,7 +1842,7 @@ body {
 
   font-size: 0.64rem;
 
-  font-weight: 800;
+  font-weight: 900;
 
   letter-spacing: 0.15em;
 
@@ -1974,9 +1885,8 @@ body {
 }
 
 
-/* =====================================================
-   STIMMANZEIGE
-   ===================================================== */
+
+/* Stimmanzeige */
 
 .tuning-meter {
   margin-bottom: 20px;
@@ -1995,9 +1905,9 @@ body {
 
   font-size: 0.63rem;
 
-  text-transform: uppercase;
-
   letter-spacing: 0.05em;
+
+  text-transform: uppercase;
 }
 
 
@@ -2041,35 +1951,33 @@ body {
   position: absolute;
 
   top: 50%;
-
   left: 50%;
 
   width: 20px;
   height: 20px;
 
-  border-radius: 50%;
-
-  transform:
-    translate(-50%, -50%);
-
-  background: white;
-
   border:
     3px solid
     var(--gold);
 
+  border-radius: 50%;
+
+  background: white;
+
   box-shadow:
     0 2px 8px
     rgba(0,0,0,0.35);
+
+  transform:
+    translate(-50%,-50%);
 
   transition:
     left 0.10s ease;
 }
 
 
-/* =====================================================
-   STATUS
-   ===================================================== */
+
+/* Status */
 
 .tuner-status {
   min-height: 38px;
@@ -2111,14 +2019,13 @@ body {
 }
 
 
-/* =====================================================
-   FREQUENZ
-   ===================================================== */
+
+/* Frequenz */
 
 .tuner-frequency {
-  text-align: center;
-
   margin-bottom: 21px;
+
+  text-align: center;
 }
 
 
@@ -2152,9 +2059,8 @@ body {
 }
 
 
-/* =====================================================
-   START
-   ===================================================== */
+
+/* Start */
 
 .tuner-start {
   width: 100%;
@@ -2179,12 +2085,11 @@ body {
       var(--gold)
     );
 
-  color:
-    var(--green-dark);
+  color: var(--green-dark);
 
   font-size: 0.9rem;
 
-  font-weight: 800;
+  font-weight: 900;
 
   cursor: pointer;
 
@@ -2207,7 +2112,8 @@ body {
 
 
 .tuner-start:active {
-  transform: scale(0.985);
+  transform:
+    scale(0.985);
 }
 
 
@@ -2224,4 +2130,183 @@ body {
   font-size: 0.71rem;
 
   line-height: 1.45;
+}
+
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+  padding:
+    34px 20px
+    calc(34px + env(safe-area-inset-bottom));
+
+  border-top:
+    4px solid var(--gold);
+
+  background:
+    var(--green-dark);
+
+  color: white;
+
+  text-align: center;
+}
+
+
+.footer-symbol {
+  margin-bottom: 10px;
+
+  color: var(--gold);
+
+  font-size: 1rem;
+}
+
+
+.footer strong {
+  display: block;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.1rem;
+}
+
+
+.footer p {
+  margin:
+    7px 0
+    0;
+
+  color:
+    rgba(255,255,255,0.48);
+
+  font-size: 0.7rem;
+}
+
+
+
+/* =========================================================
+   KLEINE SMARTPHONES
+   ========================================================= */
+
+@media
+(max-width: 420px) {
+
+  .content {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+
+  .hero {
+    min-height: 390px;
+  }
+
+
+  .hero-logo {
+    width:
+      min(
+        235px,
+        72vw
+      );
+  }
+
+
+  .piece-summary {
+    padding:
+      17px 16px;
+  }
+
+
+  .piece-content {
+    padding:
+      0 16px
+      18px;
+  }
+
+
+  .track-number {
+    flex-basis: 56px;
+
+    width: 56px;
+    height: 56px;
+
+    font-size: 1.3rem;
+  }
+
+
+  .audio-heading {
+    gap: 13px;
+  }
+
+
+  .playback-speed {
+    padding: 14px;
+  }
+
+
+  .speed-header {
+    gap: 8px;
+  }
+
+
+  .speed-current {
+    min-width: 65px;
+
+    padding:
+      7px 8px;
+  }
+
+
+  .speed-button {
+    min-height: 45px;
+  }
+
+
+  .practice-summary-left strong {
+    font-size: 1.05rem;
+  }
+
+
+  .category-text strong {
+    font-size: 1.4rem;
+  }
+
+}
+
+
+
+/* =========================================================
+   GRÖSSERE BILDSCHIRME
+   ========================================================= */
+
+@media
+(min-width: 700px) {
+
+  .content {
+    padding-top: 50px;
+  }
+
+
+  .piece-summary {
+    padding:
+      23px 25px;
+  }
+
+
+  .piece-content {
+    padding:
+      0 25px
+      25px;
+  }
+
+
+  .playback-speed {
+    padding: 18px;
+  }
+
 }
