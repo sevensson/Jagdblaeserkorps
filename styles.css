@@ -2448,3 +2448,315 @@ summary::-webkit-details-marker {
     height: 50px;
   }
 }
+/* =========================================================
+   VERANSTALTUNGEN
+   ========================================================= */
+
+.events-section {
+  margin: 0 0 48px;
+}
+
+
+/* Überschrift */
+
+.events-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.events-heading-text {
+  min-width: 0;
+}
+
+.events-heading .small-title {
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.events-heading h2 {
+  margin: 4px 0 0;
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(1.9rem, 7vw, 2.6rem);
+  line-height: 1.05;
+}
+
+
+/* =========================================================
+   TERMINLISTE
+   ========================================================= */
+
+.events-list {
+  display: grid;
+  gap: 14px;
+}
+
+
+/* =========================================================
+   TERMIN-KARTE
+   ========================================================= */
+
+.event-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+
+  padding: 19px 18px;
+
+  border:
+    1px solid
+    rgba(11, 47, 34, 0.08);
+
+  border-radius: var(--radius);
+
+  background:
+    rgba(255, 255, 255, 0.90);
+
+  box-shadow: var(--shadow);
+}
+
+
+/* =========================================================
+   DATUM
+   ========================================================= */
+
+.event-date {
+  flex: 0 0 67px;
+
+  width: 67px;
+  min-height: 76px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8f1d8,
+      #eee2b9
+    );
+
+  color: var(--green-dark);
+}
+
+.event-date strong {
+  display: block;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.event-date span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--gold);
+
+  font-size: 0.68rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11em;
+}
+
+
+/* =========================================================
+   TERMIN-INHALT
+   ========================================================= */
+
+.event-information {
+  flex: 1;
+  min-width: 0;
+}
+
+.event-weekday {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--gold);
+
+  font-size: 0.62rem;
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.event-information h3 {
+  margin: 0 0 11px;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+
+/* =========================================================
+   TERMIN-DETAILS
+   ========================================================= */
+
+.event-details {
+  display: grid;
+  gap: 6px;
+}
+
+.event-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color:
+    rgba(11, 47, 34, 0.68);
+
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.event-detail-icon {
+  flex: 0 0 16px;
+  width: 16px;
+
+  color: var(--gold);
+
+  text-align: center;
+  font-size: 0.72rem;
+}
+
+
+/* Beschreibung */
+
+.event-description {
+  margin: 12px 0 0;
+  padding-top: 10px;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  color: var(--text-soft);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   KEINE TERMINE
+   ========================================================= */
+
+.no-events {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 18px;
+
+  border:
+    1px solid
+    rgba(11, 47, 34, 0.08);
+
+  border-radius: var(--radius);
+
+  background:
+    rgba(255, 255, 255, 0.72);
+}
+
+.no-events-icon {
+  flex: 0 0 45px;
+
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--green-dark);
+  color: var(--gold-light);
+}
+
+.no-events strong {
+  display: block;
+
+  color: var(--green-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+}
+
+.no-events p {
+  margin: 3px 0 0;
+
+  color: var(--text-soft);
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   VERANSTALTUNGEN AUF SMARTPHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .events-section {
+    margin-bottom: 42px;
+  }
+
+  .event-card {
+    gap: 14px;
+    padding: 17px 15px;
+  }
+
+  .event-date {
+    flex-basis: 60px;
+
+    width: 60px;
+    min-height: 70px;
+  }
+
+  .event-date strong {
+    font-size: 1.75rem;
+  }
+
+  .event-information h3 {
+    font-size: 1.25rem;
+  }
+
+}
