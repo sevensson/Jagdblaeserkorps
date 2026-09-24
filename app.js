@@ -2191,6 +2191,7 @@ function updateTunerDisplay(
   frequency
 ) {
 
+
   const targetTone =
     findClosestNaturalTone(
       frequency
@@ -2204,17 +2205,57 @@ function updateTunerDisplay(
     );
 
 
-  if (tunerNote) {
+  /*
+     Zusatzinformationen
+     für besondere Naturtöne
+  */
 
-    tunerNote.textContent =
-      targetTone.name;
+  let specialInfo = "";
+
+
+  if (
+    targetTone.special
+  ) {
+
+    specialInfo =
+
+      "<br><small>" +
+
+      targetTone.intonation +
+
+      "<br>" +
+
+      targetTone.info +
+
+      " (" +
+
+      targetTone.expectedDeviation +
+
+      " Cent)" +
+
+      "</small>";
 
   }
 
 
+
+  if (tunerNote) {
+
+    tunerNote.innerHTML =
+
+      targetTone.name +
+
+      specialInfo;
+
+  }
+
+
+
   if (tunerFrequency) {
 
+
     tunerFrequency.innerHTML =
+
 
       frequency.toLocaleString(
         "de-DE",
@@ -2222,15 +2263,30 @@ function updateTunerDisplay(
           minimumFractionDigits: 1,
           maximumFractionDigits: 1
         }
-      ) +
+      )
 
-      " Hz" +
 
-      "<br>" +
+      +
 
-      "<span>" +
+      " Hz"
 
-      "Soll: " +
+
+      +
+
+      "<br>"
+
+
+      +
+
+      "<span>"
+
+
+      +
+
+      "Soll: "
+
+
+      +
 
       targetTone.frequency.toLocaleString(
         "de-DE",
@@ -2238,17 +2294,36 @@ function updateTunerDisplay(
           minimumFractionDigits: 1,
           maximumFractionDigits: 1
         }
-      ) +
+      )
 
-      " Hz · " +
 
-      targetTone.hornTone +
+      +
 
-      ". Ton" +
+      " Hz · "
+
+
+      +
+
+      targetTone.hornTone
+
+
+      +
+
+      ". Ton"
+
+
+      +
+
+      specialInfo
+
+
+      +
 
       "</span>";
 
   }
+
+
 
 
   const roundedCents =
@@ -2257,40 +2332,59 @@ function updateTunerDisplay(
     );
 
 
+
   if (tunerCents) {
+
 
     if (
       roundedCents > 0
     ) {
 
+
       tunerCents.textContent =
+
         "+" +
+
         roundedCents +
+
         " Cent";
 
+
     }
+
 
     else if (
       roundedCents < 0
     ) {
 
+
       tunerCents.textContent =
+
         roundedCents +
+
         " Cent";
+
 
     }
 
+
     else {
 
+
       tunerCents.textContent =
+
         "0 Cent";
+
 
     }
 
   }
 
 
+
+
   const limitedCents =
+
     Math.max(
       -50,
       Math.min(
@@ -2300,21 +2394,32 @@ function updateTunerDisplay(
     );
 
 
+
   const needlePosition =
+
     50 +
+
     limitedCents;
+
 
 
   if (tunerNeedle) {
 
+
     tunerNeedle.style.left =
+
       needlePosition +
+
       "%";
 
   }
 
 
+
+
+
   if (tunerStatus) {
+
 
     tunerStatus
       .classList
@@ -2323,14 +2428,23 @@ function updateTunerDisplay(
       );
 
 
+
+    /*
+       Sondernaturtöne:
+       nicht als Fehler bewerten
+    */
+
     if (
-      Math.abs(cents) <= 5
+      targetTone.special
     ) {
 
+
       tunerStatus.textContent =
-        "✓ " +
-        targetTone.hornTone +
-        ". Ton passt";
+
+        "✓ Naturton getroffen · " +
+
+        targetTone.intonation;
+
 
 
       tunerStatus
@@ -2339,23 +2453,59 @@ function updateTunerDisplay(
           "in-tune"
         );
 
+
     }
+
+
+    else if (
+      Math.abs(cents) <= 5
+    ) {
+
+
+      tunerStatus.textContent =
+
+        "✓ " +
+
+        targetTone.hornTone +
+
+        ". Ton passt";
+
+
+
+      tunerStatus
+        .classList
+        .add(
+          "in-tune"
+        );
+
+
+    }
+
 
     else if (
       cents < -5
     ) {
 
+
       tunerStatus.textContent =
+
         targetTone.hornTone +
+
         ". Ton ist zu tief";
+
 
     }
 
+
     else {
 
+
       tunerStatus.textContent =
+
         targetTone.hornTone +
+
         ". Ton ist zu hoch";
+
 
     }
 
