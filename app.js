@@ -3387,47 +3387,7 @@ function createEventCard(event) {
 
   }
 
-/* BUTTONS */
 
-const buttonsHtml = `
-
-<div class="event-buttons">
-
-
-${
-event.maps
-
-?
-
-`
-
-<a
-href="${event.maps}"
-target="_blank"
-class="event-button"
->
-📍 Route
-</a>
-
-`
-
-:
-
-""
-
-}
-
-
-
-<button
-class="event-button"
-onclick='createCalendarFile(${JSON.stringify(event)})'
->
-📅 Kalender
-</button>
-
-
-</div>
 
 `;
 
