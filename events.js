@@ -7,7 +7,7 @@ const events = [
 
   {
     title: "Übungsabend",
-    date: "2026-09-23",
+    date: "2026-09-30",
     time: "18:00",
     meetingTime: null,
     location: "Radevormwald",
@@ -17,10 +17,10 @@ const events = [
   {
     title: "Treckertreffen",
     date: "2026-09-27",
-    time: "16:00",
-    meetingTime: "15:30",
+    time: "11:00",
+    meetingTime: "10:30",
     location: "Radevormwald - Honsberg",
-    clothing: "Jagdliche Kleidung",
+    clothing: "Dunkle Hose, dunkle Schuhe, Bläserjacke, Hut",
     description: "Musikalische Aufführung beim Treckertreffen."
   },
   {
