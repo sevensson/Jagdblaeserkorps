@@ -3431,10 +3431,6 @@ function createEventCard(event) {
 
   }
 
-
-
-`;
-
 /* BESCHREIBUNG */
 
 const descriptionHtml =
