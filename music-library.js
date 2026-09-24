@@ -592,7 +592,15 @@ const musicLibrary = [
     voices: []
   },
 
-/* Fürst-Pless-Horn */
+{
+  title: "Jägermarsch Nr. 3",
+  category: "maersche",
+  page: 22,
+  audio: "Jägermarsch_Nr_3.mp3",
+
+  voices: [
+
+    /* Fürst-Pless-Horn */
 
     {
       instrument: "Fürst-Pless-Horn",
@@ -623,8 +631,9 @@ const musicLibrary = [
       voice: "2. Stimme",
       file: "Jägermarsch_Nr_3-PF2.mp3"
     }
-    ]
-  },
+
+  ]
+},
 
   {
     title: "Alpenjägermarsch",
