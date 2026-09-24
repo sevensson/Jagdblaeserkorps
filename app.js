@@ -1721,7 +1721,14 @@ const tuningProfiles = {
         hornTone: 6,
         name: "B",
         frequency: 407.9,
-        info: "Natur-Septime -31 Cent"
+      
+        special: true,
+      
+        intonation: "Natur-Septime",
+      
+        expectedDeviation: -31,
+      
+        info: "bewusst tief"
       },
 
       {
@@ -1751,7 +1758,14 @@ const tuningProfiles = {
         hornTone: 10,
         name: "F",
         frequency: 641.0,
-        info: "Alphorn-Fa"
+      
+        special: true,
+      
+        intonation: "Alphorn-Fa",
+      
+        expectedDeviation: -49,
+      
+        info: "Sondernaturton"
       },
 
       {
