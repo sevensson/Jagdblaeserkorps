@@ -10,7 +10,8 @@ const events = [
     date: "2026-09-30",
     time: "18:00",
     meetingTime: null,
-    location: "Radevormwald",
+    location: "Hermannstraße 26, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/5waLWzCok4SYPuwv8",
     clothing: null,
     description: "Gemeinsame Probe des Jagdbläsercorps."
   },
@@ -19,7 +20,8 @@ const events = [
     date: "2026-09-27",
     time: "11:00",
     meetingTime: "10:30",
-    location: "Radevormwald - Honsberg",
+    location: "Honsberg, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/bKqs4qgwzxhFBtM87",
     clothing: "Dunkle Hose, dunkle Schuhe, Bläserjacke, Hut",
     description: "Musikalische Aufführung beim Treckertreffen."
   },
@@ -28,7 +30,8 @@ const events = [
     date: "2026-11-08",
     time: "18:00",
     meetingTime: "17:00",
-    location: "Radevormwald - Remlingrade Kirche",
+    location: "Remlingrade, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/ed71U5Jk8WxJB5G79",
     clothing: "Jagdliche Kleidung",
     description: "Musikalische Begleitung der Hubertusmesse."
   }
