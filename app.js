@@ -903,6 +903,8 @@ let bpm = 100;
 
 let beatsPerMeasure = 4;
 
+let beatNote = 4;
+
 let currentBeat = 0;
 
 let metronomeRunning = false;
@@ -1062,9 +1064,16 @@ timeButtons.forEach((button) => {
     "click",
     () => {
 
+
       beatsPerMeasure =
         Number(
           button.dataset.beats
+        );
+
+
+      beatNote =
+        Number(
+          button.dataset.note || 4
         );
 
 
