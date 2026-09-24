@@ -1590,66 +1590,217 @@ let tunerAnimationFrame =
   null;
 
 
-
 /* =========================================================
-   NATURTÖNE DES FÜRST-PLESS-HORNS IN B
+   NATURTÖNE DER HÖRNER
 
-   "name" entspricht der notierten Tonhöhe.
-   "frequency" ist die klingende Sollfrequenz.
+   Anzeige:
+   Notierte Jagdhornnotation
+
+   Frequenz:
+   klingende Sollfrequenz
+
    ========================================================= */
 
-const plessNaturalTones = [
 
-  {
-    partial: 2,
-    hornTone: 1,
-    name: "C",
-    frequency: 233.08
+const tuningProfiles = {
+
+
+  fuerstPless: {
+
+    name: "Fürst-Pless-Horn in B",
+
+    notes: [
+
+      {
+        partial: 2,
+        hornTone: 1,
+        name: "C",
+        frequency: 233.08
+      },
+
+      {
+        partial: 3,
+        hornTone: 2,
+        name: "G",
+        frequency: 349.62
+      },
+
+      {
+        partial: 4,
+        hornTone: 3,
+        name: "C",
+        frequency: 466.16
+      },
+
+      {
+        partial: 5,
+        hornTone: 4,
+        name: "E",
+        frequency: 582.70,
+        info: "Terz etwas tief"
+      },
+
+      {
+        partial: 6,
+        hornTone: 5,
+        name: "G",
+        frequency: 699.24
+      },
+
+      {
+        partial: 7,
+        hornTone: 6,
+        name: "A",
+        frequency: 815.78
+      },
+
+      {
+        partial: 8,
+        hornTone: 7,
+        name: "C",
+        frequency: 932.32
+      }
+
+    ]
+
   },
 
-  {
-    partial: 3,
-    hornTone: 2,
-    name: "G",
-    frequency: 349.62
-  },
 
-  {
-    partial: 4,
-    hornTone: 3,
-    name: "C",
-    frequency: 466.16
-  },
+  parforceB: {
 
-  {
-    partial: 5,
-    hornTone: 4,
-    name: "E",
-    frequency: 582.70
-  },
+    name: "Parforcehorn in B",
 
-  {
-    partial: 6,
-    hornTone: 5,
-    name: "G",
-    frequency: 699.24
-  },
+    notes: [
 
-  {
-    partial: 7,
-    hornTone: 6,
-    name: "A",
-    frequency: 815.78
-  },
+      {
+        partial: 1,
+        hornTone: 0,
+        name: "C",
+        frequency: 58.3,
+        info: "Grundton"
+      },
 
-  {
-    partial: 8,
-    hornTone: 7,
-    name: "C",
-    frequency: 932.32
+      {
+        partial: 2,
+        hornTone: 1,
+        name: "C",
+        frequency: 116.5
+      },
+
+      {
+        partial: 3,
+        hornTone: 2,
+        name: "G",
+        frequency: 174.8
+      },
+
+      {
+        partial: 4,
+        hornTone: 3,
+        name: "C",
+        frequency: 233.1
+      },
+
+      {
+        partial: 5,
+        hornTone: 4,
+        name: "E",
+        frequency: 291.4,
+        info: "Terz -14 Cent"
+      },
+
+      {
+        partial: 6,
+        hornTone: 5,
+        name: "G",
+        frequency: 349.6
+      },
+
+      {
+        partial: 7,
+        hornTone: 6,
+        name: "B",
+        frequency: 407.9,
+        info: "Natur-Septime -31 Cent"
+      },
+
+      {
+        partial: 8,
+        hornTone: 7,
+        name: "C",
+        frequency: 466.2
+      },
+
+      {
+        partial: 9,
+        hornTone: 8,
+        name: "D",
+        frequency: 524.4
+      },
+
+      {
+        partial: 10,
+        hornTone: 9,
+        name: "E",
+        frequency: 582.7,
+        info: "Terz -14 Cent"
+      },
+
+      {
+        partial: 11,
+        hornTone: 10,
+        name: "F",
+        frequency: 641.0,
+        info: "Alphorn-Fa"
+      },
+
+      {
+        partial: 12,
+        hornTone: 11,
+        name: "G",
+        frequency: 699.3
+      }
+
+    ]
+
   }
 
-];
+};
+
+
+
+let currentTuningProfile =
+  "fuerstPless";
+
+
+
+/* =========================================================
+   INSTRUMENT AUSWAHL
+   ========================================================= */
+
+
+const instrumentSelect =
+  document.getElementById(
+    "instrumentSelect"
+  );
+
+
+if (instrumentSelect) {
+
+  instrumentSelect.addEventListener(
+    "change",
+    (event) => {
+
+      currentTuningProfile =
+        event.target.value;
+
+
+      resetTunerDisplay();
+
+    }
+  );
+
+}
 
 
 
@@ -1657,49 +1808,60 @@ const plessNaturalTones = [
    NÄCHSTEN NATURTON FINDEN
    ========================================================= */
 
+
 function findClosestNaturalTone(
   frequency
 ) {
 
+
   let closestTone =
-    plessNaturalTones[0];
+    tuningProfiles[currentTuningProfile]
+      .notes[0];
 
 
   let smallestDifference =
     Infinity;
 
 
-  plessNaturalTones.forEach(
-    (tone) => {
 
-      const difference =
-        Math.abs(
-
-          1200 *
-
-          Math.log2(
-            frequency /
-            tone.frequency
-          )
-
-        );
+  tuningProfiles[currentTuningProfile]
+    .notes
+    .forEach(
+      (tone) => {
 
 
-      if (
-        difference <
-        smallestDifference
-      ) {
+        const difference =
+          Math.abs(
 
-        smallestDifference =
-          difference;
+            1200 *
 
-        closestTone =
-          tone;
+            Math.log2(
+              frequency /
+              tone.frequency
+            )
+
+          );
+
+
+
+        if (
+          difference <
+          smallestDifference
+        ) {
+
+          smallestDifference =
+            difference;
+
+
+          closestTone =
+            tone;
+
+        }
 
       }
 
-    }
-  );
+    );
+
 
 
   return closestTone;
