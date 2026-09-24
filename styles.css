@@ -2671,6 +2671,85 @@ summary::-webkit-details-marker {
   line-height: 1.45;
 }
 
+/* =========================================================
+   TERMIN BUTTONS
+   ========================================================= */
+
+.event-buttons {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 14px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.event-button {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 38px;
+
+  padding:
+    8px 14px;
+
+
+  border-radius: 14px;
+
+
+  background:
+    var(--green-dark);
+
+
+  color: white;
+
+
+  border: none;
+
+
+  text-decoration: none;
+
+
+  font-size: 0.75rem;
+
+
+  font-weight: 800;
+
+
+  cursor: pointer;
+
+
+  transition:
+    transform 0.12s ease,
+    opacity 0.12s ease;
+
+}
+
+
+
+.event-button:active {
+
+  transform:
+    scale(0.96);
+
+}
+
+
+
+.event-button:hover {
+
+  opacity: 0.9;
+
+}
 
 /* =========================================================
    KEINE TERMINE
@@ -2758,6 +2837,18 @@ summary::-webkit-details-marker {
   .event-information h3 {
     font-size: 1.25rem;
   }
+   .event-buttons {
+
+  width:100%;
+
+}
+
+
+.event-button {
+
+  flex:1;
+
+}
 
 }
 
