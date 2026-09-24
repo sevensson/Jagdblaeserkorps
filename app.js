@@ -1275,7 +1275,41 @@ function tick() {
 
 }
 
+/* =========================================================
+   TAKTART BPM BERECHNUNG
+   ========================================================= */
 
+function calculateBeatInterval() {
+
+
+  /*
+     BPM bezieht sich immer auf
+     Viertelnoten.
+
+     Bei Achteln:
+     doppelte Klickgeschwindigkeit.
+  */
+
+
+  if (
+    beatNote === 8
+  ) {
+
+    return (
+      60000 /
+      bpm /
+      2
+    );
+
+  }
+
+
+  return (
+    60000 /
+    bpm
+  );
+
+}
 
 /* =========================================================
    METRONOM TIMER
@@ -1287,7 +1321,7 @@ function startTimer() {
 
 
   const interval =
-    60000 / bpm;
+    calculateBeatInterval();
 
 
   timerID =
@@ -1302,6 +1336,7 @@ function startTimer() {
 
 function restartTimer() {
 
+
   clearInterval(
     timerID
   );
@@ -1311,7 +1346,7 @@ function restartTimer() {
 
 
   const interval =
-    60000 / bpm;
+    calculateBeatInterval();
 
 
   timerID =
