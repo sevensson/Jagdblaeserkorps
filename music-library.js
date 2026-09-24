@@ -142,7 +142,18 @@ const musicLibrary = [
         instrument: "Fürst-Pless-Horn",
         voice: "2. Stimme",
         file: "Horrido-FP2.mp3"
-      }
+      },
+
+    {
+      instrument: "Parforcehorn",
+      voice: "1. Stimme",
+      file: "Horrido-PF1.mp3"
+    },
+    {
+      instrument: "Parforcehorn",
+      voice: "2. Stimme",
+      file: "Horrido-PF2.mp3"
+    }
     ]
   },
 
