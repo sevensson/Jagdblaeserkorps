@@ -2760,3 +2760,35 @@ summary::-webkit-details-marker {
   }
 
 }
+
+/* =========================================================
+   STIMMGERÄT INSTRUMENT AUSWAHL
+   ========================================================= */
+
+
+.tuner-instrument select {
+
+  width:100%;
+
+  margin-top:10px;
+
+  padding:12px 14px;
+
+  border-radius:14px;
+
+  border:
+
+    1px solid
+
+    rgba(11,47,34,.15);
+
+
+  background:white;
+
+  color:var(--green-dark);
+
+  font-size:1rem;
+
+  font-weight:700;
+
+}
