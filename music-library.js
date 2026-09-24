@@ -592,46 +592,37 @@ const musicLibrary = [
     voices: []
   },
 
-  {
-    title: "Jägermarsch Nr. 3",
-    category: "maersche",
-    page: 22,
-    audio: "Jägermarsch_Nr_3.mp3",
-    voices: [
-      {
-        instrument: "Fürst-Pless-Horn",
-        voice: "1. Stimme",
-        file: "Jägermarsch_Nr_3-FP1.mp3"
-      },
-      {
-        instrument: "Fürst-Pless-Horn",
-        voice: "2. Stimme",
-        file: "Jägermarsch_Nr_3-FP2.mp3"
-      },
-      {
-        instrument: "Fürst-Pless-Horn",
-        voice: "3. Stimme",
-        file: "Jägermarsch_Nr_3-FP3.mp3"
-      }
-    ]
-  },
+/* Fürst-Pless-Horn */
 
-  {
-    title: "Hubertusmarsch",
-    category: "maersche",
-    page: 23,
-    audio: "Hubertusmarsch.mp3",
-    voices: [
-      {
-        instrument: "Fürst-Pless-Horn",
-        voice: "1. Stimme",
-        file: "Hubertusmarsch-FP1.mp3"
-      },
-      {
-        instrument: "Fürst-Pless-Horn",
-        voice: "2. Stimme",
-        file: "Hubertusmarsch-FP2.mp3"
-      }
+    {
+      instrument: "Fürst-Pless-Horn",
+      voice: "1. Stimme",
+      file: "Jägermarsch_Nr_3-FP1.mp3"
+    },
+    {
+      instrument: "Fürst-Pless-Horn",
+      voice: "2. Stimme",
+      file: "Jägermarsch_Nr_3-FP2.mp3"
+    },
+    {
+      instrument: "Fürst-Pless-Horn",
+      voice: "3. Stimme",
+      file: "Jägermarsch_Nr_3-FP3.mp3"
+    },
+
+
+    /* Parforcehorn */
+
+    {
+      instrument: "Parforcehorn",
+      voice: "1. Stimme",
+      file: "Jägermarsch_Nr_3-PF1.mp3"
+    },
+    {
+      instrument: "Parforcehorn",
+      voice: "2. Stimme",
+      file: "Jägermarsch_Nr_3-PF2.mp3"
+    }
     ]
   },
 
