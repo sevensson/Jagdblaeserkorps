@@ -3236,9 +3236,17 @@ function createCalendarFile(event) {
 
 
   const end =
-    event.date.replaceAll("-", "")
-    +
-    "T235900";
+  event.date.replaceAll("-", "")
+  +
+  "T"
+  +
+  (
+    event.endTime
+      ?
+      event.endTime.replace(":", "")
+      :
+      "235900"
+  );
 
 
   const ical =
