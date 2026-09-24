@@ -3174,7 +3174,80 @@ function renderEvents() {
 
 }
 
+/* =========================================================
+   ICAL KALENDER EXPORT
+   ========================================================= */
 
+function createCalendarFile(event) {
+
+
+  const start =
+    event.date.replaceAll("-", "")
+    +
+    "T"
+    +
+    event.time.replace(":", "")
+    +
+    "00";
+
+
+  const end =
+    event.date.replaceAll("-", "")
+    +
+    "T235900";
+
+
+  const ical =
+
+`BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${event.title}
+DTSTART:${start}
+DTEND:${end}
+LOCATION:${event.location}
+DESCRIPTION:${event.description}
+END:VEVENT
+END:VCALENDAR`;
+
+
+
+  const blob =
+    new Blob(
+      [ical],
+      {
+        type: "text/calendar"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const link =
+    document.createElement("a");
+
+
+  link.href = url;
+
+
+  link.download =
+    event.title + ".ics";
+
+
+  document.body.appendChild(link);
+
+
+  link.click();
+
+
+  document.body.removeChild(link);
+
+
+  URL.revokeObjectURL(url);
+
+}
 
 /* =========================================================
    TERMIN-KARTE
@@ -3314,22 +3387,112 @@ function createEventCard(event) {
 
   }
 
+/* BUTTONS */
 
-  /* BESCHREIBUNG */
+const buttonsHtml = `
 
-  const descriptionHtml =
-    event.description
-      ? `
-
-        <p class="event-description">
-          ${escapeHtml(event.description)}
-        </p>
-
-      `
-      : "";
+<div class="event-buttons">
 
 
-  return `
+${
+event.maps
+
+?
+
+`
+
+<a
+href="${event.maps}"
+target="_blank"
+class="event-button"
+>
+📍 Route
+</a>
+
+`
+
+:
+
+""
+
+}
+
+
+
+<button
+class="event-button"
+onclick='createCalendarFile(${JSON.stringify(event)})'
+>
+📅 Kalender
+</button>
+
+
+</div>
+
+`;
+
+/* BESCHREIBUNG */
+
+const descriptionHtml =
+  event.description
+    ? `
+
+      <p class="event-description">
+        ${escapeHtml(event.description)}
+      </p>
+
+    `
+    : "";
+
+
+
+/* BUTTONS */
+
+const buttonsHtml = `
+
+<div class="event-buttons">
+
+
+${
+event.maps
+
+?
+
+`
+
+<a
+href="${event.maps}"
+target="_blank"
+class="event-button"
+>
+📍 Route
+</a>
+
+`
+
+:
+
+""
+
+}
+
+
+
+<button
+class="event-button"
+onclick='createCalendarFile(${JSON.stringify(event)})'
+>
+📅 Kalender
+</button>
+
+
+</div>
+
+`;
+
+
+
+return `
 
     <article class="event-card">
 
@@ -3362,7 +3525,9 @@ function createEventCard(event) {
         </div>
 
 
-        ${descriptionHtml}
+       ${descriptionHtml}
+
+${buttonsHtml}
 
       </div>
 
