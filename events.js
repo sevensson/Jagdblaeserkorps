@@ -27,6 +27,17 @@ const events = [
     clothing: null,
     description: "Gemeinsame Probe des Jagdbläsercorps."
   },
+   {
+    title: "Ehrenamtstag",
+    date: "2026-11-21",
+    time: "09:30",
+    endTime: "12:05:00",
+    meetingTime: null,
+    location: "Schlossmacherstraße 4, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/J7MwPWuThyvkpbiJ8",
+    clothing: null,
+    description: "Musikalische Aufführung beim Ehrenamtstag"
+  },
   {
     title: "Übungsabend",
     date: "2026-11-25",
