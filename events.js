@@ -7,9 +7,64 @@ const events = [
 
   {
     title: "Übungsabend",
-    date: "2026-09-30",
+    date: "2026-11-11",
     time: "18:00",
-    endTime: "19:30",
+    endTime: "19:00",
+    meetingTime: null,
+    location: "Hermannstraße 26, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/5waLWzCok4SYPuwv8",
+    clothing: null,
+    description: "Gemeinsame Probe des Jagdbläsercorps."
+  },
+  {
+    title: "Übungsabend",
+    date: "2026-11-18",
+    time: "18:00",
+    endTime: "19:00",
+    meetingTime: null,
+    location: "Hermannstraße 26, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/5waLWzCok4SYPuwv8",
+    clothing: null,
+    description: "Gemeinsame Probe des Jagdbläsercorps."
+  },
+  {
+    title: "Übungsabend",
+    date: "2026-11-25",
+    time: "18:00",
+    endTime: "19:00",
+    meetingTime: null,
+    location: "Hermannstraße 26, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/5waLWzCok4SYPuwv8",
+    clothing: null,
+    description: "Gemeinsame Probe des Jagdbläsercorps."
+  },
+  {
+    title: "Übungsabend",
+    date: "2026-12-02",
+    time: "18:00",
+    endTime: "19:00",
+    meetingTime: null,
+    location: "Hermannstraße 26, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/5waLWzCok4SYPuwv8",
+    clothing: null,
+    description: "Gemeinsame Probe des Jagdbläsercorps."
+  },
+  {
+    title: "Übungsabend",
+    date: "2026-12-09",
+    time: "18:00",
+    endTime: "19:00",
+    meetingTime: null,
+    location: "Hermannstraße 26, 42477 Radevormwald",
+    maps: "https://maps.app.goo.gl/5waLWzCok4SYPuwv8",
+    clothing: null,
+    description: "Gemeinsame Probe des Jagdbläsercorps."
+  },
+   {
+    title: "Übungsabend",
+    date: "2026-12-16",
+    time: "18:00",
+    endTime: "19:00",
     meetingTime: null,
     location: "Hermannstraße 26, 42477 Radevormwald",
     maps: "https://maps.app.goo.gl/5waLWzCok4SYPuwv8",
